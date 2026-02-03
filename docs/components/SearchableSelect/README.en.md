@@ -1,9 +1,4 @@
 
----
-
-## 📄 مستندات انگلیسی (`docs/components/SearchableSelect/README.en.md`)
-
-```markdown
 # SearchableSelect Component
 
 A dropdown select component with optional search, loading state, and RTL/LTR support. Styled according to the design system and uses a portal to render the dropdown above all other elements.

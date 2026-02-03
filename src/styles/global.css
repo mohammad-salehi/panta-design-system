@@ -82,6 +82,7 @@
 }
 
 /* ---------- Utility Classes ---------- */
+.border-btnBorder { border-color: rgb(var(--btn-border)); }
 .bg-boxColor { background-color: rgb(var(--bg-boxColor-rgb)); }
 .bg-boxColor\/90 { background-color: rgba(var(--bg-boxColor-rgb), 0.9); }
 .bg-boxColor\/70 { background-color: rgba(var(--bg-boxColor-rgb), 0.7); }
@@ -192,7 +193,8 @@ body {
     @apply rounded-2xl border border-white/40 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-title;
   }
   .lux-chip {
-    @apply rounded-full border border-white/40 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-chip;
+    @apply rounded-full border  bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-chip;
+    border-color: var(--btn-border);
   }
   .lux-card {
     @apply rounded-[28px] border border-white/40 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-lux-card;

@@ -139,4 +139,50 @@ type DatePickerProps = {
 };
 declare function DatePicker({ value, onChange, onChangeFormatted, calendar, placeholder, displayFormat, disabled, className, minDate, maxDate, closeOnSelect, }: DatePickerProps): react_jsx_runtime.JSX.Element;
 
-export { Button, type ButtonProps, DatePicker, type DatePickerProps, type DatePickerValue, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
+type BoxProps = {
+    dir?: "rtl" | "ltr";
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    icon?: React.ReactNode;
+    actions?: React.ReactNode;
+    children?: React.ReactNode;
+    footer?: React.ReactNode;
+    className?: string;
+    collapsible?: boolean;
+    defaultCollapsed?: boolean;
+    onToggle?: (collapsed: boolean) => void;
+};
+declare function Box({ dir, title, description, icon, actions, children, footer, className, collapsible, defaultCollapsed, onToggle, }: BoxProps): react_jsx_runtime.JSX.Element;
+
+type SwitchOption = {
+    label: React.ReactNode;
+    value: string;
+    disabled?: boolean;
+};
+interface ButtonSelectProps {
+    value?: string;
+    defaultValue?: string;
+    onChange?: (value: string) => void;
+    options: SwitchOption[];
+    dir?: "rtl" | "ltr";
+    size?: "sm" | "md" | "lg";
+    variant?: "default" | "primary";
+    orientation?: "horizontal" | "vertical" | "grid";
+    columns?: number;
+    fullWidth?: boolean;
+    className?: string;
+}
+declare function ButtonSelect({ value, defaultValue, onChange, options, dir, size, variant, orientation, columns, fullWidth, className, }: ButtonSelectProps): react_jsx_runtime.JSX.Element;
+
+interface HashTextProps {
+    text: string;
+    startChars?: number;
+    endChars?: number;
+    separator?: string;
+    className?: string;
+    showCopyButton?: boolean;
+    copyOnClickText?: boolean;
+}
+declare const HashText: React.FC<HashTextProps>;
+
+export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, DatePicker, type DatePickerProps, type DatePickerValue, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };

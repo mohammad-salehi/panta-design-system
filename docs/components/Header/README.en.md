@@ -1,9 +1,4 @@
 
----
-
-## 📄 مستندات انگلیسی (`docs/components/Header/README.en.md`)
-
-```markdown
 # Header Component
 
 The Header component is a horizontal bar displayed at the top of the page on desktop screens. It includes a title and a theme toggle button (dark/light mode). This header is only visible on viewports larger than 1024px (desktop) and is hidden on mobile (the mobile top bar is handled by the `Navbar` component).

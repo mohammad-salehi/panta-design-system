@@ -1,9 +1,5 @@
 
----
 
-## 📄 مستندات انگلیسی (`docs/components/DatePicker/README.en.md`)
-
-```markdown
 # DatePicker Component
 
 A date picker component supporting **Gregorian** and **Jalali (Persian)** calendars. Features portal dropdown, date range limits, month/year navigation, and ISO string output. Styled according to the design system.

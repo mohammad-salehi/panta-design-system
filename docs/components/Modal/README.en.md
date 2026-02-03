@@ -1,9 +1,4 @@
 
----
-
-## 📄 مستندات انگلیسی (`docs/components/Modal/README.en.md`)
-
-```markdown
 # Modal Component
 
 A modal dialog component for displaying content on top of the page. Uses a portal to render above all elements. Supports closing via backdrop click, Escape key, or close button. Prevents body scrolling when open. Fully responsive and compatible with dark/light theme.

@@ -14,4 +14,10 @@
 - [Modal - English](components/Modal/README.en.md)
 - [تقویم (DatePicker) - فارسی](components/DatePicker/README.fa.md)
 - [DatePicker - English](components/DatePicker/README.en.md)
+- [جعبه (Box) - فارسی](components/Box/README.fa.md)
+- [Box - English](components/Box/README.en.md)
+- [سلکت (Select) - فارسی](components/ButtonSelect/README.fa.md)
+- [Select - English](components/ButtonSelect/README.en.md)
+- [متن کوتاه‌شده (HashText) - فارسی](components/HashText/README.fa.md)
+- [HashText - English](components/HashText/README.en.md)
 در حال تکمیل...

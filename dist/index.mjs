@@ -1576,9 +1576,327 @@ function DatePicker({
     ) : null
   ] });
 }
+
+// src/components/Box/Box.tsx
+import clsx4 from "clsx";
+import { useRef as useRef5, useState as useState8, useEffect as useEffect7 } from "react";
+import { jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
+function ChevronIcon({ open }) {
+  return /* @__PURE__ */ jsx9(
+    "svg",
+    {
+      width: "18",
+      height: "18",
+      viewBox: "0 0 24 24",
+      className: clsx4(
+        "transition-transform duration-300",
+        open ? "rotate-180" : ""
+      ),
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      children: /* @__PURE__ */ jsx9("polyline", { points: "6 9 12 15 18 9" })
+    }
+  );
+}
+function Box({
+  dir = "rtl",
+  title,
+  description,
+  icon,
+  actions,
+  children,
+  footer,
+  className,
+  collapsible = false,
+  defaultCollapsed = false,
+  onToggle
+}) {
+  const hasHeader = title || description || icon || actions || collapsible;
+  const [collapsed, setCollapsed] = useState8(defaultCollapsed);
+  const contentRef = useRef5(null);
+  const [height, setHeight] = useState8(0);
+  useEffect7(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [children]);
+  function toggle() {
+    if (!collapsible) return;
+    const next = !collapsed;
+    setCollapsed(next);
+    onToggle?.(next);
+  }
+  return /* @__PURE__ */ jsxs6(
+    "div",
+    {
+      dir,
+      className: clsx4(
+        `
+        w-full max-w-full min-w-0
+        rounded-[32px]
+        border border-white/30 dark:border-white/10
+        bg-gradient-to-br from-white/90 via-white/70 to-white/60
+        dark:from-[#0b0f15]/95 dark:via-[#0d131c]/85 dark:to-[#0a0f15]/90
+        backdrop-blur-2xl
+        shadow-[0_25px_70px_-35px_rgba(0,0,0,0.55)]
+        p-4 md:p-5
+        text-titleText dark:text-titleText-dark
+        flex flex-col
+        overflow-hidden
+        `,
+        className
+      ),
+      style: { boxSizing: "border-box" },
+      children: [
+        hasHeader && /* @__PURE__ */ jsxs6(
+          "div",
+          {
+            onClick: toggle,
+            className: clsx4(
+              "flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between flex-shrink-0",
+              collapsible && "cursor-pointer select-none"
+            ),
+            children: [
+              (icon || title || description) && /* @__PURE__ */ jsxs6("div", { className: "flex items-center gap-3 min-w-0", children: [
+                icon && /* @__PURE__ */ jsx9("div", { className: "h-11 w-11 flex-shrink-0 rounded-2xl bg-white/70 dark:bg-white/5 border border-white/40 dark:border-white/10 flex items-center justify-center  lux-icon", children: icon }),
+                /* @__PURE__ */ jsxs6("div", { className: "min-w-0", children: [
+                  title && /* @__PURE__ */ jsx9("h4", { className: "text-16 font-bold truncate m-0", children: title }),
+                  description && /* @__PURE__ */ jsx9("p", { className: "text-[12px] text-titleText/60 dark:text-titleText-dark/60 m-0", children: description })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxs6("div", { className: "flex items-center gap-2", children: [
+                actions,
+                collapsible && /* @__PURE__ */ jsx9("div", { className: "h-9 w-9 rounded-xl flex items-center justify-center bg-white/60 dark:bg-white/5 border border-white/40 dark:border-white/10 lux-icon", children: /* @__PURE__ */ jsx9(ChevronIcon, { open: !collapsed }) })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx9(
+          "div",
+          {
+            style: {
+              maxHeight: collapsed ? 0 : height + 20
+            },
+            className: "\r\n        transition-all duration-300 ease-in-out",
+            children: /* @__PURE__ */ jsxs6("div", { ref: contentRef, children: [
+              /* @__PURE__ */ jsx9("div", { className: "flex-1 min-h-0 w-full mt-5", children: /* @__PURE__ */ jsx9(
+                "div",
+                {
+                  className: "\r\n              relative\r\n              h-full\r\n              rounded-[28px]\r\n              border border-white/40 dark:border-white/10\r\n              bg-white/75 dark:bg-white/[0.04]\r\n              backdrop-blur-xl\r\n              p-4 md:p-5\r\n              shadow-[0_12px_30px_-20px_rgba(0,0,0,0.6)]\r\n              overflow-hidden\r\n              ",
+                  children: /* @__PURE__ */ jsx9("div", { className: "relative w-full h-full min-w-0", children })
+                }
+              ) }),
+              footer && /* @__PURE__ */ jsx9("div", { className: "mt-5 pt-4 border-t border-white/30 dark:border-white/10 flex-shrink-0", children: footer })
+            ] })
+          }
+        )
+      ]
+    }
+  );
+}
+
+// src/components/ButtonSelect/ButtonSelect.tsx
+import React9 from "react";
+import clsx5 from "clsx";
+import { jsx as jsx10 } from "react/jsx-runtime";
+function ButtonSelect({
+  value,
+  defaultValue,
+  onChange,
+  options,
+  dir = "rtl",
+  size = "md",
+  variant = "primary",
+  orientation = "horizontal",
+  columns = 4,
+  fullWidth = false,
+  className
+}) {
+  const [internalValue, setInternalValue] = React9.useState(defaultValue);
+  const current = value ?? internalValue;
+  function select(val) {
+    if (value === void 0) {
+      setInternalValue(val);
+    }
+    onChange?.(val);
+  }
+  const sizeStyles = {
+    sm: "py-1.5 px-2 text-xs",
+    md: "py-2 px-3 text-sm",
+    lg: "py-3 px-4 text-base"
+  };
+  const layoutClasses = orientation === "vertical" ? "flex flex-col gap-1" : orientation === "grid" ? `grid gap-1 grid-cols-${columns}` : "flex flex-row gap-1";
+  return /* @__PURE__ */ jsx10(
+    "div",
+    {
+      dir,
+      className: clsx5(
+        "w-full",
+        layoutClasses,
+        orientation === "horizontal" && !fullWidth && "w-fit",
+        className
+      ),
+      children: options.map((opt) => {
+        const active = opt.value === current;
+        return /* @__PURE__ */ jsx10(
+          "button",
+          {
+            type: "button",
+            disabled: opt.disabled,
+            onClick: () => select(opt.value),
+            className: clsx5(
+              `
+              font-medium
+              rounded-xl
+              border
+              transition-all
+              duration-200
+              focus:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#63C3FF]
+              focus-visible:ring-offset-2
+              shadow-sm
+              hover:cursor-pointer
+              `,
+              sizeStyles[size],
+              orientation === "horizontal" && (fullWidth ? "flex-1" : ""),
+              active ? variant === "primary" ? `
+                    bg-gradient-to-r from-[#63C3FF] to-[#4BA5FF]
+                    text-white dark:text-slate-900
+                    border-transparent
+                    shadow-md
+                  ` : `
+                    bg-white dark:bg-slate-700
+                    border-[#63C3FF]
+                  ` : `
+                    bg-boxColor dark:bg-boxColor-dark
+                    text-titleText dark:text-titleText-dark
+                    border-solid
+                    border-boxBorderColor dark:border-boxBorderColor-dark
+                    hover:bg-slate-50/70
+                    dark:hover:bg-slate-700/60
+                    hover:border-[#63C3FF]
+                  `,
+              opt.disabled && "opacity-50 pointer-events-none"
+            ),
+            children: opt.label
+          },
+          opt.value
+        );
+      })
+    }
+  );
+}
+
+// src/components/HashText/HashText.tsx
+import { useState as useState9 } from "react";
+import { jsx as jsx11, jsxs as jsxs7 } from "react/jsx-runtime";
+var HashText = ({
+  text,
+  startChars = 6,
+  endChars = 4,
+  separator = "\u2026",
+  className = "",
+  showCopyButton = true,
+  copyOnClickText = false
+}) => {
+  const [copied, setCopied] = useState9(false);
+  if (!text) return null;
+  const handleCopy = async (e) => {
+    if (e) e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+  const truncated = text.length <= startChars + endChars ? text : `${text.slice(0, startChars)}${separator}${text.slice(-endChars)}`;
+  const handleTextClick = () => {
+    if (copyOnClickText) handleCopy();
+  };
+  return /* @__PURE__ */ jsxs7(
+    "span",
+    {
+      className: `
+        lux-chip inline-flex items-center gap-2 
+        px-3 py-1.5 font-mono text-sm leading-5
+        transition-all duration-200
+        hover:shadow-md hover:border-amber-400/30
+        
+        ${className}
+      `,
+      title: text,
+      children: [
+        /* @__PURE__ */ jsx11(
+          "span",
+          {
+            className: `select-all whitespace-nowrap tracking-wide ${copyOnClickText ? "cursor-pointer hover:opacity-80" : ""}`,
+            onClick: handleTextClick,
+            children: truncated
+          }
+        ),
+        showCopyButton && /* @__PURE__ */ jsx11(
+          "button",
+          {
+            type: "button",
+            onClick: handleCopy,
+            className: `
+      flex-shrink-0 flex items-center justify-center
+      w-7 h-7 rounded-md
+      text-gray-500 hover:text-amber-600
+      dark:text-gray-400 dark:hover:text-amber-400
+      transition-all duration-200
+      focus:outline-none focus:ring-1 focus:ring-amber-400/50
+      bg-transparent border-none
+      ${copied ? "scale-110" : "scale-100"}
+    `,
+            "aria-label": "\u06A9\u067E\u06CC \u062F\u0631 \u06A9\u0644\u06CC\u067E\u200C\u0628\u0648\u0631\u062F",
+            children: copied ? /* @__PURE__ */ jsx11(
+              "svg",
+              {
+                width: "19",
+                height: "19",
+                viewBox: "0 0 24 24",
+                fill: "none",
+                stroke: "currentColor",
+                strokeWidth: "2.4",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                className: "text-emerald-500",
+                children: /* @__PURE__ */ jsx11("polyline", { points: "20 6 9 17 4 12" })
+              }
+            ) : /* @__PURE__ */ jsxs7(
+              "svg",
+              {
+                width: "19",
+                height: "19",
+                viewBox: "0 0 24 24",
+                fill: "none",
+                stroke: "currentColor",
+                strokeWidth: "2.1",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                children: [
+                  /* @__PURE__ */ jsx11("rect", { x: "9", y: "9", width: "13", height: "13", rx: "2", ry: "2" }),
+                  /* @__PURE__ */ jsx11("path", { d: "M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" })
+                ]
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+};
 export {
+  Box,
   Button,
+  ButtonSelect,
   DatePicker,
+  HashText,
   Header,
   Modal,
   Navbar,

@@ -1,27 +1,183 @@
-'use client';
+import clsx from "clsx";
+import React, { useRef, useState, useEffect } from "react";
 
-import React from 'react';
-import './Box.css';  // ایمپورت مستقیم CSS
+export type BoxProps = {
+  dir?: "rtl" | "ltr";
 
-export interface BoxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  icon?: React.ReactNode;
+
+  actions?: React.ReactNode;
+
+  children?: React.ReactNode;
+
+  footer?: React.ReactNode;
+
+  className?: string;
+
+  collapsible?: boolean;
+  defaultCollapsed?: boolean;
+  onToggle?: (collapsed: boolean) => void;
+};
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      className={clsx(
+        "transition-transform duration-300",
+        open ? "rotate-180" : ""
+      )}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  );
 }
 
-export const Box = React.forwardRef<HTMLButtonElement, BoxProps>(
-  ({ variant = 'primary', size = 'md', className, children, ...rest }, ref) => {
-    const variantClass = `pds-button--${variant}`;
-    const sizeClass = `pds-button--${size}`;
-    return (
-      <button
-        ref={ref}
-        className={`pds-button ${variantClass} ${sizeClass} ${className || ''}`}
-        {...rest}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+export function Box({
+  dir = "rtl",
+  title,
+  description,
+  icon,
+  actions,
+  children,
+  footer,
+  className,
+  collapsible = false,
+  defaultCollapsed = false,
+  onToggle,
+}: BoxProps) {
+  const hasHeader = title || description || icon || actions || collapsible;
 
-Box.displayName = 'Button';
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [children]);
+
+  function toggle() {
+    if (!collapsible) return;
+
+    const next = !collapsed;
+    setCollapsed(next);
+    onToggle?.(next);
+  }
+
+  return (
+    <div
+      dir={dir}
+      className={clsx(
+        `
+        w-full max-w-full min-w-0
+        rounded-[32px]
+        border border-white/30 dark:border-white/10
+        bg-gradient-to-br from-white/90 via-white/70 to-white/60
+        dark:from-[#0b0f15]/95 dark:via-[#0d131c]/85 dark:to-[#0a0f15]/90
+        backdrop-blur-2xl
+        shadow-[0_25px_70px_-35px_rgba(0,0,0,0.55)]
+        p-4 md:p-5
+        text-titleText dark:text-titleText-dark
+        flex flex-col
+        overflow-hidden
+        `,
+        className
+      )}
+      style={{ boxSizing: "border-box" }}
+    >
+      {/* HEADER */}
+      {hasHeader && (
+        <div
+          onClick={toggle}
+          className={clsx(
+            "flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between flex-shrink-0",
+            collapsible && "cursor-pointer select-none"
+          )}
+        >
+          {(icon || title || description) && (
+            <div className="flex items-center gap-3 min-w-0">
+              {icon && (
+                <div className="h-11 w-11 flex-shrink-0 rounded-2xl bg-white/70 dark:bg-white/5 border border-white/40 dark:border-white/10 flex items-center justify-center  lux-icon">
+                  {icon}
+                </div>
+              )}
+
+              <div className="min-w-0">
+                {title && (
+                  <h4 className="text-16 font-bold truncate m-0">
+                    {title}
+                  </h4>
+                )}
+
+                {description && (
+                  <p className="text-[12px] text-titleText/60 dark:text-titleText-dark/60 m-0">
+                    {description}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            {actions}
+
+            {collapsible && (
+              <div className="h-9 w-9 rounded-xl flex items-center justify-center bg-white/60 dark:bg-white/5 border border-white/40 dark:border-white/10 lux-icon">
+                <ChevronIcon open={!collapsed} />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* COLLAPSIBLE WRAPPER */}
+      <div
+        style={{
+          maxHeight: collapsed ? 0 : height + 20,
+        }}
+        className="
+        transition-all duration-300 ease-in-out"
+      >
+        <div ref={contentRef}>
+          {/* CONTENT */}
+          <div className="flex-1 min-h-0 w-full mt-5">
+            <div
+              className="
+              relative
+              h-full
+              rounded-[28px]
+              border border-white/40 dark:border-white/10
+              bg-white/75 dark:bg-white/[0.04]
+              backdrop-blur-xl
+              p-4 md:p-5
+              shadow-[0_12px_30px_-20px_rgba(0,0,0,0.6)]
+              overflow-hidden
+              "
+            >
+              <div className="relative w-full h-full min-w-0">
+                {children}
+              </div>
+            </div>
+          </div>
+
+          {/* FOOTER */}
+          {footer && (
+            <div className="mt-5 pt-4 border-t border-white/30 dark:border-white/10 flex-shrink-0">
+              {footer}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
