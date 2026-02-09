@@ -1,11 +1,12 @@
-import React, { ReactNode } from 'react';
+import * as React from 'react';
+import React__default, { ReactNode } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React__default.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'danger' | 'warning';
     size?: 'sm' | 'md' | 'lg';
 }
-declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+declare const Button: React__default.ForwardRefExoticComponent<ButtonProps & React__default.RefAttributes<HTMLButtonElement>>;
 
 type Theme = 'light' | 'dark';
 interface ThemeContextType {
@@ -13,7 +14,7 @@ interface ThemeContextType {
     setTheme: (theme: Theme) => void;
 }
 declare const ThemeProvider: ({ children }: {
-    children: React.ReactNode;
+    children: React__default.ReactNode;
 }) => react_jsx_runtime.JSX.Element;
 declare const useTheme: () => ThemeContextType;
 
@@ -26,7 +27,7 @@ interface NavItem {
     link: string;
     label: string;
     access?: string;
-    icon?: React.ReactNode;
+    icon?: React__default.ReactNode;
 }
 interface NavbarProps {
     navItems: NavItem[];
@@ -38,11 +39,11 @@ interface NavbarProps {
     userRole?: string;
     onChangePassword?: () => void;
     onLogout?: () => void;
-    brand?: React.ReactNode;
+    brand?: React__default.ReactNode;
     className?: string;
     currentPath: string;
 }
-declare const Navbar: React.FC<NavbarProps>;
+declare const Navbar: React__default.FC<NavbarProps>;
 
 type Option = {
     id?: string | number;
@@ -68,8 +69,8 @@ declare function SearchableSelect({ label, value, onChange, options, placeholder
 type ModalProps = {
     open: boolean;
     onClose: () => void;
-    title?: React.ReactNode;
-    children: React.ReactNode;
+    title?: React__default.ReactNode;
+    children: React__default.ReactNode;
     className?: string;
     /**
      * Close on backdrop click
@@ -109,7 +110,7 @@ type ModalProps = {
      */
     ariaLabel?: string;
 };
-declare function Modal({ open, onClose, title, children, className, closeOnBackdrop, closeOnEscape, showHeader, showCloseButton, maxWidthClass, portalTarget, zIndex, ariaLabel, }: ModalProps): React.ReactPortal;
+declare function Modal({ open, onClose, title, children, className, closeOnBackdrop, closeOnEscape, showHeader, showCloseButton, maxWidthClass, portalTarget, zIndex, ariaLabel, }: ModalProps): React__default.ReactPortal;
 
 type CalendarType = "gregorian" | "jalali";
 type DisplayFormat = "YYYY/MM/DD" | "YYYY-MM-DD";
@@ -141,12 +142,12 @@ declare function DatePicker({ value, onChange, onChangeFormatted, calendar, plac
 
 type BoxProps = {
     dir?: "rtl" | "ltr";
-    title?: React.ReactNode;
-    description?: React.ReactNode;
-    icon?: React.ReactNode;
-    actions?: React.ReactNode;
-    children?: React.ReactNode;
-    footer?: React.ReactNode;
+    title?: React__default.ReactNode;
+    description?: React__default.ReactNode;
+    icon?: React__default.ReactNode;
+    actions?: React__default.ReactNode;
+    children?: React__default.ReactNode;
+    footer?: React__default.ReactNode;
     className?: string;
     collapsible?: boolean;
     defaultCollapsed?: boolean;
@@ -155,7 +156,7 @@ type BoxProps = {
 declare function Box({ dir, title, description, icon, actions, children, footer, className, collapsible, defaultCollapsed, onToggle, }: BoxProps): react_jsx_runtime.JSX.Element;
 
 type SwitchOption = {
-    label: React.ReactNode;
+    label: React__default.ReactNode;
     value: string;
     disabled?: boolean;
 };
@@ -183,7 +184,7 @@ interface HashTextProps {
     showCopyButton?: boolean;
     copyOnClickText?: boolean;
 }
-declare const HashText: React.FC<HashTextProps>;
+declare const HashText: React__default.FC<HashTextProps>;
 
 type DoubleBarChartDataItem = {
     label: string;
@@ -197,7 +198,7 @@ interface Props$1 {
     height?: number;
     className?: string;
 }
-declare const DoubleBarChart: React.FC<Props$1>;
+declare const DoubleBarChart: React__default.FC<Props$1>;
 
 type DoubleLineChartDataItem = {
     label: string;
@@ -211,7 +212,7 @@ interface Props {
     height?: number;
     className?: string;
 }
-declare const DoubleLineChart: React.FC<Props>;
+declare const DoubleLineChart: React__default.FC<Props>;
 
 type SingleBarChartDataItem = {
     label: string;
@@ -224,7 +225,7 @@ interface SingleBarChartProps {
     className?: string;
     barColor?: string;
 }
-declare const SingleBarChart: React.FC<SingleBarChartProps>;
+declare const SingleBarChart: React__default.FC<SingleBarChartProps>;
 
 type SingleLineChartDataItem = {
     label: string;
@@ -237,7 +238,7 @@ interface SingleLineChartProps {
     className?: string;
     color?: string;
 }
-declare const SingleLineChart: React.FC<SingleLineChartProps>;
+declare const SingleLineChart: React__default.FC<SingleLineChartProps>;
 
 type CircleChartItem = {
     label: string;
@@ -270,7 +271,7 @@ interface TreeMapChartProps {
     showShareInCell?: boolean;
     formatValue?: (n: number) => string;
 }
-declare const TreeChart: React.FC<TreeMapChartProps>;
+declare const TreeChart: React__default.FC<TreeMapChartProps>;
 
 type TabsProps = {
     defaultValue: string;
@@ -296,4 +297,56 @@ declare function TabsList({ children, className }: TabsListProps): react_jsx_run
 declare function TabsTrigger({ value, children, className, }: TabsTriggerProps): react_jsx_runtime.JSX.Element;
 declare function TabsContent({ value, children, className, }: TabsContentProps): react_jsx_runtime.JSX.Element;
 
-export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };
+type RowId = string;
+type Column<T> = {
+    header: React__default.ReactNode;
+    className?: string;
+    cell?: (row: T) => React__default.ReactNode;
+    accessorKey?: keyof T;
+    align?: "start" | "center" | "end";
+    width?: string | number;
+};
+type ExpandableTableProps<T extends {
+    id?: RowId;
+    subRows?: T[];
+}> = {
+    data: T[];
+    columns: Column<T>[];
+    className?: string;
+    pageSize?: number;
+    getRowId?: (row: T, path: string) => RowId;
+    getSubRows?: (row: T) => T[] | undefined;
+    onRowClick?: (row: T) => void;
+    defaultExpandedIds?: RowId[];
+    renderProgress?: (value: number) => React__default.ReactNode;
+    rowDetails?: (row: T) => React__default.ReactNode | React__default.ReactNode[];
+    rowDetailsClassName?: string;
+    toolbarSlot?: React__default.ReactNode;
+    footerSlot?: React__default.ReactNode;
+};
+declare function ExpandableTable<T extends {
+    id?: RowId;
+    subRows?: T[];
+}>(props: ExpandableTableProps<T>): react_jsx_runtime.JSX.Element;
+
+type BadgeColor = "green" | "red" | "blue" | "yellow" | "purple";
+type BadgeVariant = "soft" | "solid" | "outline";
+type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
+    color?: BadgeColor;
+    variant?: BadgeVariant;
+};
+declare function Badge({ color, variant, className, children, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
+
+type LoaderMode = "normal" | "skeleton";
+type LoaderProps = React.HTMLAttributes<HTMLDivElement> & {
+    mode?: LoaderMode;
+    text?: string;
+    count?: number;
+    skeletonHeight?: number;
+    withAvatar?: boolean;
+};
+declare function Loader({ mode, text, count, skeletonHeight, withAvatar, className, ...props }: LoaderProps): react_jsx_runtime.JSX.Element;
+
+declare const PageLoader: () => void;
+
+export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };

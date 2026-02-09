@@ -20,6 +20,8 @@
 | نمودار دایره‌ای (CircleChart) | [README.fa.md](components/CircleChart/README.fa.md) | [README.en.md](components/CircleChart/README.en.md) |
 | نمودار درختی (TreeChart) | [README.fa.md](components/TreeChart/README.fa.md) | [README.en.md](components/TreeChart/README.en.md) |
 | تب (Tabs) | [README.fa.md](components/Tabs/README.fa.md) | [README.en.md](components/Tabs/README.en.md) |
+| جدول (Table) | [README.fa.md](components/Table/README.fa.md) | [README.en.md](components/Table/README.en.md) |
+| نشان (Badge) | [README.fa.md](components/Badge/README.fa.md) | [README.en.md](components/Badge/README.en.md) |
 
 در حال تکمیل...
 

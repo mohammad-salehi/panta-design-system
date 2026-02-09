@@ -17,3 +17,7 @@ export * from './SingleLineChart';
 export * from './CircleChart';
 export * from './TreeChart';
 export * from './Tabs';
+export * from './Table';
+export * from './Badge';
+export * from './Loader';
+export * from './PageLoader';

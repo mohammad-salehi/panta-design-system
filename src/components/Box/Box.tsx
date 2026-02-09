@@ -3,19 +3,13 @@ import React, { useRef, useState, useEffect } from "react";
 
 export type BoxProps = {
   dir?: "rtl" | "ltr";
-
   title?: React.ReactNode;
   description?: React.ReactNode;
   icon?: React.ReactNode;
-
   actions?: React.ReactNode;
-
   children?: React.ReactNode;
-
   footer?: React.ReactNode;
-
   className?: string;
-
   collapsible?: boolean;
   defaultCollapsed?: boolean;
   onToggle?: (collapsed: boolean) => void;
@@ -27,10 +21,7 @@ function ChevronIcon({ open }: { open: boolean }) {
       width="18"
       height="18"
       viewBox="0 0 24 24"
-      className={clsx(
-        "transition-transform duration-300",
-        open ? "rotate-180" : ""
-      )}
+      className={clsx("transition-transform duration-300", open ? "rotate-180" : "")}
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -54,21 +45,26 @@ export function Box({
   onToggle,
 }: BoxProps) {
   const hasHeader = title || description || icon || actions || collapsible;
-
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    }
-  }, [children]);
+    const el = contentRef.current;
+    if (!el) return;
+
+    const update = () => setHeight(el.scrollHeight);
+    update();
+
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+
+    return () => ro.disconnect();
+  }, []);
 
   function toggle() {
     if (!collapsible) return;
-
     const next = !collapsed;
     setCollapsed(next);
     onToggle?.(next);
@@ -89,13 +85,12 @@ export function Box({
         p-4 md:p-5
         text-titleText dark:text-titleText-dark
         flex flex-col
-        overflow-hidden
+        overflow-visible
         `,
         className
       )}
       style={{ boxSizing: "border-box" }}
     >
-      {/* HEADER */}
       {hasHeader && (
         <div
           onClick={toggle}
@@ -107,18 +102,12 @@ export function Box({
           {(icon || title || description) && (
             <div className="flex items-center gap-3 min-w-0">
               {icon && (
-                <div className="h-11 w-11 flex-shrink-0 rounded-2xl bg-white/70 dark:bg-white/5 border border-white/40 dark:border-white/10 flex items-center justify-center  lux-icon">
+                <div className="h-11 w-11 flex-shrink-0 rounded-2xl bg-white/70 dark:bg-white/5 border border-white/40 dark:border-white/10 flex items-center justify-center lux-icon">
                   {icon}
                 </div>
               )}
-
               <div className="min-w-0">
-                {title && (
-                  <h4 className="text-16 font-bold truncate m-0">
-                    {title}
-                  </h4>
-                )}
-
+                {title && <h4 className="text-16 font-bold truncate m-0">{title}</h4>}
                 {description && (
                   <p className="text-[12px] text-titleText/60 dark:text-titleText-dark/60 m-0">
                     {description}
@@ -130,7 +119,6 @@ export function Box({
 
           <div className="flex items-center gap-2">
             {actions}
-
             {collapsible && (
               <div className="h-9 w-9 rounded-xl flex items-center justify-center bg-white/60 dark:bg-white/5 border border-white/40 dark:border-white/10 lux-icon">
                 <ChevronIcon open={!collapsed} />
@@ -140,24 +128,15 @@ export function Box({
         </div>
       )}
 
-      {/* COLLAPSIBLE WRAPPER */}
       <div
-        style={{
-          maxHeight: collapsed ? 0 : height + 20,
-        }}
-        className="
-        transition-all duration-300 ease-in-out"
+        style={{ maxHeight: collapsed ? 0 : height + 20 }}
+        className="transition-all duration-300 ease-in-out overflow-hidden"
       >
         <div ref={contentRef}>
-          {/* CONTENT */}
           <div className="flex-1 min-h-0 w-full mt-5">
-
-            <div className="relative w-full h-full min-w-0">
-              {children}
-            </div>
+            <div className="relative w-full h-full min-w-0">{children}</div>
           </div>
 
-          {/* FOOTER */}
           {footer && (
             <div className="mt-5 pt-4 border-t border-white/30 dark:border-white/10 flex-shrink-0">
               {footer}
