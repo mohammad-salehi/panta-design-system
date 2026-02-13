@@ -385,4 +385,42 @@ type TablePaginationProps = {
 };
 declare function Pagination({ totalItems, pageSize, currentPage, onPageChange, className, rtl, compact, }: TablePaginationProps): react_jsx_runtime.JSX.Element;
 
-export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Input, type InputProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, Pagination, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, type TablePaginationProps, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };
+type ToastType = "success" | "danger" | "alert";
+type ToastPosition = "top-left" | "top-right" | "top-center" | "bottom-left" | "bottom-right" | "bottom-center";
+interface ToastOptions {
+    type?: ToastType;
+    duration?: number;
+    position?: ToastPosition;
+}
+
+interface ToastContextType {
+    toast: (message: string, options?: ToastOptions) => void;
+}
+declare function ToastProvider({ children }: {
+    children: React__default.ReactNode;
+}): react_jsx_runtime.JSX.Element;
+declare function useToast(): ToastContextType;
+
+type TooltipPlacement = "top" | "bottom" | "left" | "right";
+interface TooltipProps {
+    content: ReactNode;
+    children: ReactNode;
+    placement?: TooltipPlacement;
+    className?: string;
+    contentClassName?: string;
+    offset?: number;
+    disabled?: boolean;
+}
+declare function Tooltip({ content, children, placement, className, contentClassName, disabled, }: TooltipProps): react_jsx_runtime.JSX.Element;
+
+interface StepperItem {
+    title: string;
+}
+interface StepperProps {
+    step: number;
+    steps: StepperItem[];
+    className?: string;
+}
+declare const Stepper: React__default.FC<StepperProps>;
+
+export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Input, type InputProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, Pagination, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Stepper, type StepperProps, type TablePaginationProps, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, type ToastOptions, type ToastPosition, ToastProvider, type ToastType, Tooltip, type TooltipProps, TreeChart, type TreeChartDataItem, useTheme, useToast };

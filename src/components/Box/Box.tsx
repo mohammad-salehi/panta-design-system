@@ -86,6 +86,7 @@ export function Box({
         text-titleText dark:text-titleText-dark
         flex flex-col
         overflow-visible
+        mb-4
         `,
         className
       )}

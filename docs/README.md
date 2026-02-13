@@ -26,7 +26,8 @@
 | بارگزاری صفحه (PageLoader) | [README.fa.md](components/PageLoader/README.fa.md) | [README.en.md](components/PageLoader/README.en.md) |
 | اینپوت (Input) | [README.fa.md](components/Input/README.fa.md) | [README.en.md](components/Input/README.en.md) |
 | صفحه‌بندی (Pagination) | [README.fa.md](components/Pagination/README.fa.md) | [README.en.md](components/Pagination/README.en.md) |
-
-در حال تکمیل...
+| پیام (Toast) | [README.fa.md](components/Toast/README.fa.md) | [README.en.md](components/Toast/README.en.md) |
+| راهنما (Tooltip) | [README.fa.md](components/Tooltip/README.fa.md) | [README.en.md](components/Tooltip/README.en.md) |
+| مراحل (Stepper) | [README.fa.md](components/Stepper/README.fa.md) | [README.en.md](components/Stepper/README.en.md) |
 
 made by mohammad salehi

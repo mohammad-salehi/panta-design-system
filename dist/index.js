@@ -51,13 +51,17 @@ __export(index_exports, {
   SearchableSelect: () => SearchableSelect,
   SingleBarChart: () => SingleBarChart,
   SingleLineChart: () => SingleLineChart,
+  Stepper: () => Stepper,
   Tabs: () => Tabs,
   TabsContent: () => TabsContent,
   TabsList: () => TabsList,
   TabsTrigger: () => TabsTrigger,
   ThemeProvider: () => ThemeProvider,
+  ToastProvider: () => ToastProvider,
+  Tooltip: () => Tooltip7,
   TreeChart: () => TreeChart,
-  useTheme: () => useTheme
+  useTheme: () => useTheme,
+  useToast: () => useToast
 });
 module.exports = __toCommonJS(index_exports);
 
@@ -1699,6 +1703,7 @@ function Box({
         text-titleText dark:text-titleText-dark
         flex flex-col
         overflow-visible
+        mb-4
         `,
         className
       ),
@@ -3686,6 +3691,175 @@ function Pagination({
     }
   );
 }
+
+// src/components/Toast/ToastProvider.tsx
+var import_react19 = require("react");
+
+// src/components/Toast/ToastItem.tsx
+var import_jsx_runtime25 = require("react/jsx-runtime");
+var colors = {
+  success: "bg-emerald-500",
+  danger: "bg-red-500",
+  alert: "bg-amber-500"
+};
+var positionStyles = {
+  "top-left": "top-6 left-6",
+  "top-right": "top-6 right-6",
+  "top-center": "top-6 left-1/2 -translate-x-1/2",
+  "bottom-left": "bottom-6 left-6",
+  "bottom-right": "bottom-6 right-6",
+  "bottom-center": "bottom-6 left-1/2 -translate-x-1/2"
+};
+function ToastItem({ message, type, position }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+    "div",
+    {
+      className: `fixed z-[9999] ${positionStyles[position]} animate-fade-in`,
+      children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+        "div",
+        {
+          className: `${colors[type]} text-white px-5 py-3 rounded-xl shadow-xl backdrop-blur-md`,
+          children: message
+        }
+      )
+    }
+  );
+}
+
+// src/components/Toast/ToastProvider.tsx
+var import_jsx_runtime26 = require("react/jsx-runtime");
+var ToastContext = (0, import_react19.createContext)(null);
+function ToastProvider({ children }) {
+  const [items, setItems] = (0, import_react19.useState)([]);
+  const toast = (0, import_react19.useCallback)((message, options) => {
+    const id = crypto.randomUUID();
+    const newToast = {
+      id,
+      message,
+      type: options?.type ?? "success",
+      position: options?.position ?? "top-right",
+      duration: options?.duration ?? 4e3
+    };
+    setItems((prev) => [...prev, newToast]);
+    setTimeout(() => {
+      setItems((prev) => prev.filter((t) => t.id !== id));
+    }, newToast.duration);
+  }, []);
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(ToastContext.Provider, { value: { toast }, children: [
+    children,
+    items.map((toast2) => /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ToastItem, { ...toast2 }, toast2.id))
+  ] });
+}
+function useToast() {
+  const ctx = (0, import_react19.useContext)(ToastContext);
+  if (!ctx) throw new Error("useToast must be used inside ToastProvider");
+  return ctx;
+}
+
+// src/components/Tooltip/Tooltip.tsx
+var import_react20 = require("react");
+var import_jsx_runtime27 = require("react/jsx-runtime");
+var placementStyles = {
+  top: "bottom-full left-1/2 -translate-x-1/2 mb-3",
+  bottom: "top-full left-1/2 -translate-x-1/2 mt-3",
+  left: "right-full top-1/2 -translate-y-1/2 mr-3",
+  right: "left-full top-1/2 -translate-y-1/2 ml-3"
+};
+var arrowStyles = {
+  top: "top-full left-1/2 -translate-x-1/2 border-t-white/80 border-x-transparent border-b-transparent",
+  bottom: "bottom-full left-1/2 -translate-x-1/2 border-b-white/80 border-x-transparent border-t-transparent",
+  left: "left-full top-1/2 -translate-y-1/2 border-l-white/80 border-y-transparent border-r-transparent",
+  right: "right-full top-1/2 -translate-y-1/2 border-r-white/80 border-y-transparent border-l-transparent"
+};
+function Tooltip7({
+  content,
+  children,
+  placement = "top",
+  className = "",
+  contentClassName = "",
+  disabled = false
+}) {
+  const [open, setOpen] = (0, import_react20.useState)(false);
+  if (disabled) {
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime27.Fragment, { children });
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    "div",
+    {
+      className: `relative inline-flex ${className}`,
+      onMouseEnter: () => setOpen(true),
+      onMouseLeave: () => setOpen(false),
+      onFocus: () => setOpen(true),
+      onBlur: () => setOpen(false),
+      children: [
+        children,
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          "div",
+          {
+            className: [
+              "pointer-events-none absolute z-[9999] whitespace-nowrap transition-all duration-200",
+              placementStyles[placement],
+              open ? "visible opacity-100 translate-y-0 scale-100" : "invisible opacity-0 scale-95"
+            ].join(" "),
+            children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+              "div",
+              {
+                className: [
+                  "relative rounded-2xl border border-white/30 bg-white/70 px-3 py-2 text-xs font-medium text-slate-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] backdrop-blur-xl",
+                  "dark:border-white/10 dark:bg-slate-700/90 dark:text-slate-100",
+                  contentClassName
+                ].join(" "),
+                children: [
+                  content,
+                  /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+                    "span",
+                    {
+                      className: [
+                        "absolute h-0 w-0 border-[6px]",
+                        arrowStyles[placement]
+                      ].join(" ")
+                    }
+                  )
+                ]
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+}
+
+// src/components/Stepper/Stepper.tsx
+var import_react21 = __toESM(require("react"));
+var import_jsx_runtime28 = require("react/jsx-runtime");
+var Stepper = ({ step, steps, className = "" }) => {
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: `flex items-center flex-wrap ${className}`, children: steps.map((item, index) => {
+    const current = index + 1;
+    const isActive = step === current;
+    const isCompleted = step > current;
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_react21.default.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+        "div",
+        {
+          className: `
+                relative inline-flex items-center justify-center
+                xl:px-8 lg:px-6 md:px-4 px-3
+                xl:py-3 py-2
+                rounded-full
+                lux-panel
+                text-sm md:text-base
+                transition-all duration-300
+                
+                ${isActive ? "text-primary main-animated-border-box bg-primary/5 dark:bg-primary/10" : isCompleted ? "text-primary border border-primary/40 bg-primary/5" : "text-titleText dark:text-titleText-dark border border-slate-300 dark:border-slate-600 bg-white/60 dark:bg-slate-900/40"}
+              `,
+          children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "whitespace-nowrap", children: item.title })
+        }
+      ) }),
+      index !== steps.length - 1 && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mx-3 h-[2px] w-6 md:w-10 bg-slate-300 dark:bg-slate-600" })
+    ] }, index);
+  }) });
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Badge,
@@ -3708,12 +3882,16 @@ function Pagination({
   SearchableSelect,
   SingleBarChart,
   SingleLineChart,
+  Stepper,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
   ThemeProvider,
+  ToastProvider,
+  Tooltip,
   TreeChart,
-  useTheme
+  useTheme,
+  useToast
 });
 //# sourceMappingURL=index.js.map
