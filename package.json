@@ -11,18 +11,19 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./index.css": "./dist/index.css"
   },
   "files": [
     "dist",
     "README.md"
   ],
   "scripts": {
-    "build": "tsup && npm run copy-styles",
-    "copy-styles": "shx cp src/styles/global.css dist/styles.css",
+    "build": "npm run build:tsup && npm run build:css",
+    "build:tsup": "tsup",
+    "build:css": "postcss src/styles/global.css --output dist/styles.css",
     "prepublishOnly": "npm run build",
-    "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"tsup --watch\" \"postcss src/styles/global.css --output dist/styles.css --watch\""
   },
   "keywords": [
     "design-system",
@@ -43,6 +44,7 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "eslint": "^10.4.0",
+    "postcss-cli": "^11.0.1",
     "prettier": "^3.8.3",
     "shx": "^0.4.0",
     "tsup": "^8.5.1",

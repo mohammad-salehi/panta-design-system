@@ -1,4 +1,5 @@
 import React from 'react';
+import * as react_jsx_runtime from 'react/jsx-runtime';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'danger';
@@ -6,9 +7,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 
-interface ThemeProviderProps {
+declare const ThemeProvider: ({ children }: {
     children: React.ReactNode;
-}
-declare const ThemeProvider: React.FC<ThemeProviderProps>;
+}) => react_jsx_runtime.JSX.Element;
 
 export { Button, type ButtonProps, ThemeProvider };
