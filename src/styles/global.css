@@ -4,73 +4,32 @@
 
 /* ---------- Keyframes & Properties ---------- */
 @keyframes spin-angle {
-  to {
-    --angle: 1turn;
-  }
+  to { --angle: 1turn; }
 }
-
 @keyframes ticker-move {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.93);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.93); }
+  to { opacity: 1; transform: scale(1); }
 }
-
 @keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
 }
-
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @property --angle {
   syntax: "<angle>";
   inherits: true;
@@ -79,7 +38,6 @@
 
 /* ---------- CSS Variables (Light & Dark) ---------- */
 :root {
-  /* RGB variables for colors (to support opacity) */
   --bg-boxColor-rgb: 255 255 255;
   --bg-boxColor-dark-rgb: 30 41 59;
   --bg-bgColor-dark-rgb: 15 23 42;
@@ -88,93 +46,73 @@
   --border-boxBorderColor-rgb: 226 232 240;
   --border-boxBorderColor-dark-rgb: 51 65 85;
   --primary-rgb: 79 194 252;
-
-  /* Background for body */
   --bg-background-color: #f4f3f2;
-
-  /* Panel & Button gradients (non-RGB) */
-  --panel-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.6));
-  --panel-border: rgba(255, 255, 255, 0.3);
-
+  --panel-gradient: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7), rgba(255,255,255,0.6));
+  --panel-border: rgba(255,255,255,0.3);
   --btn-bg: #f4f3f2;
-  --btn-border: rgb(229, 231, 235);
-  --btn-hover-bg: rgba(229, 231, 235);
-  --btn-text-color: rgba(30, 41, 59);
+  --btn-border: rgb(229,231,235);
+  --btn-hover-bg: rgba(229,231,235);
+  --btn-text-color: rgba(30,41,59);
   --text-color: rgba(96,96,96);
-
-  /* Legacy (used in animated borders) */
   --color-primary: #4fc2fc;
   --color-borderNeutral: #e6e6e6;
+  --button-selected-bg: rgba(79,194,252,0.15);
+  --button-selected-bg-dark: rgba(100,116,139,0.25); /* خاکستری برای دارک */
 }
-
 .dark {
   --bg-boxColor-rgb: 30 41 59;
   --bg-boxColor-dark-rgb: 15 23 42;
   --bg-bgColor-dark-rgb: 15 23 42;
   --color-titleText-rgb: 241 245 249;
   --color-titleText-dark-rgb: 203 213 225;
-  --border-boxColor-rgb: 51 65 85;
-  --border-boxColor-dark-rgb: 71 85 105;
+  --border-boxBorderColor-rgb: 51 65 85;
+  --border-boxBorderColor-dark-rgb: 71 85 105;
   --primary-rgb: 79 194 252;
-
   --bg-background-color: #2b3037;
-
-  --panel-gradient: linear-gradient(135deg, rgba(11, 15, 21, 0.95), rgba(13, 19, 28, 0.85), rgba(10, 15, 21, 0.9));
-  --panel-border: rgba(255, 255, 255, 0.1);
-
+  --panel-gradient: linear-gradient(135deg, rgba(11,15,21,0.95), rgba(13,19,28,0.85), rgba(10,15,21,0.9));
+  --panel-border: rgba(255,255,255,0.1);
   --btn-bg: #2b3037;
-  --btn-border: rgb(75, 85, 99);
-  --btn-hover-bg: rgba(255, 255, 255, 0.1);
-  --btn-text-color: rgba(241, 245, 249);
+  --btn-border: rgb(75,85,99);
+  --btn-hover-bg: rgba(255,255,255,0.1);
+  --btn-text-color: rgba(241,245,249);
   --text-color: rgba(220,220,220);
-
   --color-primary: #4fc2fc;
   --color-borderNeutral: #444;
+  --button-selected-bg: var(--button-selected-bg-dark);
 }
 
-/* Body background */
+/* ---------- Utility Classes ---------- */
+.bg-boxColor { background-color: rgb(var(--bg-boxColor-rgb)); }
+.bg-boxColor\/90 { background-color: rgba(var(--bg-boxColor-rgb), 0.9); }
+.bg-boxColor\/70 { background-color: rgba(var(--bg-boxColor-rgb), 0.7); }
+.bg-boxColor\/50 { background-color: rgba(var(--bg-boxColor-rgb), 0.5); }
+.bg-bgColor-dark\/60 { background-color: rgba(var(--bg-bgColor-dark-rgb), 0.6); }
+.bg-bgColor-dark\/50 { background-color: rgba(var(--bg-bgColor-dark-rgb), 0.5); }
+.text-titleText { color: rgb(var(--color-titleText-rgb)); }
+.border-boxBorderColor { border-color: rgb(var(--border-boxBorderColor-rgb)); }
+.border-boxBorderColor-dark { border-color: rgb(var(--border-boxBorderColor-dark-rgb)); }
+.bg-primary\/10 { background-color: rgba(var(--primary-rgb), 0.1); }
+.text-primary { color: rgb(var(--primary-rgb)); }
+.button_selected_bg { background: var(--button-selected-bg); }
+
+/* ---------- Body ---------- */
 body {
   background-color: var(--bg-background-color);
 }
 
-/* ---------- Utility / Animation Classes ---------- */
-.animate-fadeIn {
-  animation: fadeIn 0.18s ease-out;
-}
-.animate-scaleIn {
-  animation: scaleIn 0.22s ease-out;
-}
-.animate-fadeSlide {
-  animation: fadeSlide 0.45s ease both;
-}
-.animate-fadeScale {
-  animation: fadeScale 120ms ease-out forwards;
-}
-.animate-fadeInUp {
-  animation: fadeInUp 0.4s ease-out forwards;
-}
+/* ---------- Animation Classes ---------- */
+.animate-fadeIn { animation: fadeIn 0.18s ease-out; }
+.animate-scaleIn { animation: scaleIn 0.22s ease-out; }
+.animate-fadeSlide { animation: fadeSlide 0.45s ease both; }
+.animate-fadeScale { animation: fadeScale 120ms ease-out forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.4s ease-out forwards; }
 
 /* ---------- Ticker ---------- */
-.ticker-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-.ticker-content {
-  display: flex;
-  white-space: nowrap;
-  will-change: transform;
-}
-.ticker-animate {
-  animation: ticker-move 25s linear infinite;
-}
-.ticker-no-scroll::-webkit-scrollbar {
-  display: none;
-}
-.ticker-no-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.ticker-container { position: relative; overflow: hidden; width: 100%; }
+.ticker-content { display: flex; white-space: nowrap; will-change: transform; }
+.ticker-animate { animation: ticker-move 25s linear infinite; }
+.ticker-no-scroll::-webkit-scrollbar { display: none; }
+.ticker-no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* ---------- Animated Border Boxes ---------- */
 .main-animated-border-box {
@@ -190,13 +128,11 @@ body {
   inset: calc(var(--border-width) * -1);
   border: inherit;
   border-radius: inherit;
-  background-image: conic-gradient(
-    from var(--angle),
-    var(--color-borderNeutral) 60%,
-    var(--color-primary) 73%,
-    var(--color-primary) 86%,
-    var(--color-borderNeutral) 100%
-  );
+  background-image: conic-gradient(from var(--angle),
+      var(--color-borderNeutral) 60%,
+      var(--color-primary) 73%,
+      var(--color-primary) 86%,
+      var(--color-borderNeutral) 100%);
   background-origin: border-box;
   -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
   mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
@@ -207,7 +143,6 @@ body {
   animation: spin-angle 4s linear infinite;
   pointer-events: none;
 }
-
 .main-animated-border-box2 {
   --border-width: 2px;
   --radius: 16px;
@@ -221,13 +156,11 @@ body {
   inset: calc(var(--border-width) * -1);
   border: inherit;
   border-radius: inherit;
-  background-image: conic-gradient(
-    from var(--angle),
-    var(--color-borderNeutral) 70%,
-    var(--color-primary) 80%,
-    var(--color-primary) 90%,
-    var(--color-borderNeutral) 100%
-  );
+  background-image: conic-gradient(from var(--angle),
+      var(--color-borderNeutral) 70%,
+      var(--color-primary) 80%,
+      var(--color-primary) 90%,
+      var(--color-borderNeutral) 100%);
   background-origin: border-box;
   -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
   mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
@@ -244,25 +177,20 @@ body {
   .lux-text {
     color: var(--text-color);
   }
-
   .lux-panel {
     @apply rounded-[32px] border backdrop-blur-2xl shadow-lux-panel transition hover:shadow-lux-panel-hover;
     background: var(--panel-gradient);
     border-color: var(--panel-border);
   }
-
   .lux-title {
     @apply rounded-2xl border border-white/40 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-title;
   }
-
   .lux-chip {
     @apply rounded-full border border-white/40 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-chip;
   }
-
   .lux-card {
     @apply rounded-[28px] border border-white/40 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-lux-card;
   }
-
   .lux-btn {
     @apply rounded-lg border backdrop-blur-xl shadow-lux-chip transition;
     background: var(--btn-bg);
@@ -275,32 +203,32 @@ body {
     background: var(--btn-hover-bg);
     cursor: pointer;
   }
-
+  .lux-icon {
+    @apply rounded-lg border backdrop-blur-xl shadow-lux-chip transition;
+    background: var(--btn-bg);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--btn-border);
+    color: var(--btn-text-color);
+  }
   .lux-menu {
     @apply rounded-2xl border border-white/40 dark:border-white/10 bg-white/95 dark:bg-[#0b0f15]/95 backdrop-blur-2xl shadow-lux-menu;
   }
-
-  /* Modern Table Styles (merged) */
   .lux-table-wrap {
     @apply overflow-x-auto rounded-3xl border border-gray-200/70 dark:border-[rgba(var(--border-boxBorderColor-dark-rgb),0.7)] bg-gradient-to-b from-white/90 via-gray-50/80 to-white/80 dark:from-[#151a24]/90 dark:via-[#101521]/80 dark:to-[#151a24]/90 shadow-lux-table-modern backdrop-blur-2xl px-2;
   }
-
   .lux-table {
     @apply min-w-[720px] w-full text-sm border-separate border-spacing-y-2 text-[rgb(var(--color-titleText-rgb))] dark:text-[rgb(var(--color-titleText-dark-rgb))];
   }
-
   .lux-table-head {
     @apply sticky top-0 z-10 bg-white/90 dark:bg-[#0f1420]/90 backdrop-blur shadow-[0_6px_20px_-12px_rgba(15,23,42,0.35)] border-b border-gray-200/70 dark:border-[#2a3242]/70;
   }
-
   .lux-th {
     @apply px-6 py-4 font-semibold text-gray-700 dark:text-gray-200 tracking-wide;
   }
-
   .lux-row {
     @apply transition;
   }
-
   .lux-row:nth-child(odd) .lux-td {
     @apply bg-white/85 dark:bg-[#111827]/80;
   }
@@ -313,19 +241,15 @@ body {
   .dark .lux-row:hover .lux-td {
     background-color: rgba(var(--primary-rgb), 0.1);
   }
-
   .lux-td {
     @apply px-6 py-4 align-middle !border-0 border-b border-gray-200/60 dark:border-[#2a3242]/60 text-gray-800 dark:text-gray-100;
   }
-
   .lux-details {
     @apply bg-white/85 dark:bg-[#0f172a]/80 rounded-2xl border border-gray-200/60 dark:border-[#2a3242]/70 shadow-lux-details-dark backdrop-blur-xl;
   }
-
   .lux-empty {
     @apply px-6 py-10 text-center text-gray-600 dark:text-gray-300;
   }
-
   .lux-icon-btn {
     @apply inline-flex items-center justify-center rounded-lg p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 hover:dark:bg-[#1f2937]/80 focus:outline-none focus:ring-2 focus:ring-primary/40 transition;
   }
