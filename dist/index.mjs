@@ -153,7 +153,7 @@ function Header({ title = "\u0633\u0627\u0645\u0627\u0646\u0647 \u0646\u0638\u06
             onClick: closeSidebar
           }
         ),
-        /* @__PURE__ */ jsx3("div", { className: "flex items-center gap-5", children: isOpen ? /* @__PURE__ */ jsx3("div", { className: "relative flex items-center gap-1 lux-text font-bold", children: title }) : /* @__PURE__ */ jsx3("div", { className: "text-titleText dark:text-titleText-dark", children: /* @__PURE__ */ jsx3(
+        /* @__PURE__ */ jsx3("div", { className: "flex items-center gap-5", children: isOpen ? /* @__PURE__ */ jsx3("div", { className: "relative flex items-center gap-1 text-titleText dark:text-titleText-dark font-bold", children: title }) : /* @__PURE__ */ jsx3("div", { className: "text-titleText dark:text-titleText-dark", children: /* @__PURE__ */ jsx3(
           "svg",
           {
             className: "cursor-pointer",
@@ -230,7 +230,7 @@ function AnimatedParagraph({
     return () => clearInterval(interval);
   }, [animatableIndexes.length]);
   const activeIndex = animatableIndexes[step] ?? -1;
-  return /* @__PURE__ */ jsx4("p", { className: "text-3xl font-bold mr-4 text-titleText dark:text-titleText-dark text-center w-full", children: chars.map((ch, i) => {
+  return /* @__PURE__ */ jsx4("p", { className: "text-3xl font-bold m-0 text-titleText dark:text-titleText-dark text-center w-full", children: chars.map((ch, i) => {
     if (ch === " ") return /* @__PURE__ */ jsx4("span", { children: "\xA0" }, i);
     const isActive = i === activeIndex;
     return /* @__PURE__ */ jsx4(
@@ -263,13 +263,16 @@ var Navbar = ({
   const { theme, setTheme } = useTheme();
   const isDarkMode = theme === "dark";
   const asideRef = useRef2(null);
+  const mobileSidebarRef = useRef2(null);
   const toggleTheme = () => setTheme(isDarkMode ? "light" : "dark");
   React4.useEffect(() => {
     if (!isMobileOpen) return;
     const handleClickOutside = (e) => {
-      if (asideRef.current && !asideRef.current.contains(e.target)) {
-        setIsMobileOpen(false);
+      const target = e.target;
+      if (asideRef.current && asideRef.current.contains(target) || mobileSidebarRef.current && mobileSidebarRef.current.contains(target)) {
+        return;
       }
+      setIsMobileOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("touchstart", handleClickOutside);
@@ -292,168 +295,158 @@ var Navbar = ({
     /* @__PURE__ */ jsx5("div", { children: /* @__PURE__ */ jsxs2(
       "aside",
       {
+        ref: mobileSidebarRef,
         className: clsx(
-          "absolute top-0 right-0 h-full w-[85vw] max-w-[320px] bg-boxColor dark:bg-boxColor-dark shadow-xl transition-transform duration-300 flex flex-col overflow-y-auto",
+          "absolute top-0 right-0 h-full w-[85vw] max-w-[320px]  flex flex-col overflow-y-auto transition-transform duration-300 z-50 lux-panel rounded-none lux-panel shadow-none",
           isMobileOpen ? "translate-x-0" : "translate-x-full"
         ),
         children: [
-          /* @__PURE__ */ jsxs2("div", { className: "flex items-center justify-between p-4 border-b border-boxBorderColor", children: [
-            /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-2", children: [
-              brand ? brand : /* @__PURE__ */ jsx5("div", { className: "font-bold text-titleText", children: "\u0644\u0648\u06AF\u0648" }),
-              /* @__PURE__ */ jsx5(AnimatedParagraph, { text: "P.D.S" })
+          /* @__PURE__ */ jsx5("div", { className: "sticky top-0 z-10  rounded-none border-none", children: /* @__PURE__ */ jsxs2("div", { className: "p-3", children: [
+            /* @__PURE__ */ jsxs2("div", { className: "flex items-center justify-between", children: [
+              /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-2", children: brand ? brand : /* @__PURE__ */ jsx5("div", { className: "font-bold text-titleText", children: "\u0644\u0648\u06AF\u0648" }) }),
+              /* @__PURE__ */ jsx5("div", { className: "text-left ml-2", children: /* @__PURE__ */ jsx5(AnimatedParagraph, { text: "P.D.S" }) })
             ] }),
-            /* @__PURE__ */ jsx5(
-              "button",
-              {
-                onClick: () => setIsMobileOpen(false),
-                className: "p-2 rounded-lg hover:bg-primary/10 transition text-titleText",
-                children: /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
-                  "path",
-                  {
-                    d: "M6 6l12 12M18 6L6 18",
-                    stroke: "currentColor",
-                    strokeWidth: "2",
-                    strokeLinecap: "round"
-                  }
-                ) })
-              }
-            )
-          ] }),
-          /* @__PURE__ */ jsx5("div", { className: "p-4 border-b border-boxBorderColor lux-btn m-4 mb-8", children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-3", children: [
-            /* @__PURE__ */ jsx5("div", { className: "h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
-              "path",
-              {
-                d: "M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z",
-                stroke: "currentColor",
-                strokeWidth: "1.5",
-                strokeLinecap: "round"
-              }
-            ) }) }),
-            /* @__PURE__ */ jsxs2("div", { className: "flex-1 text-left", children: [
-              /* @__PURE__ */ jsx5("div", { className: "text-sm font-semibold text-titleText", children: userFullName }),
-              /* @__PURE__ */ jsx5("div", { className: "text-xs text-gray-500", children: userRole })
-            ] }),
-            onChangePassword && /* @__PURE__ */ jsx5(
-              "button",
-              {
-                onClick: onChangePassword,
-                className: "p-2 rounded-lg hover:bg-primary/10 transition lux-btn",
-                children: /* @__PURE__ */ jsxs2("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", children: [
-                  /* @__PURE__ */ jsx5(
-                    "path",
-                    {
-                      d: "M10.6887 11.9999C10.6887 13.0229 9.85974 13.8519 8.83674 13.8519C7.81374 13.8519 6.98474 13.0229 6.98474 11.9999C6.98474 10.9769 7.81374 10.1479 8.83674 10.1479H8.83974C9.86174 10.1489 10.6887 10.9779 10.6887 11.9999Z",
-                      stroke: "currentColor",
-                      strokeWidth: "1.5"
-                    }
-                  ),
-                  /* @__PURE__ */ jsx5(
-                    "path",
-                    {
-                      d: "M10.6918 12H17.0098V13.852",
-                      stroke: "currentColor",
-                      strokeWidth: "1.5"
-                    }
-                  ),
-                  /* @__PURE__ */ jsx5(
-                    "path",
-                    {
-                      d: "M14.182 13.852V12",
-                      stroke: "currentColor",
-                      strokeWidth: "1.5"
-                    }
-                  ),
-                  /* @__PURE__ */ jsx5(
-                    "path",
-                    {
-                      d: "M2.74988 12C2.74988 5.063 5.06288 2.75 11.9999 2.75C18.9369 2.75 21.2499 5.063 21.2499 12C21.2499 18.937 18.9369 21.25 11.9999 21.25C5.06288 21.25 2.74988 18.937 2.74988 12Z",
-                      stroke: "currentColor",
-                      strokeWidth: "1.5"
-                    }
-                  )
-                ] })
-              }
-            )
-          ] }) }),
-          /* @__PURE__ */ jsx5("nav", { className: "flex-1 overflow-y-auto p-4 space-y-2", children: navItems.map((item) => {
-            if (item.access && item.access !== userRole) return null;
-            const isActive = currentPath === item.link;
-            return /* @__PURE__ */ jsx5("a", { href: item.link, className: "block", children: /* @__PURE__ */ jsxs2(
-              "button",
-              {
-                type: "button",
-                className: clsx(
-                  "w-full flex items-center justify-between gap-1 px-1 py-1 rounded-xl transition lux-icon cursor-pointer",
-                  isActive ? "bg-primary/20 dark:bg-gray-700/70" : "hover:bg-primary/10 dark:hover:bg-gray-800/50"
-                ),
-                children: [
-                  /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-3 min-w-0", children: [
+            /* @__PURE__ */ jsx5("div", { className: "mt-3 rounded-2xl border border-boxBorderColor bg-boxColor/70 p-3 lux-icon", children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-3", children: [
+              /* @__PURE__ */ jsx5("div", { className: "h-10 w-10 rounded-xl border-boxBorderColor dark:border-boxBorderColor-dark bg-white/70 dark:bg-bgColor-dark/60  transition flex items-center justify-center text-titleText dark:text-titleText-dark lux-icon", children: /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
+                "path",
+                {
+                  d: "M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z",
+                  stroke: "currentColor",
+                  strokeWidth: "2",
+                  strokeLinecap: "round"
+                }
+              ) }) }),
+              /* @__PURE__ */ jsxs2("div", { className: "min-w-0 flex-1", dir: "ltr", children: [
+                /* @__PURE__ */ jsx5("div", { className: "text-sm font-semibold truncate lux-text", children: userFullName }),
+                /* @__PURE__ */ jsx5("div", { className: "text-[11px] text-gray-500 truncate lux-text", children: userRole })
+              ] }),
+              onChangePassword && /* @__PURE__ */ jsx5(
+                "button",
+                {
+                  onClick: onChangePassword,
+                  className: "shrink-0 h-10 w-10 rounded-xl border border-boxBorderColor dark:border-boxBorderColor-dark bg-white/70 dark:bg-bgColor-dark/60 hover:bg-gray-100 dark:hover:bg-gray-900 transition flex items-center justify-center text-titleText dark:text-titleText-dark lux-btn",
+                  children: /* @__PURE__ */ jsxs2("svg", { width: "22", height: "22", viewBox: "0 0 24 24", fill: "none", children: [
                     /* @__PURE__ */ jsx5(
-                      "span",
+                      "path",
                       {
-                        className: clsx(
-                          "h-10 w-10 rounded-xl flex items-center justify-center border shrink-0 lux-btn p-2 hover:border-primary hover:text-primary dark:hover:border-gray-500 dark:hover:text-gray-300",
-                          isActive ? "text-primary border-primary bg-primary/10 dark:bg-gray-700" : "text-titleText border-boxBorderColor"
-                        ),
-                        children: item.icon
+                        d: "M10.6887 11.9999C10.6887 13.0229 9.85974 13.8519 8.83674 13.8519C7.81374 13.8519 6.98474 13.0229 6.98474 11.9999C6.98474 10.9769 7.81374 10.1479 8.83674 10.1479H8.83974C9.86174 10.1489 10.6887 10.9779 10.6887 11.9999Z",
+                        stroke: "currentColor",
+                        strokeWidth: "1.5"
                       }
                     ),
                     /* @__PURE__ */ jsx5(
-                      "span",
+                      "path",
                       {
-                        className: clsx(
-                          "text-sm font-medium text-right leading-5 min-w-0 break-words",
-                          isActive ? "text-primary font-semibold dark:text-gray-200" : "lux-text hover:text-primary dark:hover:text-gray-300"
-                        ),
-                        dir: "rtl",
-                        children: item.label
+                        d: "M10.6918 12H17.0098V13.852",
+                        stroke: "currentColor",
+                        strokeWidth: "1.5"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx5(
+                      "path",
+                      {
+                        d: "M14.182 13.852V12",
+                        stroke: "currentColor",
+                        strokeWidth: "1.5"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx5(
+                      "path",
+                      {
+                        d: "M2.74988 12C2.74988 5.063 5.06288 2.75 11.9999 2.75C18.9369 2.75 21.2499 5.063 21.2499 12C21.2499 18.937 18.9369 21.25 11.9999 21.25C5.06288 21.25 2.74988 18.937 2.74988 12Z",
+                        stroke: "currentColor",
+                        strokeWidth: "1.5"
                       }
                     )
-                  ] }),
-                  /* @__PURE__ */ jsx5(
-                    "svg",
-                    {
-                      width: "18",
-                      height: "18",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      className: clsx(
-                        "transition mt-3 self-start shrink-0",
-                        isActive ? "opacity-100 text-primary dark:text-gray-300" : "opacity-40"
-                      ),
-                      children: /* @__PURE__ */ jsx5(
-                        "path",
+                  ] })
+                }
+              )
+            ] }) })
+          ] }) }),
+          /* @__PURE__ */ jsx5("nav", { className: "px-3 pt-4 space-y-2 overflow-y-auto flex-1 min-h-0", children: navItems.map((item) => {
+            if (item.access && item.access !== userRole) return null;
+            const isActive = currentPath === item.link;
+            return /* @__PURE__ */ jsx5(
+              "a",
+              {
+                href: item.link,
+                style: { display: "block", textDecoration: "none", color: "inherit" },
+                children: /* @__PURE__ */ jsxs2(
+                  "button",
+                  {
+                    type: "button",
+                    className: clsx(
+                      "w-full flex items-center justify-between gap-1 px-1 py-1 rounded-xl transition lux-icon cursor-pointer",
+                      isActive ? "bg-primary/20 dark:bg-gray-600" : "hover:bg-primary/10 dark:hover:bg-gray-800/50"
+                    ),
+                    children: [
+                      /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-4 min-w-0", children: [
+                        /* @__PURE__ */ jsx5(
+                          "span",
+                          {
+                            className: clsx(
+                              "h-8 w-8 rounded-xl flex items-center justify-center border shrink-0 lux-icon p-1 ",
+                              isActive ? "text-primary" : "text-titleText border-boxBorderColor"
+                            ),
+                            children: item.icon
+                          }
+                        ),
+                        /* @__PURE__ */ jsx5(
+                          "span",
+                          {
+                            className: "text-sm font-medium text-right leading-5 min-w-0 break-words lux-text",
+                            dir: "rtl",
+                            children: item.label
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsx5(
+                        "svg",
                         {
-                          d: "M15 18l-6-6 6-6",
-                          stroke: "currentColor",
-                          strokeWidth: "2",
-                          strokeLinecap: "round",
-                          strokeLinejoin: "round"
+                          width: "18",
+                          height: "18",
+                          viewBox: "0 0 24 24",
+                          fill: "none",
+                          className: clsx(
+                            "transition self-center shrink-0",
+                            isActive ? "opacity-100" : "opacity-40"
+                          ),
+                          children: /* @__PURE__ */ jsx5(
+                            "path",
+                            {
+                              d: "M15 18l-6-6 6-6",
+                              stroke: "currentColor",
+                              strokeWidth: "2",
+                              strokeLinecap: "round",
+                              strokeLinejoin: "round"
+                            }
+                          )
                         }
                       )
-                    }
-                  )
-                ]
-              }
-            ) }, item.label);
+                    ]
+                  }
+                )
+              },
+              item.label
+            );
           }) }),
-          onLogout && /* @__PURE__ */ jsx5("div", { className: "p-4 border-t border-boxBorderColor", children: /* @__PURE__ */ jsxs2(
+          onLogout && /* @__PURE__ */ jsx5("div", { className: "p-3 mt-auto", children: /* @__PURE__ */ jsxs2(
             "button",
             {
               onClick: onLogout,
-              className: "w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-950/50 transition",
+              className: "w-full flex items-center justify-center gap-2 rounded-2xl border border-red-200 dark:border-red-900/40 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-950/60 transition py-3 lux-btn",
               children: [
-                /* @__PURE__ */ jsx5("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
+                /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
                   "path",
                   {
                     d: "M10 12H18M18 12L15.5 9.77778M18 12L15.5 14.2222M18 7.11111V5C18 4.44772 17.5523 4 17 4H7C6.44772 4 6 4.44772 6 5V19C6 19.5523 6.44772 20 7 20H17C17.5523 20 18 19.5523 18 19V16.8889",
                     stroke: "currentColor",
                     strokeLinecap: "round",
                     strokeLinejoin: "round",
-                    strokeWidth: "1.8"
+                    strokeWidth: "2"
                   }
                 ) }),
-                /* @__PURE__ */ jsx5("span", { className: "text-sm font-medium", children: "\u062E\u0631\u0648\u062C" })
+                /* @__PURE__ */ jsx5("span", { className: "text-sm font-semibold", children: "\u062E\u0631\u0648\u062C" })
               ]
             }
           ) })
@@ -465,7 +458,7 @@ var Navbar = ({
         "button",
         {
           onClick: () => setIsMobileOpen(true),
-          className: "h-10 w-10 rounded-xl border border-boxBorderColor bg-boxColor/70 hover:bg-gray-100 transition flex items-center justify-center text-titleText lux-btn",
+          className: "h-10 w-10 transition flex items-center justify-center lux-btn",
           children: /* @__PURE__ */ jsx5("svg", { width: "22", height: "22", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
             "path",
             {
@@ -480,7 +473,7 @@ var Navbar = ({
       /* @__PURE__ */ jsx5(
         "button",
         {
-          className: "flex items-center justify-center transition ml-2 h-9 w-9 lux-btn",
+          className: "flex items-center justify-center transition h-10 w-10 lux-btn",
           onClick: toggleTheme,
           children: isDarkMode ? /* @__PURE__ */ jsx5(
             "svg",
@@ -559,7 +552,7 @@ var Navbar = ({
               /* @__PURE__ */ jsx5("div", { className: "text-left ml-2", children: /* @__PURE__ */ jsx5(AnimatedParagraph, { text: "P.D.S" }) })
             ] }),
             /* @__PURE__ */ jsx5("div", { className: "mt-3 rounded-2xl border border-boxBorderColor bg-boxColor/70 p-3 lux-icon", children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-3", children: [
-              /* @__PURE__ */ jsx5("div", { className: "h-10 w-10 rounded-xl flex items-center justify-center  lux-btn", children: /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
+              /* @__PURE__ */ jsx5("div", { className: "h-10 w-10 rounded-xl border-boxBorderColor dark:border-boxBorderColor-dark bg-white/70 dark:bg-bgColor-dark/60  transition flex items-center justify-center text-titleText dark:text-titleText-dark lux-icon", children: /* @__PURE__ */ jsx5("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ jsx5(
                 "path",
                 {
                   d: "M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z",
@@ -615,34 +608,29 @@ var Navbar = ({
               )
             ] }) })
           ] }) }),
-          /* @__PURE__ */ jsx5("nav", { className: "px-3 pt-4 space-y-2 overflow-y-auto flex-1 min-h-0 ", children: navItems.map((item) => {
+          /* @__PURE__ */ jsx5("nav", { className: "px-3 pt-4 space-y-2 overflow-y-auto flex-1 min-h-0", children: navItems.map((item) => {
             if (item.access && item.access !== userRole) return null;
             const isActive = currentPath === item.link;
             return /* @__PURE__ */ jsx5(
               "a",
               {
                 href: item.link,
-                style: {
-                  display: "block",
-                  textDecoration: "none",
-                  color: "inherit"
-                },
+                style: { display: "block", textDecoration: "none", color: "inherit" },
                 children: /* @__PURE__ */ jsxs2(
                   "button",
                   {
                     type: "button",
                     className: clsx(
                       "w-full flex items-center justify-between gap-1 px-1 py-1 rounded-xl transition lux-icon cursor-pointer",
-                      isActive ? "bg-primary/20 dark:bg-gray-700/70" : "hover:bg-primary/10 dark:hover:bg-gray-800/50"
-                      // هاور: ملایم‌تر
+                      isActive ? "bg-primary/20 dark:bg-gray-600" : "hover:bg-primary/10 dark:hover:bg-gray-800/50"
                     ),
                     children: [
-                      /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-3 min-w-0", children: [
+                      /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-4 min-w-0", children: [
                         /* @__PURE__ */ jsx5(
                           "span",
                           {
                             className: clsx(
-                              "h-10 w-10 rounded-xl flex items-center justify-center border shrink-0 lux-btn p-2 hover:border-primary hover:text-primary dark:hover:border-gray-500 dark:hover:text-gray-300",
+                              "h-8 w-8 rounded-xl flex items-center justify-center border shrink-0 lux-icon p-1 ",
                               isActive ? "text-primary" : "text-titleText border-boxBorderColor"
                             ),
                             children: item.icon
@@ -651,10 +639,7 @@ var Navbar = ({
                         /* @__PURE__ */ jsx5(
                           "span",
                           {
-                            className: clsx(
-                              "text-sm font-medium text-right leading-5 min-w-0 break-words",
-                              "lux-text"
-                            ),
+                            className: "text-sm font-medium text-right leading-5 min-w-0 break-words lux-text",
                             dir: "rtl",
                             children: item.label
                           }
@@ -668,7 +653,7 @@ var Navbar = ({
                           viewBox: "0 0 24 24",
                           fill: "none",
                           className: clsx(
-                            "transition mt-3 self-start shrink-0",
+                            "transition self-center shrink-0",
                             isActive ? "opacity-100" : "opacity-40"
                           ),
                           children: /* @__PURE__ */ jsx5(
@@ -715,10 +700,264 @@ var Navbar = ({
     )
   ] });
 };
+
+// src/components/DropdownSelect/DropdownSelect.tsx
+import {
+  useCallback,
+  useEffect as useEffect4,
+  useMemo as useMemo2,
+  useRef as useRef3,
+  useState as useState5
+} from "react";
+import { createPortal } from "react-dom";
+import { jsx as jsx6, jsxs as jsxs3 } from "react/jsx-runtime";
+function SearchableSelect({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder = "\u0627\u0646\u062A\u062E\u0627\u0628 \u06A9\u0646\u06CC\u062F...",
+  searchable = false,
+  searchPlaceholder = "\u062C\u0633\u062A\u062C\u0648...",
+  allLabel,
+  loading = false,
+  direction = "rtl",
+  className = "",
+  disabled = false
+}) {
+  const [open, setOpen] = useState5(false);
+  const [mounted, setMounted] = useState5(false);
+  const [q, setQ] = useState5("");
+  const [coords, setCoords] = useState5({
+    top: 0,
+    left: 0,
+    width: 0
+  });
+  const buttonRef = useRef3(null);
+  const dropdownRef = useRef3(null);
+  const searchInputRef = useRef3(null);
+  useEffect4(() => {
+    setMounted(true);
+  }, []);
+  const normalizedOptions = useMemo2(() => {
+    const base = options ?? [];
+    if (!allLabel) return base;
+    return [{ id: "__all__", label: allLabel, value: "" }, ...base];
+  }, [options, allLabel]);
+  const selectedOption = useMemo2(() => {
+    return normalizedOptions.find((o) => o.value === value);
+  }, [normalizedOptions, value]);
+  const filteredOptions = useMemo2(() => {
+    if (!searchable) return normalizedOptions;
+    const query = q.trim().toLowerCase();
+    if (!query) return normalizedOptions;
+    return normalizedOptions.filter(
+      (item) => item.label.toLowerCase().includes(query)
+    );
+  }, [normalizedOptions, searchable, q]);
+  const updatePosition = useCallback(() => {
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const viewportHeight = window.innerHeight;
+    const estimatedDropdownHeight = searchable ? 320 : 260;
+    const spaceBelow = viewportHeight - rect.bottom;
+    const shouldOpenUp = spaceBelow < estimatedDropdownHeight && rect.top > estimatedDropdownHeight;
+    const top = shouldOpenUp ? rect.top + window.scrollY - estimatedDropdownHeight - 8 : rect.bottom + window.scrollY + 8;
+    setCoords({
+      top,
+      left: rect.left + window.scrollX,
+      width: rect.width
+    });
+  }, [searchable]);
+  useEffect4(() => {
+    if (!open) return;
+    updatePosition();
+    const handleScroll = () => updatePosition();
+    const handleResize = () => updatePosition();
+    window.addEventListener("scroll", handleScroll, true);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll, true);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [open, updatePosition]);
+  useEffect4(() => {
+    if (!open) return;
+    const handleOutsideClick = (e) => {
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+      const clickedButton = buttonRef.current?.contains(target);
+      const clickedDropdown = dropdownRef.current?.contains(target);
+      if (!clickedButton && !clickedDropdown) {
+        setOpen(false);
+      }
+    };
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+  useEffect4(() => {
+    if (open && searchable) {
+      const t = setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 40);
+      return () => clearTimeout(t);
+    }
+  }, [open, searchable]);
+  const handleSelect = (nextValue) => {
+    onChange(nextValue);
+    setOpen(false);
+    setQ("");
+  };
+  const triggerText = selectedOption?.label || placeholder;
+  return /* @__PURE__ */ jsxs3("div", { className: `w-full ${className}`, dir: direction, children: [
+    label ? /* @__PURE__ */ jsx6("label", { className: "mb-2 block text-sm font-medium text-titleText", children: label }) : null,
+    /* @__PURE__ */ jsxs3(
+      "button",
+      {
+        ref: buttonRef,
+        type: "button",
+        disabled,
+        onClick: () => {
+          if (disabled) return;
+          setOpen((prev) => !prev);
+        },
+        className: [
+          "lux-btn w-full h-12 px-4",
+          "flex items-center justify-between gap-3",
+          "rounded-xl",
+          "transition-all duration-200",
+          "text-titleText",
+          open ? "ring-2 ring-primary/20" : "",
+          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+        ].join(" "),
+        "aria-haspopup": "listbox",
+        "aria-expanded": open,
+        children: [
+          /* @__PURE__ */ jsx6(
+            "span",
+            {
+              className: [
+                "truncate text-sm font-medium",
+                selectedOption ? "text-titleText" : "lux-text"
+              ].join(" "),
+              children: triggerText
+            }
+          ),
+          /* @__PURE__ */ jsx6(
+            "span",
+            {
+              className: [
+                "shrink-0 text-xs text-titleText opacity-70 transition-transform duration-200",
+                open ? "rotate-180" : ""
+              ].join(" "),
+              children: "\u25BE"
+            }
+          )
+        ]
+      }
+    ),
+    mounted && open ? createPortal(
+      /* @__PURE__ */ jsxs3(
+        "div",
+        {
+          ref: dropdownRef,
+          dir: direction,
+          style: {
+            position: "absolute",
+            top: coords.top,
+            left: coords.left,
+            width: coords.width,
+            zIndex: 999999
+          },
+          className: [
+            "lux-menu",
+            "bg-boxColor",
+            "animate-fadeScale",
+            "overflow-hidden",
+            "rounded-2xl"
+          ].join(" "),
+          children: [
+            searchable ? /* @__PURE__ */ jsx6("div", { className: "p-2 pb-1", children: /* @__PURE__ */ jsxs3("div", { className: "lux-btn flex w-full items-center gap-2 rounded-xl px-3 py-2.5", children: [
+              /* @__PURE__ */ jsx6(
+                "svg",
+                {
+                  className: "h-4 w-4 shrink-0 text-titleText opacity-50",
+                  viewBox: "0 0 20 20",
+                  fill: "none",
+                  "aria-hidden": "true",
+                  children: /* @__PURE__ */ jsx6(
+                    "path",
+                    {
+                      d: "M14.1667 14.1667L18 18M16.3333 9.16667C16.3333 13.1247 13.1247 16.3333 9.16667 16.3333C5.20863 16.3333 2 13.1247 2 9.16667C2 5.20863 5.20863 2 9.16667 2C13.1247 2 16.3333 5.20863 16.3333 9.16667Z",
+                      stroke: "currentColor",
+                      strokeWidth: "1.8",
+                      strokeLinecap: "round",
+                      strokeLinejoin: "round"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx6(
+                "input",
+                {
+                  ref: searchInputRef,
+                  value: q,
+                  onChange: (e) => setQ(e.target.value),
+                  placeholder: searchPlaceholder,
+                  className: "w-full bg-transparent text-sm text-titleText outline-none placeholder:opacity-50 border-none"
+                }
+              )
+            ] }) }) : null,
+            /* @__PURE__ */ jsx6("div", { className: "max-h-72 overflow-y-auto px-2 pb-2 pt-1", children: loading ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u062F\u0631 \u062D\u0627\u0644 \u0628\u0627\u0631\u06AF\u0630\u0627\u0631\u06CC..." }) : filteredOptions.length === 0 ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u0645\u0648\u0631\u062F\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F" }) : filteredOptions.map((opt) => {
+              const active = opt.value === value;
+              return /* @__PURE__ */ jsxs3(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => handleSelect(opt.value),
+                  className: [
+                    "group flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-right text-sm",
+                    "cursor-pointer transition-colors duration-150 border-none text-titleText",
+                    active ? "button_selected_bg" : "bg-none hover:bg-primary/10 dark:hover:bg-white/5 "
+                  ].join(" "),
+                  children: [
+                    /* @__PURE__ */ jsx6("span", { className: "truncate font-medium", children: opt.label }),
+                    /* @__PURE__ */ jsx6(
+                      "span",
+                      {
+                        className: [
+                          "text-xs transition-opacity",
+                          active ? "text-primary opacity-100" : "text-titleText opacity-0 group-hover:opacity-60"
+                        ].join(" "),
+                        children: "\u2713"
+                      }
+                    )
+                  ]
+                },
+                String(opt.id ?? opt.value)
+              );
+            }) })
+          ]
+        }
+      ),
+      document.body
+    ) : null
+  ] });
+}
 export {
   Button,
   Header,
   Navbar,
+  SearchableSelect,
   ThemeProvider,
   useTheme
 };

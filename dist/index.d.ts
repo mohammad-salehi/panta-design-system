@@ -44,4 +44,25 @@ interface NavbarProps {
 }
 declare const Navbar: React.FC<NavbarProps>;
 
-export { Button, type ButtonProps, Header, type HeaderProps, type NavItem, Navbar, type NavbarProps, ThemeProvider, useTheme };
+type Option = {
+    id?: string | number;
+    label: string;
+    value: string;
+};
+type SearchableSelectProps = {
+    label?: string;
+    value: string;
+    onChange: (value: string) => void;
+    options: Option[];
+    placeholder?: string;
+    searchable?: boolean;
+    searchPlaceholder?: string;
+    allLabel?: string;
+    loading?: boolean;
+    direction?: "rtl" | "ltr";
+    className?: string;
+    disabled?: boolean;
+};
+declare function SearchableSelect({ label, value, onChange, options, placeholder, searchable, searchPlaceholder, allLabel, loading, direction, className, disabled, }: SearchableSelectProps): react_jsx_runtime.JSX.Element;
+
+export { Button, type ButtonProps, Header, type HeaderProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };

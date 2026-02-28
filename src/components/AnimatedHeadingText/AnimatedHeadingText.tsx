@@ -29,7 +29,7 @@ export default function AnimatedParagraph({
   const activeIndex = animatableIndexes[step] ?? -1;
 
   return (
-    <p className="text-3xl font-bold mr-4 text-titleText dark:text-titleText-dark text-center w-full">
+    <p className="text-3xl font-bold m-0 text-titleText dark:text-titleText-dark text-center w-full">
       {chars.map((ch, i) => {
         // فاصله‌ها ثابت می‌مونن و اصلاً هایلایت نمی‌شن
         if (ch === " ") return <span key={i}>&nbsp;</span>;
