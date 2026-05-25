@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export { FullPageLoading } from './FullPageLoading';
+export type { FullPageLoadingProps } from './FullPageLoading';

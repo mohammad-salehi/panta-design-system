@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export { JalaliCalendar } from './JalaliCalendar';
+export type { JalaliCalendarProps } from './JalaliCalendar';

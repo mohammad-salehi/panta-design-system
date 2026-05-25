@@ -1,2 +1,2 @@
-export { Button } from './DoubleLinearChart';
-export type { ButtonProps } from './DoubleLinearChart';
+export { DoubleLinearChart } from './DoubleLinearChart';
+export type { DoubleLinearChartProps } from './DoubleLinearChart';

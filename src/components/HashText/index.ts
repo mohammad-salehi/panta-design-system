@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export { HashText } from './HashText';
+export type { HashTextProps } from './HashText';

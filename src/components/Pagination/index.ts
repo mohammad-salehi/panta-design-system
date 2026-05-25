@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export { Pagination } from './Pagination';
+export type { PaginationProps } from './Pagination';

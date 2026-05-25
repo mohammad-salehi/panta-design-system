@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import './Button.css';  // ایمپورت مستقیم CSS
+import './HashText.css';  // ایمپورت مستقیم CSS
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface HashTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const HashText = React.forwardRef<HTMLButtonElement, HashTextProps>(
   ({ variant = 'primary', size = 'md', className, children, ...rest }, ref) => {
     const variantClass = `pds-button--${variant}`;
     const sizeClass = `pds-button--${size}`;
@@ -24,4 +24,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+HashText.displayName = 'Button';

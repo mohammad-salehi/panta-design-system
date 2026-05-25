@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export { LinearChart } from './LinearChart';
+export type { LinearChartProps } from './LinearChart';

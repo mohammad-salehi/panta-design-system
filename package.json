@@ -1,7 +1,7 @@
 {
   "name": "panta_design_system",
   "version": "1.0.0",
-  "description": "Design system with dark/light theme for Next.js",
+  "description": "Design system with Tailwind and dark/light theme",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,8 +11,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles.css",
-    "./index.css": "./dist/index.css"
+    "./styles.css": "./dist/styles.css"
   },
   "files": [
     "dist",
@@ -22,14 +21,15 @@
     "build": "npm run build:tsup && npm run build:css",
     "build:tsup": "tsup",
     "build:css": "postcss src/styles/global.css --output dist/styles.css",
-    "prepublishOnly": "npm run build",
+    "copy-fonts": "shx cp -r src/assets/fonts dist/",
+    "prepublishOnly": "npm run build && npm run copy-fonts",
     "dev": "concurrently \"tsup --watch\" \"postcss src/styles/global.css --output dist/styles.css --watch\""
   },
   "keywords": [
     "design-system",
     "nextjs",
-    "dark-mode",
-    "react"
+    "tailwind",
+    "dark-mode"
   ],
   "author": "",
   "license": "MIT",
@@ -37,16 +37,18 @@
     "react": "^18.2.0 || ^19.0.0",
     "react-dom": "^18.2.0 || ^19.0.0"
   },
-  "dependencies": {
-    "next-themes": "^0.4.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "eslint": "^10.4.0",
+    "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.8.3",
     "shx": "^0.4.0",
+    "tailwindcss": "^3.4.17",
     "tsup": "^8.5.1",
     "typescript": "^5.0.0"
   }

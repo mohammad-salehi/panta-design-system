@@ -1,2 +1,2 @@
-export { Button } from './ComponentLoading';
-export type { ButtonProps } from './ComponentLoading';
+export { ComponentLoading } from './ComponentLoading';
+export type { ComponentLoadingProps } from './ComponentLoading';

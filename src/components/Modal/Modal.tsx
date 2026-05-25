@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import './Button.css';  // ایمپورت مستقیم CSS
+import './Modal.css';  // ایمپورت مستقیم CSS
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Modal = React.forwardRef<HTMLButtonElement, ModalProps>(
   ({ variant = 'primary', size = 'md', className, children, ...rest }, ref) => {
     const variantClass = `pds-button--${variant}`;
     const sizeClass = `pds-button--${size}`;
@@ -24,4 +24,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+Modal.displayName = 'Button';
