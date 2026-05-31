@@ -856,10 +856,34 @@ function SearchableSelect({
             "span",
             {
               className: [
-                "shrink-0 text-xs text-titleText opacity-70 transition-transform duration-200",
+                "shrink-0 grid place-items-center",
+                // دقیقاً وسط
+                "h-8 w-8 -m-2",
+                // hit area بهتر، ولی ظاهر همون
+                "text-titleText/70",
+                "transition-transform duration-200",
+                "[transform-origin:center]",
                 open ? "rotate-180" : ""
               ].join(" "),
-              children: "\u25BE"
+              "aria-hidden": "true",
+              children: /* @__PURE__ */ jsx6(
+                "svg",
+                {
+                  className: "block h-4 w-4",
+                  viewBox: "0 0 20 20",
+                  fill: "none",
+                  children: /* @__PURE__ */ jsx6(
+                    "path",
+                    {
+                      d: "M6 8.25L10 12.25L14 8.25",
+                      stroke: "currentColor",
+                      strokeWidth: "1.9",
+                      strokeLinecap: "round",
+                      strokeLinejoin: "round"
+                    }
+                  )
+                }
+              )
             }
           )
         ]
@@ -879,14 +903,14 @@ function SearchableSelect({
             zIndex: 999999
           },
           className: [
-            "lux-menu",
+            "lux-panel",
             "bg-boxColor",
             "animate-fadeScale",
             "overflow-hidden",
             "rounded-2xl"
           ].join(" "),
           children: [
-            searchable ? /* @__PURE__ */ jsx6("div", { className: "p-2 pb-1", children: /* @__PURE__ */ jsxs3("div", { className: "lux-btn flex w-full items-center gap-2 rounded-xl px-3 py-2.5", children: [
+            searchable ? /* @__PURE__ */ jsx6("div", { className: "px-2 pt-2 pb-1", children: /* @__PURE__ */ jsxs3("div", { className: "lux-btn box-border flex w-full items-center gap-2 rounded-xl px-3 py-2.5", children: [
               /* @__PURE__ */ jsx6(
                 "svg",
                 {
@@ -913,11 +937,11 @@ function SearchableSelect({
                   value: q,
                   onChange: (e) => setQ(e.target.value),
                   placeholder: searchPlaceholder,
-                  className: "w-full bg-transparent text-sm text-titleText outline-none placeholder:opacity-50 border-none"
+                  className: "w-full border-none bg-transparent text-sm text-titleText outline-none placeholder:opacity-50"
                 }
               )
             ] }) }) : null,
-            /* @__PURE__ */ jsx6("div", { className: "max-h-72 overflow-y-auto px-2 pb-2 pt-1", children: loading ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u062F\u0631 \u062D\u0627\u0644 \u0628\u0627\u0631\u06AF\u0630\u0627\u0631\u06CC..." }) : filteredOptions.length === 0 ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u0645\u0648\u0631\u062F\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F" }) : filteredOptions.map((opt) => {
+            /* @__PURE__ */ jsx6("div", { className: "max-h-72 overflow-y-auto px-2 py-1 box-border", children: loading ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u062F\u0631 \u062D\u0627\u0644 \u0628\u0627\u0631\u06AF\u0630\u0627\u0631\u06CC..." }) : filteredOptions.length === 0 ? /* @__PURE__ */ jsx6("div", { className: "px-3 py-4 text-center text-sm lux-text", children: "\u0645\u0648\u0631\u062F\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F" }) : filteredOptions.map((opt) => {
               const active = opt.value === value;
               return /* @__PURE__ */ jsxs3(
                 "button",
@@ -925,9 +949,10 @@ function SearchableSelect({
                   type: "button",
                   onClick: () => handleSelect(opt.value),
                   className: [
-                    "group flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-right text-sm",
-                    "cursor-pointer transition-colors duration-150 border-none text-titleText",
-                    active ? "button_selected_bg" : "bg-none hover:bg-primary/10 dark:hover:bg-white/5 "
+                    "group box-border flex w-full items-center justify-between gap-3",
+                    "rounded-xl px-3 py-3 text-right text-sm",
+                    "cursor-pointer border-none text-titleText transition-colors duration-150",
+                    active ? "bg-gray-200 dark:bg-gray-700" : "bg-transparent hover:bg-gray-100 dark:hover:bg-white/5"
                   ].join(" "),
                   children: [
                     /* @__PURE__ */ jsx6("span", { className: "truncate font-medium", children: opt.label }),
@@ -953,9 +978,147 @@ function SearchableSelect({
     ) : null
   ] });
 }
+
+// src/components/Modal/Modal.tsx
+import { useEffect as useEffect5, useState as useState6 } from "react";
+import { createPortal as createPortal2 } from "react-dom";
+import clsx2 from "clsx";
+import { jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
+function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  className,
+  closeOnBackdrop = true,
+  closeOnEscape = true,
+  showHeader = true,
+  showCloseButton = true,
+  maxWidthClass = "max-w-md",
+  portalTarget,
+  zIndex = 9999,
+  ariaLabel = "Modal dialog"
+}) {
+  const [mounted, setMounted] = useState6(false);
+  useEffect5(() => setMounted(true), []);
+  useEffect5(() => {
+    if (!open) return;
+    const body = document.body;
+    const html = document.documentElement;
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
+    const prevOverflow = body.style.overflow;
+    const prevPaddingRight = body.style.paddingRight;
+    body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+    const onKey = (e) => {
+      if (!closeOnEscape) return;
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      body.style.overflow = prevOverflow;
+      body.style.paddingRight = prevPaddingRight;
+    };
+  }, [open, onClose, closeOnEscape]);
+  if (!open || !mounted) return null;
+  const target = portalTarget ?? (typeof document !== "undefined" ? document.body : null);
+  if (!target) return null;
+  return createPortal2(
+    /* @__PURE__ */ jsxs4(
+      "div",
+      {
+        className: "fixed inset-0",
+        style: { zIndex },
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": typeof title === "string" ? title : ariaLabel,
+        children: [
+          /* @__PURE__ */ jsx7(
+            "div",
+            {
+              className: "absolute inset-0 bg-black/50 backdrop-blur-sm",
+              onClick: () => {
+                if (!closeOnBackdrop) return;
+                onClose();
+              }
+            }
+          ),
+          /* @__PURE__ */ jsx7("div", { className: "absolute inset-0 flex items-center justify-center p-4 pointer-events-none", children: /* @__PURE__ */ jsxs4(
+            "div",
+            {
+              className: clsx2(
+                "pointer-events-auto w-full",
+                maxWidthClass,
+                "rounded-2xl",
+                // tokens
+                "lux-menu bg-boxColor text-titleText",
+                "shadow-[0_20px_60px_rgba(0,0,0,0.35)]",
+                "animate-[pantaModalIn_0.18s_ease-out]",
+                className
+              ),
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                showHeader ? /* @__PURE__ */ jsxs4("div", { className: "flex items-center justify-between px-5 py-1 border-b border-boxBorderColor dark:border-boxBorderColor-dark", children: [
+                  /* @__PURE__ */ jsx7("div", { className: "min-w-0", children: title ? typeof title === "string" ? /* @__PURE__ */ jsx7("h3", { className: "truncate text-lg font-semibold", children: title }) : /* @__PURE__ */ jsx7("div", { className: "min-w-0", children: title }) : /* @__PURE__ */ jsx7("div", {}) }),
+                  showCloseButton ? /* @__PURE__ */ jsx7(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: onClose,
+                      className: clsx2(
+                        "h-9 w-9 shrink-0 rounded-xl",
+                        "lux-btn flex items-center justify-center",
+                        "text-titleText"
+                      ),
+                      "aria-label": "close",
+                      children: /* @__PURE__ */ jsx7(
+                        "svg",
+                        {
+                          className: "block h-[18px] w-[18px]",
+                          viewBox: "0 0 24 24",
+                          fill: "none",
+                          "aria-hidden": "true",
+                          children: /* @__PURE__ */ jsx7(
+                            "path",
+                            {
+                              d: "M6 6l12 12M18 6L6 18",
+                              stroke: "currentColor",
+                              strokeWidth: "2",
+                              strokeLinecap: "round"
+                            }
+                          )
+                        }
+                      )
+                    }
+                  ) : null
+                ] }) : null,
+                /* @__PURE__ */ jsx7("div", { className: "px-5 pb-4 pt-0", children })
+              ]
+            }
+          ) }),
+          /* @__PURE__ */ jsx7("style", { children: `
+        @keyframes pantaModalIn {
+          from {
+            transform: translateY(12px) scale(0.98);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+        }
+      ` })
+        ]
+      }
+    ),
+    target
+  );
+}
 export {
   Button,
   Header,
+  Modal,
   Navbar,
   SearchableSelect,
   ThemeProvider,

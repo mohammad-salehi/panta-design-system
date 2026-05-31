@@ -65,4 +65,50 @@ type SearchableSelectProps = {
 };
 declare function SearchableSelect({ label, value, onChange, options, placeholder, searchable, searchPlaceholder, allLabel, loading, direction, className, disabled, }: SearchableSelectProps): react_jsx_runtime.JSX.Element;
 
-export { Button, type ButtonProps, Header, type HeaderProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
+type ModalProps = {
+    open: boolean;
+    onClose: () => void;
+    title?: React.ReactNode;
+    children: React.ReactNode;
+    className?: string;
+    /**
+     * Close on backdrop click
+     * default: true
+     */
+    closeOnBackdrop?: boolean;
+    /**
+     * Close on Escape key
+     * default: true
+     */
+    closeOnEscape?: boolean;
+    /**
+     * Show header section (title + close button)
+     * default: true
+     */
+    showHeader?: boolean;
+    /**
+     * Render close button
+     * default: true
+     */
+    showCloseButton?: boolean;
+    /**
+     * Modal max-width tailwind class
+     * default: max-w-md
+     */
+    maxWidthClass?: string;
+    /**
+     * Portal mount target (default: document.body)
+     */
+    portalTarget?: HTMLElement | null;
+    /**
+     * Container z-index (default: 9999)
+     */
+    zIndex?: number;
+    /**
+     * Optional aria label when no title is provided
+     */
+    ariaLabel?: string;
+};
+declare function Modal({ open, onClose, title, children, className, closeOnBackdrop, closeOnEscape, showHeader, showCloseButton, maxWidthClass, portalTarget, zIndex, ariaLabel, }: ModalProps): React.ReactPortal;
+
+export { Button, type ButtonProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };

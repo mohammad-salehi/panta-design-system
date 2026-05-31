@@ -209,109 +209,130 @@ export function SearchableSelect({
 
         <span
           className={[
-            "shrink-0 text-xs text-titleText opacity-70 transition-transform duration-200",
+            "shrink-0 grid place-items-center",      // دقیقاً وسط
+            "h-8 w-8 -m-2",                          // hit area بهتر، ولی ظاهر همون
+            "text-titleText/70",
+            "transition-transform duration-200",
+            "[transform-origin:center]",
             open ? "rotate-180" : "",
           ].join(" ")}
+          aria-hidden="true"
         >
-          ▾
+          <svg
+            className="block h-4 w-4"                // block => مشکل baseline حل
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M6 8.25L10 12.25L14 8.25"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </span>
+
+
       </button>
 
       {mounted && open
         ? createPortal(
-            <div
-              ref={dropdownRef}
-              dir={direction}
-              style={{
-                position: "absolute",
-                top: coords.top,
-                left: coords.left,
-                width: coords.width,
-                zIndex: 999999,
-              }}
-              className={[
-                "lux-menu",
-                'bg-boxColor',
-                "animate-fadeScale",
-                "overflow-hidden",
-                "rounded-2xl",
-              ].join(" ")}
-            >
-              {searchable ? (
-                <div className="p-2 pb-1">
-                  <div className="lux-btn flex w-full items-center gap-2 rounded-xl px-3 py-2.5">
-                    <svg
-                      className="h-4 w-4 shrink-0 text-titleText opacity-50"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M14.1667 14.1667L18 18M16.3333 9.16667C16.3333 13.1247 13.1247 16.3333 9.16667 16.3333C5.20863 16.3333 2 13.1247 2 9.16667C2 5.20863 5.20863 2 9.16667 2C13.1247 2 16.3333 5.20863 16.3333 9.16667Z"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+          <div
+            ref={dropdownRef}
+            dir={direction}
+            style={{
+              position: "absolute",
+              top: coords.top,
+              left: coords.left,
+              width: coords.width,
+              zIndex: 999999,
+            }}
+            className={[
+              "lux-panel",
+              "bg-boxColor",
+              "animate-fadeScale",
+              "overflow-hidden",
+              "rounded-2xl",
+            ].join(" ")}
+          >
+            {searchable ? (
+              <div className="px-2 pt-2 pb-1">
+  <div className="lux-btn box-border flex w-full items-center gap-2 rounded-xl px-3 py-2.5">
 
-                    <input
-                      ref={searchInputRef}
-                      value={q}
-                      onChange={(e) => setQ(e.target.value)}
-                      placeholder={searchPlaceholder}
-                      className="w-full bg-transparent text-sm text-titleText outline-none placeholder:opacity-50 border-none"
+                  <svg
+                    className="h-4 w-4 shrink-0 text-titleText opacity-50"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M14.1667 14.1667L18 18M16.3333 9.16667C16.3333 13.1247 13.1247 16.3333 9.16667 16.3333C5.20863 16.3333 2 13.1247 2 9.16667C2 5.20863 5.20863 2 9.16667 2C13.1247 2 16.3333 5.20863 16.3333 9.16667Z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                  </div>
+                  </svg>
+
+                  <input
+                    ref={searchInputRef}
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder={searchPlaceholder}
+                    className="w-full border-none bg-transparent text-sm text-titleText outline-none placeholder:opacity-50"
+                  />
                 </div>
-              ) : null}
+              </div>
+            ) : null}
 
-              <div className="max-h-72 overflow-y-auto px-2 pb-2 pt-1">
-                {loading ? (
-                  <div className="px-3 py-4 text-center text-sm lux-text">
-                    در حال بارگذاری...
-                  </div>
-                ) : filteredOptions.length === 0 ? (
-                  <div className="px-3 py-4 text-center text-sm lux-text">
-                    موردی یافت نشد
-                  </div>
-                ) : (
-                  filteredOptions.map((opt) => {
-                    const active = opt.value === value;
+<div className="max-h-72 overflow-y-auto px-2 py-1 box-border">
+              {loading ? (
+                <div className="px-3 py-4 text-center text-sm lux-text">
+                  در حال بارگذاری...
+                </div>
+              ) : filteredOptions.length === 0 ? (
+                <div className="px-3 py-4 text-center text-sm lux-text">
+                  موردی یافت نشد
+                </div>
+              ) : (
+                filteredOptions.map((opt) => {
+                  const active = opt.value === value;
 
-                    return (
-                      <button
-                        key={String(opt.id ?? opt.value)}
-                        type="button"
-                        onClick={() => handleSelect(opt.value)}
+                  return (
+                    <button
+                      key={String(opt.id ?? opt.value)}
+                      type="button"
+                      onClick={() => handleSelect(opt.value)}
+                      className={[
+                        "group box-border flex w-full items-center justify-between gap-3",
+                        "rounded-xl px-3 py-3 text-right text-sm",
+                        "cursor-pointer border-none text-titleText transition-colors duration-150",
+                        active
+                          ? "bg-gray-200 dark:bg-gray-700"
+                          : "bg-transparent hover:bg-gray-100 dark:hover:bg-white/5",
+                      ].join(" ")}
+                    >
+                      <span className="truncate font-medium">{opt.label}</span>
+
+                      <span
                         className={[
-                          "group flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-right text-sm",
-                          "cursor-pointer transition-colors duration-150 border-none text-titleText",
+                          "text-xs transition-opacity",
                           active
-                            ? "button_selected_bg"
-                            : "bg-none hover:bg-primary/10 dark:hover:bg-white/5 ",
+                            ? "text-primary opacity-100"
+                            : "text-titleText opacity-0 group-hover:opacity-60",
                         ].join(" ")}
                       >
-                        <span className="truncate font-medium">{opt.label}</span>
-
-                        <span
-                          className={[
-                            "text-xs transition-opacity",
-                            active
-                              ? "text-primary opacity-100"
-                              : "text-titleText opacity-0 group-hover:opacity-60",
-                          ].join(" ")}
-                        >
-                          ✓
-                        </span>
-                      </button>
-                    );
-                  })
-                )}
-              </div>
-            </div>,
-            document.body
-          )
+                        ✓
+                      </span>
+                    </button>
+                  );
+                })
+              )}
+            </div>
+          </div>,
+          document.body
+        )
         : null}
     </div>
   );
