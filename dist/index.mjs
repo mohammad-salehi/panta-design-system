@@ -1115,8 +1115,470 @@ function Modal({
     target
   );
 }
+
+// src/components/Calendar/Calendar.tsx
+import { useEffect as useEffect6, useMemo as useMemo3, useRef as useRef4, useState as useState7 } from "react";
+import { createPortal as createPortal3 } from "react-dom";
+import clsx3 from "clsx";
+import { Fragment, jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
+function clampDate(d, min, max) {
+  const t = d.getTime();
+  if (min && t < min.getTime()) return min;
+  if (max && t > max.getTime()) return max;
+  return d;
+}
+function isSameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+function startOfDay(d) {
+  const x = new Date(d);
+  x.setHours(0, 0, 0, 0);
+  return x;
+}
+function toEnglishDigits(input) {
+  const fa = "\u06F0\u06F1\u06F2\u06F3\u06F4\u06F5\u06F6\u06F7\u06F8\u06F9";
+  const ar = "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
+  return input.replace(/[۰-۹٠-٩]/g, (ch) => {
+    const faIndex = fa.indexOf(ch);
+    if (faIndex !== -1) return String(faIndex);
+    const arIndex = ar.indexOf(ch);
+    if (arIndex !== -1) return String(arIndex);
+    return ch;
+  });
+}
+function joinYMD(y, m, d, format) {
+  const sep = format === "YYYY-MM-DD" ? "-" : "/";
+  return `${y}${sep}${m}${sep}${d}`;
+}
+function formatDisplayValue(date, calendar, format) {
+  if (!date) return "";
+  if (calendar === "gregorian") {
+    const y2 = String(date.getFullYear()).padStart(4, "0");
+    const m2 = String(date.getMonth() + 1).padStart(2, "0");
+    const d2 = String(date.getDate()).padStart(2, "0");
+    return joinYMD(y2, m2, d2, format);
+  }
+  const dtf = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
+  const parts = dtf.formatToParts(date);
+  const y = parts.find((p) => p.type === "year")?.value ?? "";
+  const m = parts.find((p) => p.type === "month")?.value ?? "";
+  const d = parts.find((p) => p.type === "day")?.value ?? "";
+  const yy = toEnglishDigits(y).padStart(4, "0");
+  const mm = toEnglishDigits(m).padStart(2, "0");
+  const dd = toEnglishDigits(d).padStart(2, "0");
+  return joinYMD(yy, mm, dd, format);
+}
+function getWeekdayLabels(calendar) {
+  if (calendar === "jalali") return ["\u0634", "\u06CC", "\u062F", "\u0633", "\u0686", "\u067E", "\u062C"];
+  return ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+}
+function getMonthTitle(date, calendar) {
+  if (calendar === "gregorian") {
+    return new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric"
+    }).format(date);
+  }
+  return new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "long"
+  }).format(date);
+}
+function buildMonthGrid(viewDate, calendar) {
+  const weekStart = calendar === "jalali" ? 6 : 0;
+  let firstOfMonth;
+  let lastOfMonth;
+  if (calendar === "gregorian") {
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    firstOfMonth = new Date(year, month, 1);
+    lastOfMonth = new Date(year, month + 1, 0);
+  } else {
+    firstOfMonth = findPersianMonthStart(viewDate);
+    const startNextMonth = findPersianMonthStart(addDays(firstOfMonth, 35));
+    lastOfMonth = addDays(startNextMonth, -1);
+  }
+  const firstDayIndex = firstOfMonth.getDay();
+  const leading = (firstDayIndex - weekStart + 7) % 7;
+  const days = [];
+  for (let i = leading; i > 0; i--) {
+    days.push({ date: addDays(firstOfMonth, -i), inMonth: false });
+  }
+  const totalDays = Math.round((startOfDay(lastOfMonth).getTime() - startOfDay(firstOfMonth).getTime()) / 864e5) + 1;
+  for (let i = 0; i < totalDays; i++) {
+    days.push({ date: addDays(firstOfMonth, i), inMonth: true });
+  }
+  while (days.length < 42) {
+    const last = days[days.length - 1].date;
+    days.push({ date: addDays(last, 1), inMonth: false });
+  }
+  return days;
+}
+function isDisabledDay(d, minDate, maxDate) {
+  const t = startOfDay(d).getTime();
+  if (minDate && t < startOfDay(minDate).getTime()) return true;
+  if (maxDate && t > startOfDay(maxDate).getTime()) return true;
+  return false;
+}
+function IconChevronLeft(props) {
+  return /* @__PURE__ */ jsx8("svg", { className: clsx3("h-5 w-5", props.className), viewBox: "0 0 24 24", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ jsx8(
+    "path",
+    {
+      d: "M15 6l-6 6 6 6",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }
+  ) });
+}
+function IconChevronRight(props) {
+  return /* @__PURE__ */ jsx8("svg", { className: clsx3("h-5 w-5", props.className), viewBox: "0 0 24 24", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ jsx8(
+    "path",
+    {
+      d: "M9 6l6 6-6 6",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }
+  ) });
+}
+function IconDoubleLeft(props) {
+  return /* @__PURE__ */ jsxs5("svg", { className: clsx3("h-5 w-5", props.className), viewBox: "0 0 24 24", fill: "none", "aria-hidden": "true", children: [
+    /* @__PURE__ */ jsx8(
+      "path",
+      {
+        d: "M18 6l-6 6 6 6",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }
+    ),
+    /* @__PURE__ */ jsx8(
+      "path",
+      {
+        d: "M12 6l-6 6 6 6",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }
+    )
+  ] });
+}
+function IconDoubleRight(props) {
+  return /* @__PURE__ */ jsxs5("svg", { className: clsx3("h-5 w-5", props.className), viewBox: "0 0 24 24", fill: "none", "aria-hidden": "true", children: [
+    /* @__PURE__ */ jsx8(
+      "path",
+      {
+        d: "M6 6l6 6-6 6",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }
+    ),
+    /* @__PURE__ */ jsx8(
+      "path",
+      {
+        d: "M12 6l6 6-6 6",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }
+    )
+  ] });
+}
+function getPersianParts(date) {
+  const dtf = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric"
+  });
+  const parts = dtf.formatToParts(date);
+  const y = Number(toEnglishDigits(parts.find((p) => p.type === "year")?.value ?? "0"));
+  const m = Number(toEnglishDigits(parts.find((p) => p.type === "month")?.value ?? "0"));
+  const d = Number(toEnglishDigits(parts.find((p) => p.type === "day")?.value ?? "0"));
+  return { jy: y, jm: m, jd: d };
+}
+function addDays(base, delta) {
+  const d = new Date(base);
+  d.setDate(d.getDate() + delta);
+  return d;
+}
+function findPersianMonthStart(anchor) {
+  const a = startOfDay(anchor);
+  const { jy, jm } = getPersianParts(a);
+  for (let i = 0; i <= 40; i++) {
+    const cur = addDays(a, -i);
+    const p = getPersianParts(cur);
+    if (p.jy === jy && p.jm === jm && p.jd === 1) return cur;
+  }
+  return new Date(a.getFullYear(), a.getMonth(), 1);
+}
+function DatePicker({
+  value,
+  onChange,
+  onChangeFormatted,
+  calendar = "gregorian",
+  placeholder = "Select date",
+  displayFormat = "YYYY/MM/DD",
+  disabled = false,
+  className,
+  minDate,
+  maxDate,
+  closeOnSelect = true
+}) {
+  const triggerRef = useRef4(null);
+  const panelRef = useRef4(null);
+  const [open, setOpen] = useState7(false);
+  const [mounted, setMounted] = useState7(false);
+  const [viewDate, setViewDate] = useState7(
+    () => clampDate(value ?? /* @__PURE__ */ new Date(), minDate, maxDate)
+  );
+  const isRTL = calendar === "jalali";
+  useEffect6(() => setMounted(true), []);
+  useEffect6(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const onDown = (e) => {
+      const t = e.target;
+      const trig = triggerRef.current;
+      const panel = panelRef.current;
+      if (!trig || !panel) return;
+      if (trig.contains(t) || panel.contains(t)) return;
+      setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onDown);
+    };
+  }, [open]);
+  useEffect6(() => {
+    if (value) setViewDate(clampDate(value, minDate, maxDate));
+  }, [value, minDate, maxDate]);
+  const rect = triggerRef.current?.getBoundingClientRect();
+  const panelStyle = rect ? {
+    position: "fixed",
+    top: rect.bottom + 8,
+    left: rect.left,
+    width: rect.width,
+    zIndex: 9999
+  } : void 0;
+  const days = useMemo3(() => buildMonthGrid(viewDate, calendar), [viewDate, calendar]);
+  const weekdayLabels = useMemo3(() => getWeekdayLabels(calendar), [calendar]);
+  const displayValue = formatDisplayValue(value, calendar, displayFormat);
+  const goPrevMonth = () => {
+    if (calendar === "gregorian") {
+      const d = new Date(viewDate);
+      d.setMonth(d.getMonth() - 1);
+      setViewDate(clampDate(d, minDate, maxDate));
+      return;
+    }
+    const start = findPersianMonthStart(viewDate);
+    setViewDate(clampDate(addDays(start, -1), minDate, maxDate));
+  };
+  const goNextMonth = () => {
+    if (calendar === "gregorian") {
+      const d = new Date(viewDate);
+      d.setMonth(d.getMonth() + 1);
+      setViewDate(clampDate(d, minDate, maxDate));
+      return;
+    }
+    const start = findPersianMonthStart(viewDate);
+    setViewDate(clampDate(addDays(start, 35), minDate, maxDate));
+  };
+  const goPrevYear = () => {
+    if (calendar === "gregorian") {
+      const d = new Date(viewDate);
+      d.setFullYear(d.getFullYear() - 1);
+      setViewDate(clampDate(d, minDate, maxDate));
+      return;
+    }
+    setViewDate(clampDate(addDays(viewDate, -366), minDate, maxDate));
+  };
+  const goNextYear = () => {
+    if (calendar === "gregorian") {
+      const d = new Date(viewDate);
+      d.setFullYear(d.getFullYear() + 1);
+      setViewDate(clampDate(d, minDate, maxDate));
+      return;
+    }
+    setViewDate(clampDate(addDays(viewDate, 366), minDate, maxDate));
+  };
+  const onPick = (d) => {
+    const picked = clampDate(startOfDay(d), minDate, maxDate);
+    if (isDisabledDay(picked, minDate, maxDate)) return;
+    onChange(picked);
+    onChangeFormatted?.(picked.toISOString());
+    if (closeOnSelect) setOpen(false);
+  };
+  const leftGroup = isRTL ? [
+    { key: "nextYear", onClick: goPrevYear, icon: /* @__PURE__ */ jsx8(IconDoubleRight, {}) },
+    { key: "nextMonth", onClick: goPrevMonth, icon: /* @__PURE__ */ jsx8(IconChevronRight, {}) }
+  ] : [
+    { key: "prevYear", onClick: goPrevYear, icon: /* @__PURE__ */ jsx8(IconDoubleLeft, {}) },
+    { key: "prevMonth", onClick: goPrevMonth, icon: /* @__PURE__ */ jsx8(IconChevronLeft, {}) }
+  ];
+  const rightGroup = isRTL ? [
+    { key: "prevMonth", onClick: goNextMonth, icon: /* @__PURE__ */ jsx8(IconChevronLeft, {}) },
+    { key: "prevYear", onClick: goNextYear, icon: /* @__PURE__ */ jsx8(IconDoubleLeft, {}) }
+  ] : [
+    { key: "nextMonth", onClick: goNextMonth, icon: /* @__PURE__ */ jsx8(IconChevronRight, {}) },
+    { key: "nextYear", onClick: goNextYear, icon: /* @__PURE__ */ jsx8(IconDoubleRight, {}) }
+  ];
+  const navLikeSquareBtn = "shrink-0 h-10 w-10 rounded-xl border border-boxBorderColor dark:border-boxBorderColor-dark bg-white/70 dark:bg-bgColor-dark/60 hover:bg-gray-100 dark:hover:bg-gray-900 transition flex items-center justify-center text-titleText dark:text-titleText-dark lux-btn";
+  const dayBtnBase = "h-10 rounded-xl text-sm box-border flex items-center justify-center select-none transition text-titleText dark:text-titleText-dark lux-btn";
+  return /* @__PURE__ */ jsxs5(Fragment, { children: [
+    /* @__PURE__ */ jsxs5(
+      "button",
+      {
+        ref: triggerRef,
+        type: "button",
+        disabled,
+        onClick: () => {
+          if (disabled) return;
+          setOpen((prev) => !prev);
+        },
+        className: [
+          "lux-btn w-full h-12 px-4",
+          "flex items-center justify-between gap-3",
+          "rounded-xl",
+          "transition-all duration-200",
+          "text-titleText",
+          open ? "ring-2 ring-primary/20" : "",
+          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+          className ?? ""
+        ].join(" "),
+        "aria-haspopup": "dialog",
+        "aria-expanded": open,
+        children: [
+          /* @__PURE__ */ jsx8("span", { className: clsx3("min-w-0 truncate", !displayValue && "text-mutedText"), children: displayValue || placeholder }),
+          /* @__PURE__ */ jsx8(
+            "svg",
+            {
+              className: clsx3("h-5 w-5 shrink-0 transition-transform", open && "rotate-180"),
+              viewBox: "0 0 24 24",
+              fill: "none",
+              style: { transformOrigin: "center" },
+              "aria-hidden": "true",
+              children: /* @__PURE__ */ jsx8(
+                "path",
+                {
+                  d: "M7 10l5 5 5-5",
+                  stroke: "currentColor",
+                  strokeWidth: "2",
+                  strokeLinecap: "round",
+                  strokeLinejoin: "round"
+                }
+              )
+            }
+          )
+        ]
+      }
+    ),
+    open && mounted ? createPortal3(
+      /* @__PURE__ */ jsxs5(
+        "div",
+        {
+          ref: panelRef,
+          className: clsx3(
+            "rounded-2xl border lux-calendar backdrop-blur",
+            "text-titleText dark:text-titleText-dark",
+            "shadow-lg",
+            "p-3"
+          ),
+          style: panelStyle,
+          dir: isRTL ? "rtl" : "ltr",
+          role: "dialog",
+          "aria-label": "Date picker",
+          children: [
+            /* @__PURE__ */ jsxs5("div", { className: "flex items-center justify-between gap-2 px-1 pb-2", children: [
+              /* @__PURE__ */ jsx8("div", { className: "flex items-center gap-2", children: leftGroup.map((b) => /* @__PURE__ */ jsx8(
+                "button",
+                {
+                  type: "button",
+                  onClick: b.onClick,
+                  className: navLikeSquareBtn,
+                  "aria-label": b.key,
+                  children: b.icon
+                },
+                b.key
+              )) }),
+              /* @__PURE__ */ jsx8("div", { className: "flex-1 text-center", children: /* @__PURE__ */ jsx8("div", { className: "text-sm font-semibold leading-5", children: getMonthTitle(viewDate, calendar) }) }),
+              /* @__PURE__ */ jsx8("div", { className: "flex items-center gap-2", children: rightGroup.map((b) => /* @__PURE__ */ jsx8(
+                "button",
+                {
+                  type: "button",
+                  onClick: b.onClick,
+                  className: navLikeSquareBtn,
+                  "aria-label": b.key,
+                  children: b.icon
+                },
+                b.key
+              )) })
+            ] }),
+            /* @__PURE__ */ jsx8("div", { className: "grid grid-cols-7 gap-1 px-1 pb-1", children: weekdayLabels.map((w) => /* @__PURE__ */ jsx8(
+              "div",
+              {
+                className: "py-1 text-center text-[11px] font-medium text-mutedText select-none",
+                children: w
+              },
+              w
+            )) }),
+            /* @__PURE__ */ jsx8("div", { className: "grid grid-cols-7 gap-1 px-1", children: days.map(({ date, inMonth }, idx) => {
+              const selected = value ? isSameDay(date, value) : false;
+              const today = isSameDay(date, /* @__PURE__ */ new Date());
+              const isOutsideMonth = !inMonth;
+              const isDayDisabled = isOutsideMonth || isDisabledDay(date, minDate, maxDate);
+              const dayLabel = calendar === "gregorian" ? String(date.getDate()) : new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+                day: "numeric"
+              }).format(date);
+              return /* @__PURE__ */ jsx8(
+                "button",
+                {
+                  type: "button",
+                  disabled: isDayDisabled,
+                  onClick: () => {
+                    if (isDayDisabled) return;
+                    onPick(date);
+                  },
+                  className: clsx3(
+                    dayBtnBase,
+                    !selected && !isDayDisabled && "hover:bg-gray-100 dark:hover:bg-gray-900",
+                    selected && "bg-primary/20 dark:bg-gray-600",
+                    today && !selected && !isDayDisabled && "ring-1 ring-black/10 dark:ring-white/10",
+                    isOutsideMonth && "opacity-30 cursor-not-allowed",
+                    isDayDisabled && !isOutsideMonth && "opacity-35 cursor-not-allowed"
+                  ),
+                  "aria-pressed": selected,
+                  "aria-disabled": isDayDisabled,
+                  children: dayLabel
+                },
+                `${date.toISOString()}-${idx}`
+              );
+            }) })
+          ]
+        }
+      ),
+      document.body
+    ) : null
+  ] });
+}
 export {
   Button,
+  DatePicker,
   Header,
   Modal,
   Navbar,

@@ -12,4 +12,6 @@
 - [Searchable Select - English](components/SearchableSelect/README.en.md)
 - [مودال (Modal) - فارسی](components/Modal/README.fa.md)
 - [Modal - English](components/Modal/README.en.md)
+- [تقویم (DatePicker) - فارسی](components/DatePicker/README.fa.md)
+- [DatePicker - English](components/DatePicker/README.en.md)
 در حال تکمیل...

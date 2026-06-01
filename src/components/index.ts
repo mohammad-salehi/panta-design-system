@@ -6,3 +6,4 @@ export * from './Header';
 export * from './Navbar';  
 export * from './DropdownSelect';
 export * from './Modal';
+export * from './Calendar';

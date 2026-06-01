@@ -182,6 +182,12 @@ body {
     background: var(--panel-gradient);
     border-color: var(--panel-border);
   }
+  .lux-calendar {
+    @apply rounded-[32px] border backdrop-blur shadow-lux-panel transition ;
+    background: var(--panel-gradient);
+    border-color: var(--panel-border);
+    
+  }
   .lux-title {
     @apply rounded-2xl border border-white/40 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl shadow-lux-title;
   }

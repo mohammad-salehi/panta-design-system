@@ -111,4 +111,32 @@ type ModalProps = {
 };
 declare function Modal({ open, onClose, title, children, className, closeOnBackdrop, closeOnEscape, showHeader, showCloseButton, maxWidthClass, portalTarget, zIndex, ariaLabel, }: ModalProps): React.ReactPortal;
 
-export { Button, type ButtonProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
+type CalendarType = "gregorian" | "jalali";
+type DisplayFormat = "YYYY/MM/DD" | "YYYY-MM-DD";
+type DatePickerValue = Date | null;
+type DatePickerProps = {
+    value: DatePickerValue;
+    onChange: (value: DatePickerValue) => void;
+    /**
+     * خروجی نهایی برای هر دو تقویم:
+     * همیشه ISO string
+     * مثال:
+     * 2026-06-01T13:24:53.207Z
+     */
+    onChangeFormatted?: (value: string) => void;
+    calendar?: CalendarType;
+    placeholder?: string;
+    /**
+     * فقط برای نمایش داخل دکمه
+     * روی خروجی callback اثری ندارد
+     */
+    displayFormat?: DisplayFormat;
+    disabled?: boolean;
+    className?: string;
+    minDate?: Date;
+    maxDate?: Date;
+    closeOnSelect?: boolean;
+};
+declare function DatePicker({ value, onChange, onChangeFormatted, calendar, placeholder, displayFormat, disabled, className, minDate, maxDate, closeOnSelect, }: DatePickerProps): react_jsx_runtime.JSX.Element;
+
+export { Button, type ButtonProps, DatePicker, type DatePickerProps, type DatePickerValue, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
