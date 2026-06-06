@@ -151,22 +151,9 @@ export function Box({
         <div ref={contentRef}>
           {/* CONTENT */}
           <div className="flex-1 min-h-0 w-full mt-5">
-            <div
-              className="
-              relative
-              h-full
-              rounded-[28px]
-              border border-white/40 dark:border-white/10
-              bg-white/75 dark:bg-white/[0.04]
-              backdrop-blur-xl
-              p-4 md:p-5
-              shadow-[0_12px_30px_-20px_rgba(0,0,0,0.6)]
-              overflow-hidden
-              "
-            >
-              <div className="relative w-full h-full min-w-0">
-                {children}
-              </div>
+
+            <div className="relative w-full h-full min-w-0">
+              {children}
             </div>
           </div>
 

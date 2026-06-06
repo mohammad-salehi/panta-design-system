@@ -10,3 +10,5 @@ export * from './Calendar';
 export * from './Box';
 export * from './ButtonSelect';
 export * from './HashText';
+export * from './DoubleBarChart';
+export * from './DoubleLineChart';

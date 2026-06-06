@@ -52,6 +52,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "recharts": "^3.8.1"
   }
 }

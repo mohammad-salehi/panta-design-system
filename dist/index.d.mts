@@ -185,4 +185,32 @@ interface HashTextProps {
 }
 declare const HashText: React.FC<HashTextProps>;
 
-export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, DatePicker, type DatePickerProps, type DatePickerValue, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
+type DoubleBarChartDataItem = {
+    label: string;
+    x: number;
+    y: number;
+};
+interface Props$1 {
+    data: DoubleBarChartDataItem[];
+    assetLabel?: string;
+    liabilityLabel?: string;
+    height?: number;
+    className?: string;
+}
+declare const DoubleBarChart: React.FC<Props$1>;
+
+type DoubleLineChartDataItem = {
+    label: string;
+    x: number;
+    y: number;
+};
+interface Props {
+    data: DoubleLineChartDataItem[];
+    assetLabel?: string;
+    liabilityLabel?: string;
+    height?: number;
+    className?: string;
+}
+declare const DoubleLineChart: React.FC<Props>;
+
+export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };

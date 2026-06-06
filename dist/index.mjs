@@ -1680,13 +1680,7 @@ function Box({
             },
             className: "\r\n        transition-all duration-300 ease-in-out",
             children: /* @__PURE__ */ jsxs6("div", { ref: contentRef, children: [
-              /* @__PURE__ */ jsx9("div", { className: "flex-1 min-h-0 w-full mt-5", children: /* @__PURE__ */ jsx9(
-                "div",
-                {
-                  className: "\r\n              relative\r\n              h-full\r\n              rounded-[28px]\r\n              border border-white/40 dark:border-white/10\r\n              bg-white/75 dark:bg-white/[0.04]\r\n              backdrop-blur-xl\r\n              p-4 md:p-5\r\n              shadow-[0_12px_30px_-20px_rgba(0,0,0,0.6)]\r\n              overflow-hidden\r\n              ",
-                  children: /* @__PURE__ */ jsx9("div", { className: "relative w-full h-full min-w-0", children })
-                }
-              ) }),
+              /* @__PURE__ */ jsx9("div", { className: "flex-1 min-h-0 w-full mt-5", children: /* @__PURE__ */ jsx9("div", { className: "relative w-full h-full min-w-0", children }) }),
               footer && /* @__PURE__ */ jsx9("div", { className: "mt-5 pt-4 border-t border-white/30 dark:border-white/10 flex-shrink-0", children: footer })
             ] })
           }
@@ -1891,11 +1885,417 @@ var HashText = ({
     }
   );
 };
+
+// src/components/DoubleBarChart/DoubleBarChart.tsx
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from "recharts";
+import { jsx as jsx12, jsxs as jsxs8 } from "react/jsx-runtime";
+var DoubleBarChart = ({
+  data,
+  assetLabel = "\u062F\u0627\u0631\u0627\u06CC\u06CC",
+  liabilityLabel = "\u0628\u062F\u0647\u06CC",
+  height = 320,
+  className = ""
+}) => {
+  const formatCompact = (n) => {
+    const abs = Math.abs(n);
+    if (abs >= 1e9) return (n / 1e9).toFixed(1) + "B";
+    if (abs >= 1e6) return (n / 1e6).toFixed(1) + "M";
+    if (abs >= 1e3) return (n / 1e3).toFixed(1) + "K";
+    return String(n);
+  };
+  return /* @__PURE__ */ jsx12("div", { className: `w-full min-w-0 overflow-hidden ${className}`, children: /* @__PURE__ */ jsxs8(
+    "div",
+    {
+      className: "\r\n        relative\r\n        w-full\r\n        min-w-0\r\n        overflow-hidden\r\n        border\r\n        border-white/30\r\n        dark:border-white/10\r\n        bg-white/70\r\n        dark:bg-white/[0.04]\r\n        backdrop-blur-2xl\r\n        p-6\r\n        shadow-[0_25px_60px_-25px_rgba(0,0,0,0.45)]\r\n        transition-all\r\n      ",
+      style: { height },
+      children: [
+        /* @__PURE__ */ jsx12("div", { className: "pointer-events-none absolute -top-32 -right-32 h-72 w-72 rounded-none bg-emerald-400/15 blur-[120px]" }),
+        /* @__PURE__ */ jsx12("div", { className: "pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-none bg-rose-400/15 blur-[120px]" }),
+        /* @__PURE__ */ jsx12("div", { className: "relative h-full w-full min-w-0 overflow-hidden", children: /* @__PURE__ */ jsx12(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxs8(
+          BarChart,
+          {
+            data,
+            margin: { top: 10, right: 20, left: 10, bottom: 20 },
+            barCategoryGap: "28%",
+            children: [
+              /* @__PURE__ */ jsxs8("defs", { children: [
+                /* @__PURE__ */ jsxs8("linearGradient", { id: "assetGradient", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+                  /* @__PURE__ */ jsx12("stop", { offset: "0%", stopColor: "#34d399" }),
+                  /* @__PURE__ */ jsx12("stop", { offset: "100%", stopColor: "#059669" })
+                ] }),
+                /* @__PURE__ */ jsxs8("linearGradient", { id: "liabilityGradient", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+                  /* @__PURE__ */ jsx12("stop", { offset: "0%", stopColor: "#fb7185" }),
+                  /* @__PURE__ */ jsx12("stop", { offset: "100%", stopColor: "#e11d48" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx12(
+                CartesianGrid,
+                {
+                  vertical: false,
+                  stroke: "currentColor",
+                  opacity: 0.06
+                }
+              ),
+              /* @__PURE__ */ jsx12(
+                XAxis,
+                {
+                  dataKey: "label",
+                  tick: { fontSize: 12 },
+                  tickLine: false,
+                  axisLine: false,
+                  interval: "preserveStartEnd",
+                  minTickGap: 10
+                }
+              ),
+              /* @__PURE__ */ jsx12(
+                YAxis,
+                {
+                  width: 55,
+                  tickFormatter: (v) => formatCompact(Number(v)),
+                  tick: { fontSize: 12 },
+                  tickLine: false,
+                  axisLine: false
+                }
+              ),
+              /* @__PURE__ */ jsx12(
+                Tooltip,
+                {
+                  cursor: { fill: "rgba(255,255,255,0.05)" },
+                  content: ({ active, payload, label }) => {
+                    if (!active || !payload?.length) return null;
+                    const xVal = payload.find((p) => p.dataKey === "x")?.value ?? 0;
+                    const yVal = payload.find((p) => p.dataKey === "y")?.value ?? 0;
+                    return /* @__PURE__ */ jsxs8(
+                      "div",
+                      {
+                        className: "\r\n                      rounded-2xl\r\n                      border\r\n                      border-white/30\r\n                      dark:border-white/10\r\n                      bg-white/90\r\n                      dark:bg-[#0b0f15]\r\n                      px-4\r\n                      py-3\r\n                      text-xs\r\n                      shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)]\r\n                      backdrop-blur-xl\r\n                    ",
+                        children: [
+                          /* @__PURE__ */ jsx12("div", { className: "mb-2 font-semibold text-sm", children: label }),
+                          /* @__PURE__ */ jsxs8("div", { className: "space-y-1", children: [
+                            /* @__PURE__ */ jsxs8("div", { className: "flex justify-between gap-6", children: [
+                              /* @__PURE__ */ jsx12("span", { className: "text-emerald-500 font-medium", children: assetLabel }),
+                              /* @__PURE__ */ jsx12("span", { dir: "ltr", className: "font-semibold", children: formatCompact(Number(xVal)) })
+                            ] }),
+                            /* @__PURE__ */ jsxs8("div", { className: "flex justify-between gap-6", children: [
+                              /* @__PURE__ */ jsx12("span", { className: "text-rose-500 font-medium", children: liabilityLabel }),
+                              /* @__PURE__ */ jsx12("span", { dir: "ltr", className: "font-semibold", children: formatCompact(Number(yVal)) })
+                            ] })
+                          ] })
+                        ]
+                      }
+                    );
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx12(
+                Bar,
+                {
+                  dataKey: "x",
+                  fill: "url(#assetGradient)",
+                  radius: [14, 14, 6, 6],
+                  maxBarSize: 42,
+                  animationDuration: 600
+                }
+              ),
+              /* @__PURE__ */ jsx12(
+                Bar,
+                {
+                  dataKey: "y",
+                  fill: "url(#liabilityGradient)",
+                  radius: [14, 14, 6, 6],
+                  maxBarSize: 42,
+                  animationDuration: 600
+                }
+              )
+            ]
+          }
+        ) }) })
+      ]
+    }
+  ) });
+};
+
+// src/components/DoubleLineChart/DoubleLineChart.tsx
+import {
+  Line,
+  XAxis as XAxis2,
+  YAxis as YAxis2,
+  CartesianGrid as CartesianGrid2,
+  Tooltip as Tooltip2,
+  ResponsiveContainer as ResponsiveContainer2,
+  Area,
+  ComposedChart
+} from "recharts";
+import { jsx as jsx13, jsxs as jsxs9 } from "react/jsx-runtime";
+var DoubleLineChart = ({
+  data,
+  assetLabel = "\u062F\u0627\u0631\u0627\u06CC\u06CC",
+  liabilityLabel = "\u0628\u062F\u0647\u06CC",
+  height = 320,
+  className = ""
+}) => {
+  const formatCompact = (n) => {
+    const abs = Math.abs(n);
+    if (abs >= 1e9) {
+      return `${Number((n / 1e9).toFixed(1))}B`;
+    }
+    if (abs >= 1e6) {
+      return `${Number((n / 1e6).toFixed(1))}M`;
+    }
+    if (abs >= 1e3) {
+      return `${Number((n / 1e3).toFixed(1))}K`;
+    }
+    return String(n);
+  };
+  const formatLabel = (value) => {
+    const text = String(value ?? "");
+    return text.length > 10 ? `${text.slice(0, 10)}\u2026` : text;
+  };
+  return /* @__PURE__ */ jsx13("div", { className: `w-full max-w-full min-w-0 overflow-hidden ${className}`, children: /* @__PURE__ */ jsxs9(
+    "div",
+    {
+      className: "\r\n          relative\r\n          w-full\r\n          max-w-full\r\n          min-w-0\r\n          overflow-hidden\r\n          border\r\n          border-white/30\r\n          dark:border-white/10\r\n          bg-white/70\r\n          dark:bg-white/[0.04]\r\n          backdrop-blur-2xl\r\n          p-6\r\n          shadow-[0_25px_60px_-25px_rgba(0,0,0,0.45)]\r\n          transition-all\r\n        ",
+      style: { height },
+      children: [
+        /* @__PURE__ */ jsx13("div", { className: "pointer-events-none absolute -top-32 -right-32 h-72 w-72 rounded-full bg-emerald-400/15 blur-[120px]" }),
+        /* @__PURE__ */ jsx13("div", { className: "pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-rose-400/15 blur-[120px]" }),
+        /* @__PURE__ */ jsx13("div", { className: "pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent dark:via-white/15" }),
+        /* @__PURE__ */ jsxs9("div", { className: "pointer-events-none absolute left-6 top-5 z-10 flex items-center gap-4 text-xs", children: [
+          /* @__PURE__ */ jsxs9("div", { className: "flex items-center gap-2 text-emerald-500", children: [
+            /* @__PURE__ */ jsx13("span", { className: "h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" }),
+            /* @__PURE__ */ jsx13("span", { className: "font-medium", children: assetLabel })
+          ] }),
+          /* @__PURE__ */ jsxs9("div", { className: "flex items-center gap-2 text-rose-500", children: [
+            /* @__PURE__ */ jsx13("span", { className: "h-2.5 w-2.5 rounded-full bg-rose-400 shadow-[0_0_16px_rgba(251,113,133,0.8)]" }),
+            /* @__PURE__ */ jsx13("span", { className: "font-medium", children: liabilityLabel })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx13("div", { className: "relative h-full w-full max-w-full min-w-0 overflow-hidden pt-7", children: /* @__PURE__ */ jsx13(ResponsiveContainer2, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxs9(
+          ComposedChart,
+          {
+            data,
+            margin: {
+              top: 18,
+              right: 18,
+              left: 8,
+              bottom: 18
+            },
+            children: [
+              /* @__PURE__ */ jsxs9("defs", { children: [
+                /* @__PURE__ */ jsxs9("linearGradient", { id: "assetLineGradient", x1: "0", y1: "0", x2: "1", y2: "0", children: [
+                  /* @__PURE__ */ jsx13("stop", { offset: "0%", stopColor: "#10b981" }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "50%", stopColor: "#34d399" }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "100%", stopColor: "#6ee7b7" })
+                ] }),
+                /* @__PURE__ */ jsxs9("linearGradient", { id: "liabilityLineGradient", x1: "0", y1: "0", x2: "1", y2: "0", children: [
+                  /* @__PURE__ */ jsx13("stop", { offset: "0%", stopColor: "#e11d48" }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "50%", stopColor: "#fb7185" }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "100%", stopColor: "#fda4af" })
+                ] }),
+                /* @__PURE__ */ jsxs9("linearGradient", { id: "assetAreaGradient", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+                  /* @__PURE__ */ jsx13("stop", { offset: "0%", stopColor: "#34d399", stopOpacity: 0.24 }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "55%", stopColor: "#34d399", stopOpacity: 0.08 }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "100%", stopColor: "#34d399", stopOpacity: 0 })
+                ] }),
+                /* @__PURE__ */ jsxs9("linearGradient", { id: "liabilityAreaGradient", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+                  /* @__PURE__ */ jsx13("stop", { offset: "0%", stopColor: "#fb7185", stopOpacity: 0.22 }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "55%", stopColor: "#fb7185", stopOpacity: 0.07 }),
+                  /* @__PURE__ */ jsx13("stop", { offset: "100%", stopColor: "#fb7185", stopOpacity: 0 })
+                ] }),
+                /* @__PURE__ */ jsxs9("filter", { id: "assetGlow", x: "-30%", y: "-30%", width: "160%", height: "160%", children: [
+                  /* @__PURE__ */ jsx13("feGaussianBlur", { stdDeviation: "3", result: "coloredBlur" }),
+                  /* @__PURE__ */ jsxs9("feMerge", { children: [
+                    /* @__PURE__ */ jsx13("feMergeNode", { in: "coloredBlur" }),
+                    /* @__PURE__ */ jsx13("feMergeNode", { in: "SourceGraphic" })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxs9("filter", { id: "liabilityGlow", x: "-30%", y: "-30%", width: "160%", height: "160%", children: [
+                  /* @__PURE__ */ jsx13("feGaussianBlur", { stdDeviation: "3", result: "coloredBlur" }),
+                  /* @__PURE__ */ jsxs9("feMerge", { children: [
+                    /* @__PURE__ */ jsx13("feMergeNode", { in: "coloredBlur" }),
+                    /* @__PURE__ */ jsx13("feMergeNode", { in: "SourceGraphic" })
+                  ] })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx13(
+                CartesianGrid2,
+                {
+                  vertical: false,
+                  stroke: "currentColor",
+                  opacity: 0.06,
+                  strokeDasharray: "4 8"
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                XAxis2,
+                {
+                  dataKey: "label",
+                  tick: {
+                    fontSize: 12,
+                    fill: "currentColor"
+                  },
+                  tickLine: false,
+                  axisLine: false,
+                  interval: "preserveStartEnd",
+                  minTickGap: 24,
+                  tickFormatter: formatLabel,
+                  padding: { left: 8, right: 8 }
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                YAxis2,
+                {
+                  width: 55,
+                  tickFormatter: (v) => formatCompact(Number(v)),
+                  tick: {
+                    fontSize: 12,
+                    fill: "currentColor"
+                  },
+                  tickLine: false,
+                  axisLine: false
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                Tooltip2,
+                {
+                  wrapperStyle: {
+                    outline: "none",
+                    zIndex: 50,
+                    maxWidth: "calc(100% - 24px)"
+                  },
+                  cursor: {
+                    stroke: "rgba(148,163,184,0.35)",
+                    strokeWidth: 1,
+                    strokeDasharray: "4 6"
+                  },
+                  content: ({ active, payload, label }) => {
+                    if (!active || !payload?.length) return null;
+                    const xVal = payload.find((p) => p.dataKey === "x")?.value ?? 0;
+                    const yVal = payload.find((p) => p.dataKey === "y")?.value ?? 0;
+                    return /* @__PURE__ */ jsxs9(
+                      "div",
+                      {
+                        className: "\r\n                        min-w-[180px]\r\n                        rounded-2xl\r\n                        border\r\n                        border-white/30\r\n                        dark:border-white/10\r\n                        bg-white/90\r\n                        dark:bg-[#0b0f15]/95\r\n                        px-4\r\n                        py-3\r\n                        text-xs\r\n                        text-titleText\r\n                        dark:text-titleText-dark\r\n                        shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)]\r\n                        backdrop-blur-xl\r\n                      ",
+                        children: [
+                          /* @__PURE__ */ jsx13("div", { className: "mb-3 max-w-[180px] truncate text-sm font-semibold", children: String(label) }),
+                          /* @__PURE__ */ jsxs9("div", { className: "space-y-2", children: [
+                            /* @__PURE__ */ jsxs9("div", { className: "flex items-center justify-between gap-6", children: [
+                              /* @__PURE__ */ jsxs9("div", { className: "flex items-center gap-2 text-emerald-500", children: [
+                                /* @__PURE__ */ jsx13("span", { className: "h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.85)]" }),
+                                /* @__PURE__ */ jsx13("span", { className: "font-medium", children: assetLabel })
+                              ] }),
+                              /* @__PURE__ */ jsx13("span", { dir: "ltr", className: "font-semibold", children: formatCompact(Number(xVal)) })
+                            ] }),
+                            /* @__PURE__ */ jsxs9("div", { className: "flex items-center justify-between gap-6", children: [
+                              /* @__PURE__ */ jsxs9("div", { className: "flex items-center gap-2 text-rose-500", children: [
+                                /* @__PURE__ */ jsx13("span", { className: "h-2 w-2 rounded-full bg-rose-400 shadow-[0_0_12px_rgba(251,113,133,0.85)]" }),
+                                /* @__PURE__ */ jsx13("span", { className: "font-medium", children: liabilityLabel })
+                              ] }),
+                              /* @__PURE__ */ jsx13("span", { dir: "ltr", className: "font-semibold", children: formatCompact(Number(yVal)) })
+                            ] })
+                          ] })
+                        ]
+                      }
+                    );
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                Area,
+                {
+                  type: "monotone",
+                  dataKey: "x",
+                  fill: "url(#assetAreaGradient)",
+                  stroke: "none",
+                  activeDot: false,
+                  isAnimationActive: true,
+                  animationDuration: 800
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                Area,
+                {
+                  type: "monotone",
+                  dataKey: "y",
+                  fill: "url(#liabilityAreaGradient)",
+                  stroke: "none",
+                  activeDot: false,
+                  isAnimationActive: true,
+                  animationDuration: 800
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                Line,
+                {
+                  type: "monotone",
+                  dataKey: "x",
+                  name: assetLabel,
+                  stroke: "url(#assetLineGradient)",
+                  strokeWidth: 2,
+                  dot: {
+                    r: 3,
+                    strokeWidth: 1,
+                    stroke: "#10b981",
+                    fill: "#ffffff"
+                  },
+                  activeDot: {
+                    r: 6,
+                    strokeWidth: 2,
+                    stroke: "#10b981",
+                    fill: "#ffffff"
+                  },
+                  filter: "url(#assetGlow)",
+                  isAnimationActive: true,
+                  animationDuration: 900
+                }
+              ),
+              /* @__PURE__ */ jsx13(
+                Line,
+                {
+                  type: "monotone",
+                  dataKey: "y",
+                  name: liabilityLabel,
+                  stroke: "url(#liabilityLineGradient)",
+                  strokeWidth: 2,
+                  dot: {
+                    r: 3,
+                    strokeWidth: 1,
+                    stroke: "#e11d48",
+                    fill: "#ffffff"
+                  },
+                  activeDot: {
+                    r: 6,
+                    strokeWidth: 2,
+                    stroke: "#e11d48",
+                    fill: "#ffffff"
+                  },
+                  filter: "url(#liabilityGlow)",
+                  isAnimationActive: true,
+                  animationDuration: 900
+                }
+              )
+            ]
+          }
+        ) }) })
+      ]
+    }
+  ) });
+};
 export {
   Box,
   Button,
   ButtonSelect,
   DatePicker,
+  DoubleBarChart,
+  DoubleLineChart,
   HashText,
   Header,
   Modal,
