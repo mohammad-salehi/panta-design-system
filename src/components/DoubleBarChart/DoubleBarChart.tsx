@@ -28,8 +28,8 @@ interface Props {
 
 export const DoubleBarChart: React.FC<Props> = ({
   data,
-  assetLabel = "دارایی",
-  liabilityLabel = "بدهی",
+  assetLabel = "",
+  liabilityLabel = "",
   height = 320,
   className = "",
 }) => {
@@ -92,17 +92,18 @@ export const DoubleBarChart: React.FC<Props> = ({
 
               <XAxis
                 dataKey="label"
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 12, fill: "currentColor", }}
                 tickLine={false}
                 axisLine={false}
                 interval="preserveStartEnd"
                 minTickGap={10}
+                padding={{ left: 28, right: 8 }}
               />
 
               <YAxis
                 width={55}
                 tickFormatter={(v) => formatCompact(Number(v))}
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 12, fill: "currentColor", }}
                 tickLine={false}
                 axisLine={false}
               />

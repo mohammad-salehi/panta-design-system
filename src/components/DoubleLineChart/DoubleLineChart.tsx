@@ -29,8 +29,8 @@ interface Props {
 
 export const DoubleLineChart: React.FC<Props> = ({
   data,
-  assetLabel = "دارایی",
-  liabilityLabel = "بدهی",
+  assetLabel = "",
+  liabilityLabel = "",
   height = 320,
   className = "",
 }) => {
@@ -83,18 +83,7 @@ export const DoubleLineChart: React.FC<Props> = ({
         <div className="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-rose-400/15 blur-[120px]" />
         <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent dark:via-white/15" />
 
-        {/* Legend */}
-        <div className="pointer-events-none absolute left-6 top-5 z-10 flex items-center gap-4 text-xs">
-          <div className="flex items-center gap-2 text-emerald-500">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" />
-            <span className="font-medium">{assetLabel}</span>
-          </div>
 
-          <div className="flex items-center gap-2 text-rose-500">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-400 shadow-[0_0_16px_rgba(251,113,133,0.8)]" />
-            <span className="font-medium">{liabilityLabel}</span>
-          </div>
-        </div>
 
         <div className="relative h-full w-full max-w-full min-w-0 overflow-hidden pt-7">
           <ResponsiveContainer width="100%" height="100%">
@@ -170,7 +159,7 @@ export const DoubleLineChart: React.FC<Props> = ({
                 interval="preserveStartEnd"
                 minTickGap={24}
                 tickFormatter={formatLabel}
-                padding={{ left: 8, right: 8 }}
+                padding={{ left: 28, right: 8 }}
               />
 
               <YAxis
@@ -283,18 +272,8 @@ export const DoubleLineChart: React.FC<Props> = ({
                 name={assetLabel}
                 stroke="url(#assetLineGradient)"
                 strokeWidth={2}
-                dot={{
-                  r: 3,
-                  strokeWidth: 1,
-                  stroke: "#10b981",
-                  fill: "#ffffff",
-                }}
-                activeDot={{
-                  r: 6,
-                  strokeWidth: 2,
-                  stroke: "#10b981",
-                  fill: "#ffffff",
-                }}
+                dot={false}
+                activeDot={false}
                 filter="url(#assetGlow)"
                 isAnimationActive
                 animationDuration={900}
@@ -306,18 +285,8 @@ export const DoubleLineChart: React.FC<Props> = ({
                 name={liabilityLabel}
                 stroke="url(#liabilityLineGradient)"
                 strokeWidth={2}
-                dot={{
-                  r: 3,
-                  strokeWidth: 1,
-                  stroke: "#e11d48",
-                  fill: "#ffffff",
-                }}
-                activeDot={{
-                  r: 6,
-                  strokeWidth: 2,
-                  stroke: "#e11d48",
-                  fill: "#ffffff",
-                }}
+                dot={false}
+                activeDot={false}
                 filter="url(#liabilityGlow)"
                 isAnimationActive
                 animationDuration={900}

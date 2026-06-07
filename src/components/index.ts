@@ -12,3 +12,6 @@ export * from './ButtonSelect';
 export * from './HashText';
 export * from './DoubleBarChart';
 export * from './DoubleLineChart';
+export * from './SingleBarChart';
+export * from './SingleLineChart';
+export * from './CircleChart';

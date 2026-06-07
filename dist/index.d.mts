@@ -213,4 +213,44 @@ interface Props {
 }
 declare const DoubleLineChart: React.FC<Props>;
 
-export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, ThemeProvider, useTheme };
+type SingleBarChartDataItem = {
+    label: string;
+    value: number;
+};
+interface SingleBarChartProps {
+    data: SingleBarChartDataItem[];
+    dataLabel?: string;
+    height?: number;
+    className?: string;
+    barColor?: string;
+}
+declare const SingleBarChart: React.FC<SingleBarChartProps>;
+
+type SingleLineChartDataItem = {
+    label: string;
+    value: number;
+};
+interface SingleLineChartProps {
+    data: SingleLineChartDataItem[];
+    dataLabel?: string;
+    height?: number;
+    className?: string;
+    color?: string;
+}
+declare const SingleLineChart: React.FC<SingleLineChartProps>;
+
+type CircleChartItem = {
+    label: string;
+    value: number;
+    color?: string;
+};
+type CircleChartProps = {
+    unit?: string;
+    data: CircleChartItem[];
+    height?: number;
+    dir?: "rtl" | "ltr";
+    className?: string;
+};
+declare function CircleChart({ unit, data, height, dir, className, }: CircleChartProps): react_jsx_runtime.JSX.Element;
+
+export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, ThemeProvider, useTheme };

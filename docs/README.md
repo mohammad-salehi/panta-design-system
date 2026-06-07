@@ -1,23 +1,24 @@
-# مستندات دیزاین سیستم پنتا
+# (Panta Design System) مستندات دیزاین سیستم پنتا
 
 ## کامپوننت‌ها
 
-- [دکمه (Button) - فارسی](components/Button/README.fa.md)
-- [Button - English](components/Button/README.en.md)
-- [ناوبار (Navbar) - فارسی](components/Navbar/README.fa.md)
-- [Navbar - English](components/Navbar/README.en.md)
-- [هدر (Header) - فارسی](components/Header/README.fa.md)
-- [Header - English](components/Header/README.en.md)
-- [انتخاب‌گر با جست‌وجو (Searchable Select) - فارسی](components/SearchableSelect/README.fa.md)
-- [Searchable Select - English](components/SearchableSelect/README.en.md)
-- [مودال (Modal) - فارسی](components/Modal/README.fa.md)
-- [Modal - English](components/Modal/README.en.md)
-- [تقویم (DatePicker) - فارسی](components/DatePicker/README.fa.md)
-- [DatePicker - English](components/DatePicker/README.en.md)
-- [جعبه (Box) - فارسی](components/Box/README.fa.md)
-- [Box - English](components/Box/README.en.md)
-- [سلکت (Select) - فارسی](components/ButtonSelect/README.fa.md)
-- [Select - English](components/ButtonSelect/README.en.md)
-- [متن کوتاه‌شده (HashText) - فارسی](components/HashText/README.fa.md)
-- [HashText - English](components/HashText/README.en.md)
+| کامپوننت | مستندات فارسی | English Doc |
+|----------|----------------|------------------|
+| دکمه (Button) | [README.fa.md](components/Button/README.fa.md) | [README.en.md](components/Button/README.en.md) |
+| ناوبار (Navbar) | [README.fa.md](components/Navbar/README.fa.md) | [README.en.md](components/Navbar/README.en.md) |
+| هدر (Header) | [README.fa.md](components/Header/README.fa.md) | [README.en.md](components/Header/README.en.md) |
+| انتخاب‌گر با جست‌وجو (SearchableSelect) | [README.fa.md](components/SearchableSelect/README.fa.md) | [README.en.md](components/SearchableSelect/README.en.md) |
+| مودال (Modal) | [README.fa.md](components/Modal/README.fa.md) | [README.en.md](components/Modal/README.en.md) |
+| تقویم (DatePicker) | [README.fa.md](components/DatePicker/README.fa.md) | [README.en.md](components/DatePicker/README.en.md) |
+| جعبه (Box) | [README.fa.md](components/Box/README.fa.md) | [README.en.md](components/Box/README.en.md) |
+| سلکت (ButtonSelect) | [README.fa.md](components/ButtonSelect/README.fa.md) | [README.en.md](components/ButtonSelect/README.en.md) |
+| متن کوتاه‌شده (HashText) | [README.fa.md](components/HashText/README.fa.md) | [README.en.md](components/HashText/README.en.md) |
+| نمودار میله‌ای دوعددی (DoubleBarChart) | [README.fa.md](components/DoubleBarChart/README.fa.md) | [README.en.md](components/DoubleBarChart/README.en.md) |
+| نمودار خطی دوعددی (DoubleLineChart) | [README.fa.md](components/DoubleLineChart/README.fa.md) | [README.en.md](components/DoubleLineChart/README.en.md) |
+| نمودار میله‌ای تکی (SingleBarChart) | [README.fa.md](components/SingleBarChart/README.fa.md) | [README.en.md](components/SingleBarChart/README.en.md) |
+| نمودار خطی تکی (SingleLineChart) | [README.fa.md](components/SingleLineChart/README.fa.md) | [README.en.md](components/SingleLineChart/README.en.md) |
+| نمودار دایره‌ای (CircleChart) | [README.fa.md](components/CircleChart/README.fa.md) | [README.en.md](components/CircleChart/README.en.md) |
+
 در حال تکمیل...
+
+made by mohammad salehi

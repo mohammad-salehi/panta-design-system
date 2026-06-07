@@ -451,17 +451,11 @@
 .left-0 {
     left: 0px;
 }
-.left-6 {
-    left: 1.5rem;
-}
 .right-0 {
     right: 0px;
 }
 .top-0 {
     top: 0px;
-}
-.top-5 {
-    top: 1.25rem;
 }
 .z-10 {
     z-index: 10;
@@ -533,9 +527,6 @@
 .h-2 {
     height: 0.5rem;
 }
-.h-2\.5 {
-    height: 0.625rem;
-}
 .h-4 {
     height: 1rem;
 }
@@ -580,9 +571,6 @@
 }
 .w-2 {
     width: 0.5rem;
-}
-.w-2\.5 {
-    width: 0.625rem;
 }
 .w-4 {
     width: 1rem;
@@ -864,6 +852,9 @@
 .bg-black\/50 {
     background-color: rgb(0 0 0 / 0.5);
 }
+.bg-blue-400\/10 {
+    background-color: rgb(96 165 250 / 0.1);
+}
 .bg-boxColor {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -877,6 +868,9 @@
 .bg-emerald-400 {
     --tw-bg-opacity: 1;
     background-color: rgb(52 211 153 / var(--tw-bg-opacity, 1));
+}
+.bg-emerald-400\/10 {
+    background-color: rgb(52 211 153 / 0.1);
 }
 .bg-emerald-400\/15 {
     background-color: rgb(52 211 153 / 0.15);
@@ -1236,16 +1230,6 @@
     --tw-shadow-colored: 0 0 12px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-\[0_0_16px_rgba\(251\2c 113\2c 133\2c 0\.8\)\] {
-    --tw-shadow: 0 0 16px rgba(251,113,133,0.8);
-    --tw-shadow-colored: 0 0 16px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-\[0_0_16px_rgba\(52\2c 211\2c 153\2c 0\.8\)\] {
-    --tw-shadow: 0 0 16px rgba(52,211,153,0.8);
-    --tw-shadow-colored: 0 0 16px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .shadow-\[0_20px_50px_-20px_rgba\(0\2c 0\2c 0\2c 0\.7\)\] {
     --tw-shadow: 0 20px 50px -20px rgba(0,0,0,0.7);
     --tw-shadow-colored: 0 20px 50px -20px var(--tw-shadow-color);
@@ -1333,6 +1317,10 @@
 }
 .ring-primary\/20 {
     --tw-ring-color: rgb(47 162 220 / 0.2);
+}
+.blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .blur-\[120px\] {
     --tw-blur: blur(120px);
