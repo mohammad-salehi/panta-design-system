@@ -45,7 +45,12 @@ __export(index_exports, {
   SearchableSelect: () => SearchableSelect,
   SingleBarChart: () => SingleBarChart,
   SingleLineChart: () => SingleLineChart,
+  Tabs: () => Tabs,
+  TabsContent: () => TabsContent,
+  TabsList: () => TabsList,
+  TabsTrigger: () => TabsTrigger,
   ThemeProvider: () => ThemeProvider,
+  TreeChart: () => TreeChart,
   useTheme: () => useTheme
 });
 module.exports = __toCommonJS(index_exports);
@@ -2616,6 +2621,358 @@ function CircleChart({
     }
   );
 }
+
+// src/components/TreeChart/TreeChart.tsx
+var import_react13 = require("react");
+var import_recharts6 = require("recharts");
+var import_jsx_runtime17 = require("react/jsx-runtime");
+var PALETTE = [
+  ["#4F46E5", "#6366F1"],
+  ["#0EA5E9", "#06B6D4"],
+  ["#14B8A6", "#22C55E"],
+  ["#84CC16", "#A3E635"],
+  ["#F59E0B", "#F97316"],
+  ["#EF4444", "#F43F5E"],
+  ["#D946EF", "#A855F7"],
+  ["#8B5CF6", "#6366F1"]
+];
+var defaultFormat = (n) => {
+  const abs = Math.abs(n);
+  if (abs >= 1e9) return `${(n / 1e9).toFixed(1)}B`;
+  if (abs >= 1e6) return `${(n / 1e6).toFixed(1)}M`;
+  if (abs >= 1e3) return `${(n / 1e3).toFixed(1)}K`;
+  return Number(n).toLocaleString("en-US");
+};
+var TreemapCell = ({
+  x,
+  y,
+  width,
+  height,
+  index,
+  depth,
+  payload,
+  name,
+  value,
+  total,
+  hoveredKey,
+  setHoveredKey,
+  showValueInCell,
+  showShareInCell,
+  valueUnit,
+  formatValue: formatValue2
+}) => {
+  const cellName = String(payload?.name ?? name ?? "");
+  const symbol = String(payload?.symbol ?? cellName ?? "");
+  const v = Number(payload?.value ?? value ?? 0);
+  const pct = total > 0 ? v / total * 100 : 0;
+  const key = `${cellName}-${symbol}-${index}`;
+  const isHovered = hoveredKey === key;
+  const isDimmed = hoveredKey !== null && !isHovered;
+  const showMain = width > 84 && height > 46;
+  const showSub = width > 120 && height > 78;
+  const [c1, c2] = PALETTE[index % PALETTE.length];
+  const gradId = `tm-grad-${index}`;
+  const glowId = `tm-glow-${index}`;
+  if (depth !== 1) {
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("g", { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      "rect",
+      {
+        x,
+        y,
+        width,
+        height,
+        rx: 10,
+        ry: 10,
+        fill: "rgba(255,255,255,0.06)",
+        stroke: "rgba(255,255,255,0.14)"
+      }
+    ) });
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+    "g",
+    {
+      onMouseEnter: () => setHoveredKey(key),
+      onMouseLeave: () => setHoveredKey(null),
+      style: { transition: "all .18s ease" },
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("defs", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("linearGradient", { id: gradId, x1: "0", y1: "0", x2: "1", y2: "1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("stop", { offset: "0%", stopColor: c1, stopOpacity: isDimmed ? 0.55 : 0.95 }),
+            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("stop", { offset: "100%", stopColor: c2, stopOpacity: isDimmed ? 0.5 : 0.9 })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("filter", { id: glowId, x: "-20%", y: "-20%", width: "140%", height: "140%", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("feGaussianBlur", { stdDeviation: isHovered ? "8" : "5", result: "blur" }),
+            /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("feMerge", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("feMergeNode", { in: "blur" }),
+              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("feMergeNode", { in: "SourceGraphic" })
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          "rect",
+          {
+            x,
+            y,
+            width,
+            height,
+            rx: 12,
+            ry: 12,
+            fill: `url(#${gradId})`,
+            stroke: isHovered ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.55)",
+            strokeWidth: isHovered ? 1.4 : 1,
+            filter: `url(#${glowId})`,
+            opacity: isDimmed ? 0.55 : 1
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          "rect",
+          {
+            x: x + 5,
+            y: y + 5,
+            width: Math.max(0, width - 10),
+            height: Math.max(0, height - 10),
+            rx: 9,
+            ry: 9,
+            fill: "rgba(0,0,0,0.08)",
+            opacity: showMain ? 1 : 0
+          }
+        ),
+        showMain && /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+          "text",
+          {
+            x: x + width / 2,
+            y: y + height / 2,
+            textAnchor: "middle",
+            dominantBaseline: "central",
+            fill: "#fff",
+            style: {
+              paintOrder: "stroke",
+              stroke: "rgba(0,0,0,0.30)",
+              strokeWidth: 3
+            },
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("tspan", { x: x + width / 2, dy: showSub ? "-0.85em" : "-0.2em", fontSize: 13, fontWeight: 800, children: symbol }),
+              showSub && showValueInCell && /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("tspan", { x: x + width / 2, dy: "1.35em", fontSize: 11, fontWeight: 600, opacity: 0.98, children: [
+                formatValue2(v),
+                valueUnit ? ` ${valueUnit}` : ""
+              ] }),
+              showSub && showShareInCell && /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("tspan", { x: x + width / 2, dy: "1.2em", fontSize: 11, fontWeight: 500, opacity: 0.9, children: [
+                pct.toFixed(1),
+                "%"
+              ] })
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+var TreeChart = ({
+  data,
+  height = 340,
+  className = "",
+  aspectRatio = 4 / 3,
+  valueUnit = "",
+  valueLabel = "Value",
+  shareLabel = "Share",
+  showValueInCell = true,
+  showShareInCell = true,
+  formatValue: formatValue2 = defaultFormat
+}) => {
+  const [hoveredKey, setHoveredKey] = (0, import_react13.useState)(null);
+  const safeData = data ?? [];
+  const total = (0, import_react13.useMemo)(
+    () => safeData.reduce((s, i) => s + Number(i.value || 0), 0),
+    [safeData]
+  );
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: `w-full min-w-0 max-w-full overflow-hidden ${className}`, style: { height }, children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "relative h-full w-full overflow-hidden rounded-3xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/[0.03] backdrop-blur-xl p-2", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "pointer-events-none absolute -top-24 -right-24 h-52 w-52 rounded-full bg-indigo-500/20 blur-[80px]" }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "pointer-events-none absolute -bottom-24 -left-24 h-52 w-52 rounded-full bg-cyan-500/20 blur-[80px]" }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "relative h-full w-full", children: safeData.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "flex h-full items-center justify-center text-sm text-slate-500 dark:text-slate-400", children: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0628\u0631\u0627\u06CC \u0646\u0645\u0627\u06CC\u0634 \u0648\u062C\u0648\u062F \u0646\u062F\u0627\u0631\u062F." }) : /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_recharts6.ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      import_recharts6.Treemap,
+      {
+        data: safeData,
+        dataKey: "value",
+        nameKey: "symbol",
+        aspectRatio,
+        isAnimationActive: true,
+        animationDuration: 500,
+        content: (props) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          TreemapCell,
+          {
+            ...props,
+            total,
+            hoveredKey,
+            setHoveredKey,
+            showValueInCell,
+            showShareInCell,
+            valueUnit,
+            formatValue: formatValue2
+          }
+        ),
+        children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          import_recharts6.Tooltip,
+          {
+            content: ({ active, payload }) => {
+              if (!active || !payload?.length) return null;
+              const d = payload[0].payload;
+              const v = Number(d?.value || 0);
+              const pct = total > 0 ? v / total * 100 : 0;
+              return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+                "div",
+                {
+                  className: "\r\n                          rounded-2xl border border-white/30 dark:border-white/10\r\n                          bg-white/90 dark:bg-[#0b0f15]\r\n                          px-4 py-3 text-xs\r\n                          shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)]\r\n                          backdrop-blur-xl\r\n                        ",
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "mb-2 font-semibold text-sm", children: [
+                      d?.name,
+                      " ",
+                      d?.symbol ? /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("span", { className: "opacity-70", children: [
+                        "(",
+                        d.symbol,
+                        ")"
+                      ] }) : null
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex justify-between gap-6", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "font-medium", children: valueLabel }),
+                      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("span", { dir: "ltr", className: "font-semibold", children: [
+                        formatValue2(v),
+                        valueUnit ? ` ${valueUnit}` : ""
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "mt-1 flex justify-between gap-6", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "font-medium opacity-80", children: shareLabel }),
+                      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("span", { dir: "ltr", className: "font-semibold", children: [
+                        pct.toFixed(1),
+                        "%"
+                      ] })
+                    ] })
+                  ]
+                }
+              );
+            }
+          }
+        )
+      }
+    ) }) })
+  ] }) });
+};
+
+// src/components/Tabs/Tabs.tsx
+var import_react14 = __toESM(require("react"));
+var import_jsx_runtime18 = require("react/jsx-runtime");
+var TabsContext = import_react14.default.createContext(null);
+function useTabsContext() {
+  const ctx = import_react14.default.useContext(TabsContext);
+  if (!ctx) throw new Error("Tabs components must be used inside <Tabs />");
+  return ctx;
+}
+function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+function Tabs({ defaultValue, children, className }) {
+  const [active, setActive] = (0, import_react14.useState)(defaultValue);
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(TabsContext.Provider, { value: { active, setActive }, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className, children }) });
+}
+function TabsList({ children, className }) {
+  const { active } = useTabsContext();
+  const wrapRef = (0, import_react14.useRef)(null);
+  const listRef = (0, import_react14.useRef)(null);
+  const [indicator, setIndicator] = (0, import_react14.useState)({
+    width: 0,
+    x: 0,
+    rtl: false,
+    ready: false
+  });
+  const updateIndicator = import_react14.default.useCallback(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const activeEl = list.querySelector(`[data-value="${active}"]`);
+    if (!activeEl) return;
+    const listRect = list.getBoundingClientRect();
+    const elRect = activeEl.getBoundingClientRect();
+    const dir = getComputedStyle(list).direction;
+    const rtl = dir === "rtl";
+    const width = elRect.width;
+    const x = rtl ? listRect.right - elRect.right : elRect.left - listRect.left;
+    setIndicator({
+      width,
+      x,
+      rtl,
+      ready: true
+    });
+  }, [active]);
+  (0, import_react14.useLayoutEffect)(() => {
+    updateIndicator();
+  }, [updateIndicator, children]);
+  (0, import_react14.useEffect)(() => {
+    const onResize = () => updateIndicator();
+    window.addEventListener("resize", onResize);
+    if ("fonts" in document) {
+      document.fonts?.ready?.then?.(updateIndicator);
+    }
+    return () => window.removeEventListener("resize", onResize);
+  }, [updateIndicator]);
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    "div",
+    {
+      ref: wrapRef,
+      className: cn(
+        "relative w-fit max-w-full overflow-x-auto border-b border-border",
+        className
+      ),
+      children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { ref: listRef, className: "relative flex items-center gap-6", children: [
+        children,
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          "span",
+          {
+            "aria-hidden": true,
+            className: cn(
+              "pointer-events-none absolute bottom-0 h-0.5 rounded-full bg-primary",
+              "transition-[left,right,width,opacity] duration-300 ease-out",
+              indicator.ready ? "opacity-100" : "opacity-0"
+            ),
+            style: {
+              width: `${indicator.width}px`,
+              left: indicator.rtl ? "auto" : `${indicator.x}px`,
+              right: indicator.rtl ? `${indicator.x}px` : "auto"
+            }
+          }
+        )
+      ] })
+    }
+  );
+}
+function TabsTrigger({
+  value,
+  children,
+  className
+}) {
+  const { active, setActive } = useTabsContext();
+  const isActive = active === value;
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    "span",
+    {
+      "data-value": value,
+      onClick: () => setActive(value),
+      className: cn(
+        "select-none cursor-pointer pb-3 text-sm font-medium whitespace-nowrap",
+        "transition-colors duration-200",
+        isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+        className
+      ),
+      children
+    }
+  );
+}
+function TabsContent({
+  value,
+  children,
+  className
+}) {
+  const { active } = useTabsContext();
+  if (active !== value) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: cn("pt-4", className), children });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Box,
@@ -2632,7 +2989,12 @@ function CircleChart({
   SearchableSelect,
   SingleBarChart,
   SingleLineChart,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   ThemeProvider,
+  TreeChart,
   useTheme
 });
 //# sourceMappingURL=index.js.map

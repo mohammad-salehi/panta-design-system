@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -253,4 +253,47 @@ type CircleChartProps = {
 };
 declare function CircleChart({ unit, data, height, dir, className, }: CircleChartProps): react_jsx_runtime.JSX.Element;
 
-export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, ThemeProvider, useTheme };
+type TreeChartDataItem = {
+    name: string;
+    value: number;
+    symbol?: string;
+};
+interface TreeMapChartProps {
+    data: TreeChartDataItem[];
+    height?: number;
+    className?: string;
+    aspectRatio?: number;
+    valueUnit?: string;
+    valueLabel?: string;
+    shareLabel?: string;
+    showValueInCell?: boolean;
+    showShareInCell?: boolean;
+    formatValue?: (n: number) => string;
+}
+declare const TreeChart: React.FC<TreeMapChartProps>;
+
+type TabsProps = {
+    defaultValue: string;
+    children: ReactNode;
+    className?: string;
+};
+type TabsListProps = {
+    children: ReactNode;
+    className?: string;
+};
+type TabsTriggerProps = {
+    value: string;
+    children: ReactNode;
+    className?: string;
+};
+type TabsContentProps = {
+    value: string;
+    children: ReactNode;
+    className?: string;
+};
+declare function Tabs({ defaultValue, children, className }: TabsProps): react_jsx_runtime.JSX.Element;
+declare function TabsList({ children, className }: TabsListProps): react_jsx_runtime.JSX.Element;
+declare function TabsTrigger({ value, children, className, }: TabsTriggerProps): react_jsx_runtime.JSX.Element;
+declare function TabsContent({ value, children, className, }: TabsContentProps): react_jsx_runtime.JSX.Element;
+
+export { Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, HashText, type HashTextProps, Header, type HeaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };

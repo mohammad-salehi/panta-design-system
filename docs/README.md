@@ -18,6 +18,8 @@
 | نمودار میله‌ای تکی (SingleBarChart) | [README.fa.md](components/SingleBarChart/README.fa.md) | [README.en.md](components/SingleBarChart/README.en.md) |
 | نمودار خطی تکی (SingleLineChart) | [README.fa.md](components/SingleLineChart/README.fa.md) | [README.en.md](components/SingleLineChart/README.en.md) |
 | نمودار دایره‌ای (CircleChart) | [README.fa.md](components/CircleChart/README.fa.md) | [README.en.md](components/CircleChart/README.en.md) |
+| نمودار درختی (TreeChart) | [README.fa.md](components/TreeChart/README.fa.md) | [README.en.md](components/TreeChart/README.en.md) |
+| تب (Tabs) | [README.fa.md](components/Tabs/README.fa.md) | [README.en.md](components/Tabs/README.en.md) |
 
 در حال تکمیل...
 

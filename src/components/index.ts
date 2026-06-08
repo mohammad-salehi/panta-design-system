@@ -15,3 +15,5 @@ export * from './DoubleLineChart';
 export * from './SingleBarChart';
 export * from './SingleLineChart';
 export * from './CircleChart';
+export * from './TreeChart';
+export * from './Tabs';
