@@ -22,6 +22,10 @@
 | تب (Tabs) | [README.fa.md](components/Tabs/README.fa.md) | [README.en.md](components/Tabs/README.en.md) |
 | جدول (Table) | [README.fa.md](components/Table/README.fa.md) | [README.en.md](components/Table/README.en.md) |
 | نشان (Badge) | [README.fa.md](components/Badge/README.fa.md) | [README.en.md](components/Badge/README.en.md) |
+| بارگزاری کامپوننت (Loader) | [README.fa.md](components/Loader/README.fa.md) | [README.en.md](components/Loader/README.en.md) |
+| بارگزاری صفحه (PageLoader) | [README.fa.md](components/PageLoader/README.fa.md) | [README.en.md](components/PageLoader/README.en.md) |
+| اینپوت (Input) | [README.fa.md](components/Input/README.fa.md) | [README.en.md](components/Input/README.en.md) |
+| صفحه‌بندی (Pagination) | [README.fa.md](components/Pagination/README.fa.md) | [README.en.md](components/Pagination/README.en.md) |
 
 در حال تکمیل...
 

@@ -21,3 +21,5 @@ export * from './Table';
 export * from './Badge';
 export * from './Loader';
 export * from './PageLoader';
+export * from './Input';
+export * from './Pagination';

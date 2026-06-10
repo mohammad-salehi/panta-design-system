@@ -324,3 +324,19 @@ body {
     transform: translateX(100%);
   }
 }
+
+@keyframes autofillFix {
+  from { background-color: transparent; }
+  to { background-color: transparent; }
+}
+
+.lux-input-field input:-webkit-autofill {
+  animation: autofillFix 0.001s;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+.dark .lux-input-field input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}

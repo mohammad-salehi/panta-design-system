@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React$1 from 'react';
 import React__default, { ReactNode } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
@@ -331,14 +331,14 @@ declare function ExpandableTable<T extends {
 
 type BadgeColor = "green" | "red" | "blue" | "yellow" | "purple";
 type BadgeVariant = "soft" | "solid" | "outline";
-type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
+type BadgeProps = React$1.HTMLAttributes<HTMLSpanElement> & {
     color?: BadgeColor;
     variant?: BadgeVariant;
 };
 declare function Badge({ color, variant, className, children, ...props }: BadgeProps): react_jsx_runtime.JSX.Element;
 
 type LoaderMode = "normal" | "skeleton";
-type LoaderProps = React.HTMLAttributes<HTMLDivElement> & {
+type LoaderProps = React$1.HTMLAttributes<HTMLDivElement> & {
     mode?: LoaderMode;
     text?: string;
     count?: number;
@@ -347,6 +347,42 @@ type LoaderProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 declare function Loader({ mode, text, count, skeletonHeight, withAvatar, className, ...props }: LoaderProps): react_jsx_runtime.JSX.Element;
 
-declare const PageLoader: () => void;
+type PageLoaderProps = React$1.HTMLAttributes<HTMLDivElement> & {
+    /** کنترل نمایش */
+    open?: boolean;
+    /** متن داینامیک که از مصرف‌کننده گرفته می‌شود */
+    text: string;
+    /** بک‌دراپ */
+    backdrop?: boolean;
+    /** بلور */
+    blur?: boolean;
+    mode?: "loader" | "spinner";
+};
+declare function PageLoader({ open, text, backdrop, blur, className, mode, ...props }: PageLoaderProps): react_jsx_runtime.JSX.Element;
 
-export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };
+type NativeTypes = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    label?: string;
+    hint?: string;
+    error?: string;
+    success?: string;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    enablePasswordToggle?: boolean;
+    fullWidth?: boolean;
+    type?: NativeTypes;
+}
+declare const Input: React$1.ForwardRefExoticComponent<InputProps & React$1.RefAttributes<HTMLInputElement>>;
+
+type TablePaginationProps = {
+    totalItems: number;
+    pageSize: number;
+    currentPage: number;
+    onPageChange: (page: number) => void;
+    className?: string;
+    rtl?: boolean;
+    compact?: boolean;
+};
+declare function Pagination({ totalItems, pageSize, currentPage, onPageChange, className, rtl, compact, }: TablePaginationProps): react_jsx_runtime.JSX.Element;
+
+export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Input, type InputProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, Pagination, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, type TablePaginationProps, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, TreeChart, type TreeChartDataItem, useTheme };

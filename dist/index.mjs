@@ -3387,10 +3387,298 @@ function Loader({
 }
 
 // src/components/PageLoader/PageLoader.tsx
-import { jsx as jsx22 } from "react/jsx-runtime";
-var PageLoader = () => {
-  /* @__PURE__ */ jsx22("div", { className: "fixed inset-0 z-50 grid place-items-center bg-white/70 dark:bg-bgColor-dark/70 backdrop-blur-sm", children: /* @__PURE__ */ jsx22("div", { className: "pointer-events-none", children: /* @__PURE__ */ jsx22(AnimatedParagraph, { text: "asd" }) }) });
-};
+import * as React15 from "react";
+import clsx8 from "clsx";
+import { useEffect as useEffect9, useMemo as useMemo8, useState as useState13 } from "react";
+import { Fragment as Fragment2, jsx as jsx22, jsxs as jsxs17 } from "react/jsx-runtime";
+function PageLoader({
+  open = true,
+  text,
+  backdrop = true,
+  blur = true,
+  className,
+  mode = "loader",
+  ...props
+}) {
+  if (!open) return null;
+  const chars = useMemo8(() => Array.from(text), [text]);
+  const animatableIndexes = React15.useMemo(
+    () => chars.map((c, i) => c === " " ? null : i).filter((x) => x !== null),
+    [chars]
+  );
+  const [step, setStep] = useState13(0);
+  useEffect9(() => {
+    if (!animatableIndexes.length) return;
+    const interval = setInterval(() => {
+      setStep((prev) => (prev + 1) % animatableIndexes.length);
+    }, 300);
+    return () => clearInterval(interval);
+  }, [animatableIndexes.length]);
+  const activeIndex = animatableIndexes[step] ?? -1;
+  return /* @__PURE__ */ jsx22(
+    "div",
+    {
+      className: clsx8(
+        "fixed inset-0 z-[999] grid place-items-center",
+        backdrop && "bg-white/70 dark:bg-bgColor-dark/70",
+        blur && "backdrop-blur-sm",
+        className
+      ),
+      role: "status",
+      "aria-live": "polite",
+      "aria-busy": "true",
+      ...props,
+      children: /* @__PURE__ */ jsx22("div", { className: "pointer-events-none flex flex-col items-center", children: mode === "loader" ? /* @__PURE__ */ jsxs17(Fragment2, { children: [
+        /* @__PURE__ */ jsxs17("svg", { className: "h-10 w-10 animate-spin", viewBox: "0 0 24 24", "aria-hidden": "true", children: [
+          /* @__PURE__ */ jsx22(
+            "circle",
+            {
+              cx: "12",
+              cy: "12",
+              r: "9",
+              fill: "none",
+              stroke: "currentColor",
+              strokeWidth: "3",
+              className: "text-slate-300 dark:text-slate-700",
+              opacity: "0.35"
+            }
+          ),
+          /* @__PURE__ */ jsx22(
+            "path",
+            {
+              d: "M21 12a9 9 0 0 0-9-9",
+              fill: "none",
+              stroke: "currentColor",
+              strokeWidth: "3",
+              strokeLinecap: "round",
+              className: "text-sky-500 dark:text-sky-400"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsx22("p", { className: "mt-3 text-sm font-medium text-slate-700 dark:text-slate-200", children: text })
+      ] }) : mode === "spinner" ? /* @__PURE__ */ jsx22("p", { className: "text-4xl sm:text-6xl lg:text-8xl font-bold m-0 text-titleText dark:text-titleText-dark text-center w-full", children: chars.map((ch, i) => {
+        if (ch === " ") return /* @__PURE__ */ jsx22("span", { children: "\xA0" }, i);
+        const isActive = i === activeIndex;
+        return /* @__PURE__ */ jsx22(
+          "span",
+          {
+            className: `transition-all duration-500 ease-in-out ${isActive ? "opacity-100 text-[deepskyblue]" : "opacity-80 text-titleText dark:text-titleText-dark"}`,
+            children: ch
+          },
+          i
+        );
+      }) }) : null })
+    }
+  );
+}
+
+// src/components/Input/Input.tsx
+import { forwardRef, useState as useState14 } from "react";
+import clsx9 from "clsx";
+import { jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
+var Input = forwardRef(
+  ({
+    type = "text",
+    enablePasswordToggle = true,
+    fullWidth = true,
+    label,
+    hint,
+    error,
+    success,
+    leftIcon,
+    rightIcon,
+    ...props
+  }, ref) => {
+    const [showPassword, setShowPassword] = useState14(false);
+    const isPassword = type === "password" && enablePasswordToggle;
+    const resolvedType = isPassword ? showPassword ? "text" : "password" : type;
+    return /* @__PURE__ */ jsxs18(
+      "div",
+      {
+        className: clsx9(
+          "lux-input-field space-y-1.5",
+          fullWidth ? "w-full" : "w-fit"
+        ),
+        children: [
+          label && /* @__PURE__ */ jsxs18("label", { className: "block text-sm font-medium text-titleText dark:text-titleText-dark", children: [
+            label,
+            props.required && /* @__PURE__ */ jsx23("span", { className: "text-primary ml-0.5", children: "*" })
+          ] }),
+          /* @__PURE__ */ jsxs18(
+            "div",
+            {
+              className: clsx9(
+                "flex h-11 items-center gap-2 rounded-2xl border px-3.5",
+                "bg-white dark:bg-bgColor-dark",
+                "border-boxBorderColor dark:border-boxBorderColor-dark",
+                "transition-all duration-150",
+                "focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 border border-solid border-boxBorderColor dark:border-boxBorderColor-dark",
+                props.disabled && "opacity-50 cursor-not-allowed"
+              ),
+              children: [
+                leftIcon && /* @__PURE__ */ jsx23("span", { className: "text-mutedText dark:text-mutedText-dark shrink-0 flex items-center [&>svg]:w-[18px] [&>svg]:h-[18px]", children: leftIcon }),
+                /* @__PURE__ */ jsx23(
+                  "input",
+                  {
+                    ref,
+                    type: resolvedType,
+                    autoComplete: type === "password" ? "new-password" : "off",
+                    className: clsx9(
+                      "flex-1 min-w-0 bg-transparent border-none outline-none shadow-none",
+                      "text-sm text-titleText dark:text-titleText-dark",
+                      "placeholder:text-mutedText/60 dark:placeholder:text-mutedText-dark/60 bg-none border-none p-0 ",
+                      props.disabled && "cursor-not-allowed"
+                    ),
+                    ...props
+                  }
+                ),
+                isPassword ? /* @__PURE__ */ jsx23(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setShowPassword((prev) => !prev),
+                    tabIndex: -1,
+                    "aria-label": "\u0646\u0645\u0627\u06CC\u0634 \u06CC\u0627 \u067E\u0646\u0647\u0627\u0646 \u0633\u0627\u062E\u062A\u0646 \u0631\u0645\u0632",
+                    className: "shrink-0 flex items-center  text-gray-400 hover:text-primary transition-colors p-0 bg-transparent border-none outline-none",
+                    children: showPassword ? /* @__PURE__ */ jsx23(EyeOffIcon, {}) : /* @__PURE__ */ jsx23(EyeIcon, {})
+                  }
+                ) : rightIcon && /* @__PURE__ */ jsx23("span", { className: "text-mutedText dark:text-mutedText-dark shrink-0 flex items-center [&>svg]:w-[18px] [&>svg]:h-[18px]", children: rightIcon })
+              ]
+            }
+          ),
+          error ? /* @__PURE__ */ jsx23("p", { className: "text-xs text-red-500", children: error }) : success ? /* @__PURE__ */ jsx23("p", { className: "text-xs text-emerald-500", children: success }) : hint ? /* @__PURE__ */ jsx23("p", { className: "text-xs text-mutedText dark:text-mutedText-dark", children: hint }) : null
+        ]
+      }
+    );
+  }
+);
+Input.displayName = "Input";
+var EyeIcon = ({ size = 20 }) => /* @__PURE__ */ jsxs18("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: [
+  /* @__PURE__ */ jsx23("path", { d: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" }),
+  /* @__PURE__ */ jsx23("circle", { cx: "12", cy: "12", r: "3" })
+] });
+var EyeOffIcon = ({ size = 20 }) => /* @__PURE__ */ jsxs18("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: [
+  /* @__PURE__ */ jsx23("path", { d: "M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12a21.8 21.8 0 0 1 5.06-6.94" }),
+  /* @__PURE__ */ jsx23("path", { d: "M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.7 21.7 0 0 1-3.22 4.94" }),
+  /* @__PURE__ */ jsx23("line", { x1: "1", y1: "1", x2: "23", y2: "23" })
+] });
+
+// src/components/Pagination/Pagination.tsx
+import { useMemo as useMemo9 } from "react";
+import { jsx as jsx24, jsxs as jsxs19 } from "react/jsx-runtime";
+function usePagination(totalItems, currentPage, pageSize) {
+  return useMemo9(() => {
+    const totalPages = Math.max(1, Math.ceil(totalItems / Math.max(1, pageSize)));
+    const pages = [];
+    const maxVisible = 7;
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return { pages, totalPages };
+    }
+    const siblings = 1;
+    const left = Math.max(2, currentPage - siblings);
+    const right = Math.min(totalPages - 1, currentPage + siblings);
+    pages.push(1);
+    if (left > 2) pages.push("\u2026");
+    for (let i = left; i <= right; i++) pages.push(i);
+    if (right < totalPages - 1) pages.push("\u2026");
+    pages.push(totalPages);
+    return { pages, totalPages };
+  }, [totalItems, currentPage, pageSize]);
+}
+function Pagination({
+  totalItems,
+  pageSize,
+  currentPage,
+  onPageChange,
+  className = "",
+  rtl = false,
+  compact = false
+}) {
+  const { pages, totalPages } = usePagination(totalItems, currentPage, pageSize);
+  const isFirst = currentPage <= 1;
+  const isLast = currentPage >= totalPages;
+  const prevLabel = rtl ? "\u2192" : "\u2190";
+  const nextLabel = rtl ? "\u2190" : "\u2192";
+  const btnSize = compact ? "h-7 min-w-7 px-1.5 text-xs" : "h-8 min-w-8 px-2 text-sm";
+  const base = `
+    inline-flex items-center justify-center rounded-lg
+    border border-solid border-gray-200 dark:border-gray-700
+    bg-white/70 dark:bg-gray-900/40
+    text-titleText dark:text-titleText-dark
+    disabled:opacity-40 disabled:cursor-not-allowed
+    ${btnSize}
+  `;
+  const navBtn = `${base} hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer`;
+  return /* @__PURE__ */ jsx24(
+    "nav",
+    {
+      dir: rtl ? "rtl" : "ltr",
+      "aria-label": "pagination",
+      className: `w-full flex items-center justify-between flex-wrap gap-2 mt-4 ${className}`,
+      children: /* @__PURE__ */ jsxs19("div", { className: "flex items-center gap-1 flex-wrap", children: [
+        /* @__PURE__ */ jsx24(
+          "button",
+          {
+            type: "button",
+            className: navBtn,
+            onClick: () => onPageChange(currentPage - 1),
+            disabled: isFirst,
+            "aria-label": "\u0635\u0641\u062D\u0647 \u0642\u0628\u0644",
+            children: prevLabel
+          }
+        ),
+        pages.map(
+          (p, i) => p === "\u2026" ? /* @__PURE__ */ jsx24(
+            "span",
+            {
+              className: `
+                hidden sm:inline-flex items-center justify-center
+                ${btnSize} text-gray-400 dark:text-gray-500 select-none
+              `,
+              "aria-hidden": "true",
+              children: "\u2026"
+            },
+            `ellipsis-${i}`
+          ) : /* @__PURE__ */ jsx24(
+            "button",
+            {
+              type: "button",
+              className: `
+                inline-flex items-center justify-center rounded-lg  cursor-pointer
+                border border-solid
+                ${btnSize}
+                ${p === currentPage ? "bg-primary text-white border-primary shadow-sm ring-1 ring-primary/30 scale-105" : "hidden sm:inline-flex border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/40 text-titleText dark:text-titleText-dark hover:bg-gray-100 dark:hover:bg-gray-800"}
+                ${p === currentPage ? "" : ""}
+              `,
+              onClick: () => onPageChange(p),
+              "aria-label": `\u0635\u0641\u062D\u0647 ${p}`,
+              "aria-current": p === currentPage ? "page" : void 0,
+              children: p.toLocaleString("fa-IR")
+            },
+            `page-${p}`
+          )
+        ),
+        /* @__PURE__ */ jsxs19("span", { className: "sm:hidden text-sm text-gray-500 dark:text-gray-400 px-2", children: [
+          currentPage.toLocaleString("fa-IR"),
+          " / ",
+          totalPages.toLocaleString("fa-IR")
+        ] }),
+        /* @__PURE__ */ jsx24(
+          "button",
+          {
+            type: "button",
+            className: navBtn,
+            onClick: () => onPageChange(currentPage + 1),
+            disabled: isLast,
+            "aria-label": "\u0635\u0641\u062D\u0647 \u0628\u0639\u062F",
+            children: nextLabel
+          }
+        )
+      ] })
+    }
+  );
+}
 export {
   Badge,
   Box,
@@ -3403,10 +3691,12 @@ export {
   ExpandableTable,
   HashText,
   Header,
+  Input,
   Loader,
   Modal,
   Navbar,
   PageLoader,
+  Pagination,
   SearchableSelect,
   SingleBarChart,
   SingleLineChart,
