@@ -8,7 +8,7 @@
         ],
         "jsx": "react-jsx",
         "strict": false,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "esModuleInterop": true,
         "skipLibCheck": true,
         "declaration": true,
