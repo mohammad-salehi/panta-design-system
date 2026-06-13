@@ -144,6 +144,33 @@ body {
   animation: spin-angle 4s linear infinite;
   pointer-events: none;
 }
+/* کلاس مخصوص لایه انیمیشن — برای وقتی که absolute inset-0 هست */
+.animated-border-overlay {
+  --border-width: 2px;
+  --angle: 0turn;
+  border: var(--border-width) solid transparent;
+}
+.animated-border-overlay::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) * -1);
+  border: inherit;
+  border-radius: inherit;
+  background-image: conic-gradient(from var(--angle),
+      var(--color-borderNeutral) 60%,
+      var(--color-primary) 73%,
+      var(--color-primary) 86%,
+      var(--color-borderNeutral) 100%);
+  background-origin: border-box;
+  -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+  mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+  -webkit-mask-clip: content-box, border-box;
+  mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-angle 4s linear infinite;
+  pointer-events: none;
+}
 .main-animated-border-box2 {
   --border-width: 2px;
   --radius: 16px;
