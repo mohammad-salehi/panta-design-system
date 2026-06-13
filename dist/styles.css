@@ -2097,7 +2097,6 @@ body {
   animation: spin-angle 4s linear infinite;
   pointer-events: none;
 }
-/* کلاس مخصوص لایه انیمیشن — برای وقتی که absolute inset-0 هست */
 .animated-border-overlay {
   --border-width: 2px;
   --angle: 0turn;

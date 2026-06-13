@@ -22,19 +22,13 @@ export const Stepper: React.FC<StepperProps> = ({ step, steps, className = "" })
           <React.Fragment key={index}>
             {/* MOBILE */}
             <div className="flex items-start gap-3 md:hidden">
-              {/* ستون دایره */}
               <div className="flex flex-col items-center">
-                {/* wrapper همیشه ثابت w-8 h-8 */}
                 <div className="relative w-8 h-8 flex items-center justify-center flex-shrink-0">
-
-                  {/* لایه انیمیشن — absolute، خارج از flow */}
                   {isActive && (
                     <div
                       className="animated-border-overlay absolute inset-0 rounded-full pointer-events-none"
                     />
                   )}
-
-                  {/* خود دایره */}
                   {isCompleted ? (
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -51,8 +45,6 @@ export const Stepper: React.FC<StepperProps> = ({ step, steps, className = "" })
                     </div>
                   )}
                 </div>
-
-                {/* خط عمودی */}
                 {index < steps.length - 1 && (
                   <div className="w-[2px] h-8 bg-slate-300 dark:bg-slate-600 mt-1" />
                 )}
@@ -63,11 +55,6 @@ export const Stepper: React.FC<StepperProps> = ({ step, steps, className = "" })
                 {item.title}
               </div>
             </div>
-
-
-
-
-            {/* DESKTOP */}
             <div className="hidden md:flex items-center">
               <div
                 className={`
