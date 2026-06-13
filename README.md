@@ -8,7 +8,6 @@ A modern, production-ready React component library built with Tailwind CSS — f
 ---
 
 ## ✨ Features
-
 - 20+ ready-to-use components
 - Dark / Light Theme via CSS variables & `ThemeProvider`
 - Full RTL Support for Persian/Arabic UIs

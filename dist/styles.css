@@ -2049,26 +2049,22 @@
 .text-primary { color: rgb(var(--primary-rgb)); }
 .button_selected_bg { background: var(--button-selected-bg); }
 
-/* ---------- Body ---------- */
 body {
   background-color: var(--bg-background-color);
 }
 
-/* ---------- Animation Classes ---------- */
 .animate-fadeIn { animation: fadeIn 0.18s ease-out; }
 .animate-scaleIn { animation: scaleIn 0.22s ease-out; }
 .animate-fadeSlide { animation: fadeSlide 0.45s ease both; }
 .animate-fadeScale { animation: fadeScale 120ms ease-out forwards; }
 .animate-fadeInUp { animation: fadeInUp 0.4s ease-out forwards; }
 
-/* ---------- Ticker ---------- */
 .ticker-container { position: relative; overflow: hidden; width: 100%; }
 .ticker-content { display: flex; white-space: nowrap; will-change: transform; }
 .ticker-animate { animation: ticker-move 25s linear infinite; }
 .ticker-no-scroll::-webkit-scrollbar { display: none; }
 .ticker-no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ---------- Animated Border Boxes ---------- */
 .main-animated-border-box {
   --border-width: 2px;
   --radius: 16px;
@@ -2151,8 +2147,6 @@ body {
   animation: spin-angle 8s linear infinite;
   pointer-events: none;
 }
-
-/* ---------- Component Layer (Lux Design System) ---------- */
 
 
 @keyframes fadeScale {
