@@ -18,7 +18,6 @@ A modern, production-ready React component library built with Tailwind CSS — f
 - Zero heavy dependencies (only `recharts` & `clsx`)
 - Fully Responsive & Mobile-First
 - Strong TypeScript support
-
 ---
 
 ## 📦 Installation
