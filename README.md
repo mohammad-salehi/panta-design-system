@@ -9,7 +9,7 @@ A modern, production-ready React component library built with Tailwind CSS — f
 
 ## ✨ Features
 
-- 30+ ready-to-use components
+- 20+ ready-to-use components
 - Dark / Light Theme via CSS variables & `ThemeProvider`
 - Full RTL Support for Persian/Arabic UIs
 - Next.js App Router & Server Components compatible
@@ -96,25 +96,28 @@ export default function Page() {
 - **Button**
 - **Navbar**
 - **Header**
-- **SearchableSelect**
+- **Dropdown Searchable Select**
 - **Modal**
-- **DatePicker**
+- **Date Picker**
 - **Box**
-- **ButtonSelect**
-- **HashText**
-- **DoubleBarChart**
-- **DoubleLineChart**
-- **SingleBarChart**
-- **SingleLineChart**
-- **CircleChart**
-- **TreeChart**
+- **Button Select**
+- **Hash Text**
+- **Double Bar Chart**
+- **Double Line Chart**
+- **Single Bar Chart**
+- **Single Line Chart**
+- **Circle Chart**
+- **Tree Chart**
 - **Tabs**
 - **Table**
 - **Badge**
 - **Loader**
-- **PageLoader**
+- **Page Loader**
 - **Input**
 - **Pagination**
+- **Toast**
+- **Tooltip**
+- **Stepper**
 
 ## 🎨 Theming
 
