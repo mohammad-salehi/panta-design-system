@@ -26,10 +26,7 @@
     "dev": "concurrently \"tsup --watch\" \"postcss src/styles/global.css --output dist/styles.css --watch\""
   },
   "keywords": [
-    "design-system",
-    "nextjs",
-    "tailwind",
-    "dark-mode"
+    "react","component-library","design-system","tailwindcss","dark-mode","rtl","nextjs","typescript","persian-ui","arabic-ui","recharts","date-picker","modal","table","pagination","ui-kit","frontend","react-components","panta"
   ],
   "author": "",
   "license": "MIT",
