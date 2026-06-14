@@ -3,21 +3,21 @@
 [![npm version](https://img.shields.io/npm/v/@msalehi79/panta-design-system)](https://www.npmjs.com/package/@msalehi79/panta-design-system)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-**A modern, production-ready React component library** built with Tailwind CSS — fully typed, with built-in dark/light mode, RTL support, and excellent Next.js compatibility.
+A modern, production-ready React component library built with Tailwind CSS — fully typed, with built-in dark/light mode, RTL support, and excellent Next.js compatibility.
 
 ---
 
 ## ✨ Features
 
-- ۳۰+ کامپوننت آماده و حرفه‌ای
-- پشتیبانی کامل از **Dark / Light Theme** با CSS Variables و `ThemeProvider`
-- پشتیبانی عالی از **RTL** (فارسی و عربی)
-- سازگار با **Next.js App Router** و Server Components
-- استایلینگ کامل با Tailwind CSS
-- چارت‌های پیشرفته با Recharts (Bar, Line, Pie/Donut, Treemap و ...)
-- بدون وابستگی سنگین (فقط `recharts` و `clsx`)
-- کاملاً Responsive و Mobile-First
-- TypeScript-first با تایپینگ قوی
+- 30+ ready-to-use components
+- Dark / Light Theme via CSS variables & `ThemeProvider`
+- Full RTL Support for Persian/Arabic UIs
+- Next.js App Router & Server Components compatible
+- Tailwind CSS styling
+- Advanced charts powered by Recharts (Bar, Line, Pie/Donut, Treemap, etc.)
+- Zero heavy dependencies (only `recharts` & `clsx`)
+- Fully Responsive & Mobile-First
+- Strong TypeScript support
 
 ---
 
@@ -35,13 +35,13 @@ npm install react react-dom recharts clsx
 
 ## Add Global Styles
 
-در فایل CSS اصلی پروژه (معمولاً globals.css یا app/globals.css):
+In your main CSS file:
 
 ```bash
 CSS@import "@msalehi79/panta-design-system/styles.css";
 ```
 
-## تنظیمات Tailwind
+## Tailwind Config
 
 ```bash
 // tailwind.config.js
@@ -93,33 +93,32 @@ export default function Page() {
 
 ## 🧩 Components
 
-- **Button** — دکمه
-- **Navbar** — نوار ناوبری
-- **Header** — هدر
-- **SearchableSelect** — سلکت جستجوable
-- **Modal** — مودال
-- **DatePicker** — انتخابگر تاریخ
-- **Box** — باکس
-- **ButtonSelect** — انتخاب با دکمه
-- **HashText** — متن هش
-- **DoubleBarChart** — نمودار میله‌ای دوگانه
-- **DoubleLineChart** — نمودار خطی دوگانه
-- **SingleBarChart** — نمودار میله‌ای تک
-- **SingleLineChart** — نمودار خطی تک
-- **CircleChart** — نمودار دایره‌ای
-- **TreeChart** — نمودار درختی
-- **Tabs** — تب‌ها
-- **Table** — جدول
-- **Badge** — نشان
-- **Loader** — لودر
-- **PageLoader** — لودر صفحه
-- **Input** — ورودی
-- **Pagination** — صفحه‌بندی
+- **Button**
+- **Navbar**
+- **Header**
+- **SearchableSelect**
+- **Modal**
+- **DatePicker**
+- **Box**
+- **ButtonSelect**
+- **HashText**
+- **DoubleBarChart**
+- **DoubleLineChart**
+- **SingleBarChart**
+- **SingleLineChart**
+- **CircleChart**
+- **TreeChart**
+- **Tabs**
+- **Table**
+- **Badge**
+- **Loader**
+- **PageLoader**
+- **Input**
+- **Pagination**
 
 ## 🎨 Theming
 
-تم از طریق کلاس dark روی تگ <html> و متغیرهای CSS کنترل می‌شود:
-CSS
+Theme is controlled via the dark class on <html> and CSS variables:
 
 ```bash
 :root {
@@ -143,9 +142,9 @@ CSS
 
 ## ⚙️ Next.js Notes
 
-کامپوننت‌های تعاملی به صورت داخلی "use client" هستند.
-فایل CSS را فقط یک بار در layout.tsx ایمپورت کنید.
-با Turbopack هم کاملاً سازگار است.
+Interactive components are marked with "use client" internally.
+Import the CSS only once in the root layout.
+Fully compatible with Turbopack.
 
 ## 📄 License
 
