@@ -1,6 +1,6 @@
 {
   "name": "@msalehi79/panta-design-system",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Design system with Tailwind and dark/light theme",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -26,7 +26,25 @@
     "dev": "concurrently \"tsup --watch\" \"postcss src/styles/global.css --output dist/styles.css --watch\""
   },
   "keywords": [
-    "react","component-library","design-system","tailwindcss","dark-mode","rtl","nextjs","typescript","persian-ui","arabic-ui","recharts","date-picker","modal","table","pagination","ui-kit","frontend","react-components","panta"
+    "react",
+    "component-library",
+    "design-system",
+    "tailwindcss",
+    "dark-mode",
+    "rtl",
+    "nextjs",
+    "typescript",
+    "persian-ui",
+    "arabic-ui",
+    "recharts",
+    "date-picker",
+    "modal",
+    "table",
+    "pagination",
+    "ui-kit",
+    "frontend",
+    "react-components",
+    "panta"
   ],
   "author": "",
   "license": "MIT",
