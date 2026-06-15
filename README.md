@@ -91,31 +91,32 @@ export default function Page() {
 
 ## 🧩 Components
 
-- **Button**
-- **Navbar**
-- **Header**
-- **Dropdown Searchable Select**
-- **Modal**
-- **Date Picker**
-- **Box**
-- **Button Select**
-- **Hash Text**
-- **Double Bar Chart**
-- **Double Line Chart**
-- **Single Bar Chart**
-- **Single Line Chart**
-- **Circle Chart**
-- **Tree Chart**
-- **Tabs**
-- **Table**
-- **Badge**
-- **Loader**
-- **Page Loader**
-- **Input**
-- **Pagination**
-- **Toast**
-- **Tooltip**
-- **Stepper**
+| کامپوننت | مستندات فارسی | English Doc |
+|----------|----------------|------------------|
+| دکمه (Button) | [README.fa.md](docs/components/Button/README.fa.md) | [README.en.md](docs/components/Button/README.en.md) |
+| بدنه اصلی (AppShell) | [README.fa.md](docs/components/AppShell/README.fa.md) | [README.en.md](docs/components/AppShell/README.en.md) |
+| انتخاب‌گر با جست‌وجو (SearchableSelect) | [README.fa.md](docs/components/SearchableSelect/README.fa.md) | [README.en.md](docs/components/SearchableSelect/README.en.md) |
+| مودال (Modal) | [README.fa.md](docs/components/Modal/README.fa.md) | [README.en.md](docs/components/Modal/README.en.md) |
+| تقویم (DatePicker) | [README.fa.md](docs/components/DatePicker/README.fa.md) | [README.en.md](docs/components/DatePicker/README.en.md) |
+| جعبه (Box) | [README.fa.md](docs/components/Box/README.fa.md) | [README.en.md](docs/components/Box/README.en.md) |
+| سلکت (ButtonSelect) | [README.fa.md](docs/components/ButtonSelect/README.fa.md) | [README.en.md](docs/components/ButtonSelect/README.en.md) |
+| متن کوتاه‌شده (HashText) | [README.fa.md](docs/components/HashText/README.fa.md) | [README.en.md](docs/components/HashText/README.en.md) |
+| نمودار میله‌ای دوعددی (DoubleBarChart) | [README.fa.md](docs/components/DoubleBarChart/README.fa.md) | [README.en.md](docs/components/DoubleBarChart/README.en.md) |
+| نمودار خطی دوعددی (DoubleLineChart) | [README.fa.md](docs/components/DoubleLineChart/README.fa.md) | [README.en.md](docs/components/DoubleLineChart/README.en.md) |
+| نمودار میله‌ای تکی (SingleBarChart) | [README.fa.md](docs/components/SingleBarChart/README.fa.md) | [README.en.md](docs/components/SingleBarChart/README.en.md) |
+| نمودار خطی تکی (SingleLineChart) | [README.fa.md](docs/components/SingleLineChart/README.fa.md) | [README.en.md](docs/components/SingleLineChart/README.en.md) |
+| نمودار دایره‌ای (CircleChart) | [README.fa.md](docs/components/CircleChart/README.fa.md) | [README.en.md](docs/components/CircleChart/README.en.md) |
+| نمودار درختی (TreeChart) | [README.fa.md](docs/components/TreeChart/README.fa.md) | [README.en.md](docs/components/TreeChart/README.en.md) |
+| تب (Tabs) | [README.fa.md](docs/components/Tabs/README.fa.md) | [README.en.md](docs/components/Tabs/README.en.md) |
+| جدول (Table) | [README.fa.md](docs/components/Table/README.fa.md) | [README.en.md](docs/components/Table/README.en.md) |
+| نشان (Badge) | [README.fa.md](docs/components/Badge/README.fa.md) | [README.en.md](docs/components/Badge/README.en.md) |
+| بارگزاری کامپوننت (Loader) | [README.fa.md](docs/components/Loader/README.fa.md) | [README.en.md](docs/components/Loader/README.en.md) |
+| بارگزاری صفحه (PageLoader) | [README.fa.md](docs/components/PageLoader/README.fa.md) | [README.en.md](docs/components/PageLoader/README.en.md) |
+| اینپوت (Input) | [README.fa.md](docs/components/Input/README.fa.md) | [README.en.md](docs/components/Input/README.en.md) |
+| صفحه‌بندی (Pagination) | [README.fa.md](docs/components/Pagination/README.fa.md) | [README.en.md](docs/components/Pagination/README.en.md) |
+| پیام (Toast) | [README.fa.md](docs/components/Toast/README.fa.md) | [README.en.md](docs/components/Toast/README.en.md) |
+| راهنما (Tooltip) | [README.fa.md](docs/components/Tooltip/README.fa.md) | [README.en.md](docs/components/Tooltip/README.en.md) |
+| مراحل (Stepper) | [README.fa.md](docs/components/Stepper/README.fa.md) | [README.en.md](docs/components/Stepper/README.en.md) |
 
 ## 🎨 Theming
 

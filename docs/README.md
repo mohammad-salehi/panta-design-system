@@ -5,8 +5,7 @@
 | کامپوننت | مستندات فارسی | English Doc |
 |----------|----------------|------------------|
 | دکمه (Button) | [README.fa.md](components/Button/README.fa.md) | [README.en.md](components/Button/README.en.md) |
-| ناوبار (Navbar) | [README.fa.md](components/Navbar/README.fa.md) | [README.en.md](components/Navbar/README.en.md) |
-| هدر (Header) | [README.fa.md](components/Header/README.fa.md) | [README.en.md](components/Header/README.en.md) |
+| بدنه اصلی (AppShell) | [README.fa.md](components/AppShell/README.fa.md) | [README.en.md](components/AppShell/README.en.md) |
 | انتخاب‌گر با جست‌وجو (SearchableSelect) | [README.fa.md](components/SearchableSelect/README.fa.md) | [README.en.md](components/SearchableSelect/README.en.md) |
 | مودال (Modal) | [README.fa.md](components/Modal/README.fa.md) | [README.en.md](components/Modal/README.en.md) |
 | تقویم (DatePicker) | [README.fa.md](components/DatePicker/README.fa.md) | [README.en.md](components/DatePicker/README.en.md) |

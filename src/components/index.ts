@@ -2,8 +2,6 @@
 
 export * from './Button';
 export * from './ThemeProvider';
-export * from './Header'; 
-export * from './Navbar';  
 export * from './DropdownSelect';
 export * from './Modal';
 export * from './Calendar';
@@ -26,3 +24,4 @@ export * from './Pagination';
 export * from './Toast';
 export * from './Tooltip';
 export * from './Stepper';
+export * from './AppShell';

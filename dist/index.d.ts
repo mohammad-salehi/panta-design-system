@@ -23,14 +23,14 @@ type HeaderProps = {
 };
 declare function Header({ title }: HeaderProps): react_jsx_runtime.JSX.Element;
 
-interface NavItem {
+interface NavItem$1 {
     link: string;
     label: string;
     access?: string;
     icon?: React__default.ReactNode;
 }
 interface NavbarProps {
-    navItems: NavItem[];
+    navItems: NavItem$1[];
     isOpen: boolean;
     setIsOpen: (open: boolean) => void;
     isMobileOpen: boolean;
@@ -424,4 +424,25 @@ interface StepperProps {
 }
 declare const Stepper: React__default.FC<StepperProps>;
 
-export { Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Input, type InputProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem, Navbar, type NavbarProps, PageLoader, Pagination, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Stepper, type StepperProps, type TablePaginationProps, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, type ToastOptions, type ToastPosition, ToastProvider, type ToastType, Tooltip, type TooltipProps, TreeChart, type TreeChartDataItem, useTheme, useToast };
+interface NavItem {
+    link: string;
+    label: string;
+    access?: string;
+    icon?: React__default.ReactNode;
+}
+interface AppShellProps {
+    navItems: NavItem[];
+    userFullName?: string;
+    userRole?: string;
+    onChangePassword?: () => void;
+    onLogout?: () => void;
+    brand?: React__default.ReactNode;
+    className?: string;
+    currentPath: string;
+    title?: string;
+    headerTitle?: string;
+    children?: React__default.ReactNode;
+}
+declare const AppShell: React__default.FC<AppShellProps>;
+
+export { AppShell, type AppShellProps, Badge, type BadgeProps, Box, type BoxProps, Button, type ButtonProps, ButtonSelect, type ButtonSelectProps, CircleChart, type CircleChartProps, type Column, DatePicker, type DatePickerProps, type DatePickerValue, DoubleBarChart, type DoubleBarChartDataItem, DoubleLineChart, type DoubleLineChartDataItem, ExpandableTable, type ExpandableTableProps, HashText, type HashTextProps, Header, type HeaderProps, Input, type InputProps, Loader, type LoaderProps, Modal, type ModalProps, type NavItem$1 as NavItem, Navbar, type NavbarProps, PageLoader, Pagination, type RowId, SearchableSelect, type SearchableSelectProps, SingleBarChart, type SingleBarChartDataItem, SingleLineChart, type SingleLineChartDataItem, Stepper, type StepperProps, type TablePaginationProps, Tabs, TabsContent, TabsList, type TabsProps, TabsTrigger, ThemeProvider, type ToastOptions, type ToastPosition, ToastProvider, type ToastType, Tooltip, type TooltipProps, TreeChart, type TreeChartDataItem, useTheme, useToast };
