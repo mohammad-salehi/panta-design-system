@@ -264,10 +264,6 @@ const AppShellInner: React.FC<AppShellProps> = ({
           </ToastProvider>
         </main>
 
-        {/* Footer */}
-        <footer className="text-center text-sm text-gray-500 py-4">
-          © طراحی و توسعه توسط محمد صالحی
-        </footer>
       </div>
     </div>
   );
