@@ -16,7 +16,7 @@ A full‑screen loading component with two modes: **loader** (spinner + static t
 ## Usage
 
 ```tsx
-import { PageLoader } from 'panta_design_system';
+import { PageLoader } from '@msalehi79/panta-design-system';
 
 // 1. Loader mode (default)
 <PageLoader text="Loading..." />

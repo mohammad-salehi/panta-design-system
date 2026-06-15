@@ -14,7 +14,7 @@ The Button component is used for user actions. It comes with three visual varian
 ## Usage
 
 ```tsx
-import { Button } from 'panta_design_system';
+import { Button } from '@msalehi79/panta-design-system';
 
 1. Primary
 <Button variant="primary" onClick={() => alert('Clicked')}>

@@ -25,7 +25,7 @@ A dual bar chart component for comparing two datasets (e.g., assets and liabilit
 ### 1. Basic usage
 
 ```tsx
-import { DoubleBarChart } from 'panta_design_system';
+import { DoubleBarChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'Farvardin', x: 120, y: 80 },

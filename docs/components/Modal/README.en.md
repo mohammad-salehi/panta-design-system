@@ -26,7 +26,7 @@ A modal dialog component for displaying content on top of the page. Uses a porta
 ### 1. Simple modal with title and close button
 
 ```tsx
-import { Modal, Button } from 'panta_design_system';
+import { Modal, Button } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [open, setOpen] = useState(false);

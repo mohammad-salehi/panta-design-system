@@ -31,7 +31,7 @@
 ### ۱. کنترل شده (Controlled)
 
 ```tsx
-import { ButtonSelect } from 'panta_design_system';
+import { ButtonSelect } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [selected, setSelected] = useState('option1');

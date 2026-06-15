@@ -25,7 +25,7 @@
 ### ۱. استفاده پایه
 
 ```tsx
-import { DoubleLineChart } from 'panta_design_system';
+import { DoubleLineChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'فروردین', x: 120, y: 80 },

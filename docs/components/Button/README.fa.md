@@ -14,7 +14,7 @@
 ## نحوه استفاده
 
 ```tsx
-import { Button } from 'panta_design_system';
+import { Button } from '@msalehi79/panta-design-system';
 
 ۱. اصلی (primary)
 <Button variant="primary" onClick={() => alert('کلیک شد')}>

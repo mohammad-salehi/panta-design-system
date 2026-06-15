@@ -25,7 +25,7 @@
 ### ۱. مودال ساده با عنوان و دکمه بستن
 
 ```tsx
-import { Modal, Button } from 'panta_design_system';
+import { Modal, Button } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [open, setOpen] = useState(false);

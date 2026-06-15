@@ -30,7 +30,7 @@
 ### ۱. استفاده پایه
 
 ```tsx
-import { TreeChart } from 'panta_design_system';
+import { TreeChart } from '@msalehi79/panta-design-system';
 
 const data = [
   { name: 'فروش داخلی', value: 450, symbol: 'D' },

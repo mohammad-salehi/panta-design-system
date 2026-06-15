@@ -16,7 +16,7 @@
 ## Usage / نحوه استفاده
 
 ```tsx
-import { PageLoader } from 'panta_design_system';
+import { PageLoader } from '@msalehi79/panta-design-system';
 
 // 1. Loader mode (default)
 <PageLoader text="در حال بارگذاری..." />

@@ -25,7 +25,7 @@ A line chart component for visualizing the trend of a single dataset (e.g., mont
 ### 1. Basic usage
 
 ```tsx
-import { SingleLineChart } from 'panta_design_system';
+import { SingleLineChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'Jan', value: 120 },

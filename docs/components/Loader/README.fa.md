@@ -17,7 +17,7 @@
 ## Usage / نحوه استفاده
 
 ```tsx
-import { Loader } from 'panta_design_system';
+import { Loader } from '@msalehi79/panta-design-system';
 
 // 1. Normal mode
 <Loader />

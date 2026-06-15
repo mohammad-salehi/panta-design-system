@@ -15,7 +15,7 @@
 ### ۱. استفاده در یک لایه‌آوت (مثلاً `app/panel/layout.tsx`)
 
 ```tsx
-import { Header, ThemeProvider } from 'panta_design_system';
+import { Header, ThemeProvider } from '@msalehi79/panta-design-system';
 import 'panta_design_system/styles.css';
 
 export default function PanelLayout({ children }) {

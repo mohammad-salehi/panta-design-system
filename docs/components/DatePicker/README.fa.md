@@ -23,7 +23,7 @@
 ### ۱. انتخابگر تاریخ میلادی (پیش‌فرض)
 
 ```tsx
-import { DatePicker } from 'panta_design_system';
+import { DatePicker } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [selectedDate, setSelectedDate] = useState<Date | null>(null);

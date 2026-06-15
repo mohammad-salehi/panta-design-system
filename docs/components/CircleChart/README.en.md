@@ -26,7 +26,7 @@ A donut/pie chart component for displaying proportions of a dataset. Built with 
 ### 1. Basic usage
 
 ```tsx
-import { CircleChart } from 'panta_design_system';
+import { CircleChart } from '@msalehi79/panta-design-system';
 
 const data = [
   { label: 'Assets', value: 250 },

@@ -31,7 +31,7 @@ A treemap component for displaying hierarchical data with weighted proportions. 
 ### 1. Basic usage
 
 ```tsx
-import { TreeChart } from 'panta_design_system';
+import { TreeChart } from '@msalehi79/panta-design-system';
 
 const data = [
   { name: 'Domestic Sales', value: 450, symbol: 'D' },

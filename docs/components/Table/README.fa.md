@@ -38,7 +38,7 @@
 ### ۱. تعریف نوع داده و ستون‌ها
 
 ```tsx
-import { ExpandableTable, Column } from 'panta_design_system';
+import { ExpandableTable, Column } from '@msalehi79/panta-design-system';
 
 interface Asset {
   id: string;

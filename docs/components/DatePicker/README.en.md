@@ -25,7 +25,7 @@ A date picker component supporting **Gregorian** and **Jalali (Persian)** calend
 ### 1. Gregorian date picker (default)
 
 ```tsx
-import { DatePicker } from 'panta_design_system';
+import { DatePicker } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [selectedDate, setSelectedDate] = useState<Date | null>(null);

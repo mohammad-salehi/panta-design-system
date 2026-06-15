@@ -36,7 +36,7 @@
 ```tsx
 'use client';
 
-import { NavItem } from 'panta_design_system';
+import { NavItem } from '@msalehi79/panta-design-system';
 
 const navItems: NavItem[] = [
   {
@@ -54,7 +54,7 @@ const navItems: NavItem[] = [
 
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Navbar } from 'panta_design_system';
+import { Navbar } from '@msalehi79/panta-design-system';
 
 export default function PanelLayout({ children }) {
   const [isOpen, setIsOpen] = useState(true);

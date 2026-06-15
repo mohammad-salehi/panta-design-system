@@ -25,7 +25,7 @@
 ### ۱. استفاده پایه
 
 ```tsx
-import { CircleChart } from 'panta_design_system';
+import { CircleChart } from '@msalehi79/panta-design-system';
 
 const data = [
   { label: 'دارایی', value: 250 },

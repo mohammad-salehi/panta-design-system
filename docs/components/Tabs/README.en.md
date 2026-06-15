@@ -50,7 +50,7 @@ The component set includes:
 ### 1. Basic usage (LTR)
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from 'panta_design_system';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@msalehi79/panta-design-system';
 
 <Tabs defaultValue="tab1">
   <TabsList>

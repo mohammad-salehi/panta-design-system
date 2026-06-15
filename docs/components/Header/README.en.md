@@ -16,7 +16,7 @@ The Header component is a horizontal bar displayed at the top of the page on des
 ### 1. Use inside a layout (e.g., `app/panel/layout.tsx`)
 
 ```tsx
-import { Header, ThemeProvider } from 'panta_design_system';
+import { Header, ThemeProvider } from '@msalehi79/panta-design-system';
 import 'panta_design_system/styles.css';
 
 export default function PanelLayout({ children }) {

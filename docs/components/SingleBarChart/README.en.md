@@ -25,7 +25,7 @@ A bar chart component for displaying a single dataset (e.g., sales, visits, or a
 ### 1. Basic usage
 
 ```tsx
-import { SingleBarChart } from 'panta_design_system';
+import { SingleBarChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'Jan', value: 120 },

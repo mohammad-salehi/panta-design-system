@@ -32,7 +32,7 @@
 ### ۱. انتخابگر ساده بدون جستجو
 
 ```tsx
-import { SearchableSelect } from 'panta_design_system';
+import { SearchableSelect } from '@msalehi79/panta-design-system';
 
 const [city, setCity] = useState('');
 

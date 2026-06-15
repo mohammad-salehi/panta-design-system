@@ -18,7 +18,7 @@
 ## Usage / نحوه استفاده
 
 ```tsx
-import { Pagination } from 'panta_design_system';
+import { Pagination } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 function MyComponent() {

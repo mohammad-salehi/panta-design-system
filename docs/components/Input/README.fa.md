@@ -23,7 +23,7 @@
 ## Usage / نحوه استفاده
 
 ```tsx
-import { Input, IconMail } from 'panta_design_system';
+import { Input, IconMail } from '@msalehi79/panta-design-system';
 
 // 1. Basic input
 <Input placeholder="نام خود را وارد کنید" />

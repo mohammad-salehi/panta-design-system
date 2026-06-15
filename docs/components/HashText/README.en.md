@@ -20,7 +20,7 @@ A component to display shortened text (e.g., transaction hashes, wallet addresse
 ### 1. Basic usage
 
 ```tsx
-import { HashText } from 'panta_design_system';
+import { HashText } from '@msalehi79/panta-design-system';
 
 <HashText text="0x71C7656EC7ab88b098defB751B7401B5f6d8976F" />
 // Output: 0x71C7…76F

@@ -32,7 +32,7 @@ A set of buttons that behave like radio buttons. Suitable for selecting one opti
 ### 1. Controlled mode
 
 ```tsx
-import { ButtonSelect } from 'panta_design_system';
+import { ButtonSelect } from '@msalehi79/panta-design-system';
 import { useState } from 'react';
 
 const [selected, setSelected] = useState('option1');

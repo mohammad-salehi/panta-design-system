@@ -26,7 +26,7 @@
 ### ۱. استفاده پایه
 
 ```tsx
-import { SingleLineChart } from 'panta_design_system';
+import { SingleLineChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'فروردین', value: 120 },

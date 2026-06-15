@@ -19,7 +19,7 @@
 ### ۱. استفاده پایه
 
 ```tsx
-import { HashText } from 'panta_design_system';
+import { HashText } from '@msalehi79/panta-design-system';
 
 <HashText
   text="0x71C7656EC7ab88b098defB751B7401B5f6d8976F"

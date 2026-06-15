@@ -38,7 +38,7 @@ A hierarchical table component supporting nested rows, pagination, expandable ro
 ### 1. Define data type and columns
 
 ```tsx
-import { ExpandableTable, Column } from 'panta_design_system';
+import { ExpandableTable, Column } from '@msalehi79/panta-design-system';
 
 interface Asset {
   id: string;

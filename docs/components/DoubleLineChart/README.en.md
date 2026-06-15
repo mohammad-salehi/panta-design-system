@@ -25,7 +25,7 @@ A dual line chart component for visualizing the trend of two datasets (e.g., ass
 ### 1. Basic usage
 
 ```tsx
-import { DoubleLineChart } from 'panta_design_system';
+import { DoubleLineChart } from '@msalehi79/panta-design-system';
 
 const chartData = [
   { label: 'Jan', x: 120, y: 80 },

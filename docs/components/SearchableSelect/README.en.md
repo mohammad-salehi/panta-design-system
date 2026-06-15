@@ -33,7 +33,7 @@ A dropdown select component with optional search, loading state, and RTL/LTR sup
 ### 1. Basic select without search
 
 ```tsx
-import { SearchableSelect } from 'panta_design_system';
+import { SearchableSelect } from '@msalehi79/panta-design-system';
 
 const [city, setCity] = useState('');
 
