@@ -90,7 +90,6 @@ export default function Page() {
 ```
 
 ## 🧩 Components
-
 | کامپوننت | مستندات فارسی | English Doc |
 |----------|----------------|------------------|
 | دکمه (Button) | [README.fa.md](@msalehi79/panta-design-system/docs/components/Button/README.fa.md) | [README.en.md](@msalehi79/panta-design-system/docs/components/Button/README.en.md) |
