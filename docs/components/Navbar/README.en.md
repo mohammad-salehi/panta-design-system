@@ -14,6 +14,7 @@ The Navbar component (side menu) for admin panels. Includes a header (brand, tit
 | `currentPath` | `string` | **required** | Current route path (to highlight active item) |
 | `userFullName` | `string` | `'User'` | Full name displayed in the user card |
 | `userRole` | `string` | `''` | User role (e.g., `'Admin'`) |
+| `title` | `string` | **required** | Site title |
 | `onChangePassword` | `() => void` | `-` | Callback when the change password button is clicked |
 | `onLogout` | `() => void` | `-` | Callback when the logout button is clicked |
 | `brand` | `React.ReactNode` | `-` | Brand element (logo or name) in the sidebar header |

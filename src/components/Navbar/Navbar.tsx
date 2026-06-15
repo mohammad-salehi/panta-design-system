@@ -24,6 +24,7 @@ export interface NavbarProps {
   brand?: React.ReactNode;
   className?: string;
   currentPath: string;
+  title:string;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -37,6 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onChangePassword,
   onLogout,
   brand,
+  title="",
   className,
   currentPath,
 }) => {
@@ -108,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   )}
                 </div>
                 <div className="text-left ml-2">
-                  <AnimatedParagraph text="P.D.S" />
+                  <AnimatedParagraph text={title} />
                 </div>
               </div>
 

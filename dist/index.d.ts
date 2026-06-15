@@ -42,6 +42,7 @@ interface NavbarProps {
     brand?: React__default.ReactNode;
     className?: string;
     currentPath: string;
+    title: string;
 }
 declare const Navbar: React__default.FC<NavbarProps>;
 

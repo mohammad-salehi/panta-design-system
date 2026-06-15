@@ -321,6 +321,7 @@ var Navbar = ({
   onChangePassword,
   onLogout,
   brand,
+  title = "",
   className,
   currentPath
 }) => {
@@ -368,7 +369,7 @@ var Navbar = ({
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "sticky top-0 z-10  rounded-none border-none", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center justify-between", children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex items-center gap-2", children: brand ? brand : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "font-bold text-titleText", children: "\u0644\u0648\u06AF\u0648" }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "text-left ml-2", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(AnimatedParagraph, { text: "P.D.S" }) })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "text-left ml-2", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(AnimatedParagraph, { text: title }) })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "mt-3 rounded-2xl border border-boxBorderColor bg-boxColor/70 p-3 lux-icon", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "h-10 w-10 rounded-xl border-boxBorderColor dark:border-boxBorderColor-dark bg-white/70 dark:bg-bgColor-dark/60  transition flex items-center justify-center text-titleText dark:text-titleText-dark lux-icon", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
